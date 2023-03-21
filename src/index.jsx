@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// this will be on our home page to bring in localhost api URL
+// const api=process.env.REACT_APP_BASEURL;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
