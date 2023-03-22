@@ -1,15 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
+import WarehouseList from "./components/Pages/WarehouseList/WarehouseList";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import WarehouseList from "./pages/WarehouseList/WarehouseList";
-
 export default function App() {
   return (
     <div className="App">
-      <Header />
-      <Footer />
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
@@ -28,6 +26,7 @@ export default function App() {
           />
           <Route path="inventory/edit" element={<EditInventory />} /> */}
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
