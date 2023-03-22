@@ -1,15 +1,19 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import WarehouseList from "./pages/WarehouseList/WarehouseList";
 
 export default function App() {
   return (
     <div className="App">
+      <Header />
+      <Footer />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
-          <Route path="warehouses/edit" element={<EditWarehouse />} />
+          {/* <Route path="warehouses/edit" element={<EditWarehouse />} />
           <Route path="warehouses/add" element={<AddWarehouse />} />
           <Route path="inventory/edit" element={<EditInventory />} />
           <Route
@@ -22,7 +26,7 @@ export default function App() {
             path="/inventory/:inventoryId"
             element={<InventoryDetails />}
           />
-          <Route path="inventory/edit" element={<EditInventory />} />
+          <Route path="inventory/edit" element={<EditInventory />} /> */}
         </Routes>
       </BrowserRouter>
     </div>
