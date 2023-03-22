@@ -6,10 +6,10 @@
     flex-direction: column;
     align-items: center;
     background-color: green;
-    height: 23.4375rem;
+    height: 12.5rem;
     background-color: $background-color-dark;
     width: 100%;
-    padding: 1.5rem 0 1.75rem;
+
 
     // @include tablet {
 
@@ -17,6 +17,7 @@
 
     &__img {
         width: 8.0625rem;
+            padding: 1.5rem 0 1.75rem;
     }
 
     &__buttons {
@@ -34,6 +35,7 @@
         background-color: $background-color-dark;
         color: $background-color-light;
         border: none;
+        border-radius: 1.125rem;
 
         &:hover {
             background-color: $primary-color-dark;
@@ -50,6 +52,7 @@
         background-color: $background-color-dark;
         color: $background-color-light;
         border: none;
+        border-radius: 1.125rem;
 
         &:hover {
             background-color: $primary-color-dark;
