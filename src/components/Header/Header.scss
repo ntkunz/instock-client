@@ -1,0 +1,89 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: green;
+    height: 12.5rem;
+    background-color: $background-color-dark;
+    width: 100%;
+
+
+    @include tablet {
+        flex-direction: row;
+        align-items: flex-start;
+        height: 11.625rem;
+        justify-content: space-between;
+    }
+
+    &__img {
+        width: 8.0625rem;
+            padding: 1.5rem 0 1.75rem;
+
+            @include tablet {
+                margin: 2rem;
+                padding: 0;
+                width: 8.125rem;
+            }
+
+            @include desktop {
+                margin: 2rem 8.125rem;
+            }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+
+        @include tablet {
+            padding: 1.75rem 2rem;
+            gap: .5rem;
+        }
+
+        @include desktop {
+            padding: 1.75rem 8.125rem;
+        }
+    }
+
+    &__warehouse-button {
+        height: 2.25rem;
+        width: 10.25rem;
+        background-color: $background-color-dark;
+        color: $background-color-light;
+        border: none;
+        border-radius: 1.125rem;
+        font-size: .625rem;
+
+        &:hover {
+            background-color: $primary-color-dark;
+            color: $primary-color-light;
+        }
+        @include tablet {
+            height: 2.25rem;
+            width: 6.75rem;
+            border-radius: 1.125rem;
+        }
+    }
+
+    &__inventory-button {
+        height: 2.25rem;
+        width: 10.25rem;
+        background-color: $background-color-dark;
+        color: $background-color-light;
+        border: none;
+        border-radius: 1.125rem;
+        font-size: .625rem;
+
+        &:hover {
+            background-color: $primary-color-dark;
+            color: $primary-color-light;
+        }
+
+        @include tablet {
+            height: 2.25rem;
+            width: 5.625rem;
+        }
+    }
+}
