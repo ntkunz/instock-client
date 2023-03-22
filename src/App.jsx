@@ -5,8 +5,7 @@ import Header from "./components/Header/Header";
 export default function App() {
   return (
     <div className="App">
-      <Header />
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
@@ -25,7 +24,7 @@ export default function App() {
           />
           <Route path="inventory/edit" element={<EditInventory />} />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </div>
   );
 }

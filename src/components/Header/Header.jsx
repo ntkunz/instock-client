@@ -9,10 +9,8 @@ function Header() {
     <header className="header">
         <img className="header__img" src={headerImg} alt="instock arrow logo" />
         <div className="header__buttons">
-            <button className="header__warehouse-button"><h3>Warehouses</h3></button>
-            <button className="header__inventory-button"><h3>Inventory</h3></button>
-            {/* <Link to="/"><button className="header__warehouse-button"><h3>Warehouses</h3></button></Link>
-            <Link to="/inventory"><button className="header__inventory-button"><h3>Inventory</h3></button></Link> */}
+            <Link to="/"><button className="header__warehouse-button"><h3>Warehouses</h3></button></Link>
+            <Link to="/inventory"><button className="header__inventory-button"><h3>Inventory</h3></button></Link>
         </div>
     </header>
 
