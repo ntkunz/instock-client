@@ -1,14 +1,21 @@
 import './Header.scss';
+import { Link } from "react-router-dom";
+import headerImg from "../../assets/logo/InStock-Logo.svg";
 
-export default function Header() {
+function Header() {
+
+    return(
 
     <header className="header">
-        <img src="../../assets/logo/InStock-Logo.svg/" alt="instock arrow logo" className="header__img" />
+        <img className="header__img" src={headerImg} alt="instock arrow logo" />
         <div className="header__buttons">
-            <button className="header__warehouse-button">Warehouses</button>
-            <button className="header__inventory-button">Inventory</button>
+            <Link to="/"><button className="header__warehouse-button"><h3>Warehouses</h3></button></Link>
+            <Link to="/inventory"><button className="header__inventory-button"><h3>Inventory</h3></button></Link>
         </div>
     </header>
 
-
+    )
 }
+
+export default Header;
+<Link className="header__btn-link" to="/upload"><button className="header__btn" >Upload</button></Link>
