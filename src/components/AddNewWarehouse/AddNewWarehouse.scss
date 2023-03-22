@@ -1,0 +1,60 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.heading {
+    display: flex;
+    &__warehouse {
+        padding: 1.5rem;
+    }
+
+}
+
+.form {
+    &__heading {
+        padding: 1rem;
+        border-top: 1px solid $secondary-color-light ;
+    }
+    &__container {
+        display: flex;
+        flex-direction: column;
+        padding: 0 1rem;
+    }
+    &__warehouse {
+        padding-bottom: 2.5rem;
+    }
+    &__label {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: .5rem;
+        @include body-medium-mobile;
+    }
+    &__input {
+        border: 1px solid $secondary-color-light;
+        border-radius: 1.25rem;
+        width: 100%;
+        height: 2.25rem;
+        padding-left: 1rem;
+    }
+    &__button-wrapper {
+        background-color: $background-color-light;
+        display: flex;
+        height: 2.25rem;
+        justify-content: space-around;
+        padding: 4rem 0;
+        
+    }
+    &__button {
+        width: 8.75rem;
+        height: 2.25rem;
+        border-radius: 1.25rem;
+        &--1 {
+            background-color: $primary-color-light;
+            border: .0625rem solid $secondary-color-light;
+        }
+        &--2 {
+            color: $primary-color-light;
+            background-color: $primary-color-medium;
+            border: none;
+        }
+    }
+}
