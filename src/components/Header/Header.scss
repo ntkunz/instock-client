@@ -8,18 +8,23 @@
     background-color: green;
     height: 12.5rem;
     background-color: $background-color-dark;
-    width: 100%;
-
+    margin: 0 -1rem;
+    padding: 0 1rem;
 
     @include tablet {
         flex-direction: row;
         align-items: flex-start;
         height: 11.625rem;
         justify-content: space-between;
+        margin: 0 -2rem;
+    }
+
+    @include desktop {
+        margin: 0 -8.125rem;
     }
 
     &__img {
-        width: 8.0625rem;
+        width: 8rem;
             padding: 1.5rem 0 1.75rem;
 
             @include tablet {
@@ -36,9 +41,11 @@
     &__buttons {
         display: flex;
         justify-content: space-between;
+        width: 100%;
 
         @include tablet {
             padding: 1.75rem 2rem;
+            width: fit-content;
             gap: .5rem;
         }
 
@@ -49,7 +56,7 @@
 
     &__warehouse-button {
         height: 2.25rem;
-        width: 10.25rem;
+        padding: 0 3rem;
         background-color: $background-color-dark;
         color: $background-color-light;
         border: none;
@@ -63,14 +70,16 @@
         @include tablet {
             height: 2.25rem;
             width: 6.75rem;
+            padding: 0;
             border-radius: 1.125rem;
         }
     }
 
     &__inventory-button {
         height: 2.25rem;
-        width: 10.25rem;
+        padding: 0 2.25rem;
         background-color: $background-color-dark;
+        color: $background-color-light;
         color: $background-color-light;
         border: none;
         border-radius: 1.125rem;
@@ -84,6 +93,7 @@
         @include tablet {
             height: 2.25rem;
             width: 5.625rem;
+            padding: 0;
         }
     }
 }
