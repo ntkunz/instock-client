@@ -1,7 +1,7 @@
 import React from "react";
 import "./WarehouseList.scss";
 import deleteicon from "../../assets/icons/delete_outline-24px.svg";
-import editicon from "../../assets/icons/chevron_right-24px.svg";
+import editicon from "../../assets/icons/edit-24px.svg";
 export default function WarehouseList() {
   return (
     <section className="warehouseList">
@@ -27,11 +27,12 @@ export default function WarehouseList() {
       </div>
 
       <ul className="warehouseList__list">
-        <li class="warehouseList__items">
+        <li className="warehouseList__items">
+          <div className="warehouseList__item">
           <div className="warehouseList__left">
             <div className="warehouseList__warehouse">
               <div className="warehouseList__subtitle">warehouse</div>
-              <div className="warehouseList__info warehouseList__arrow">
+              <div className="warehouseList__info warehouseList__icon">
                 <a
                   className="warehouseList__link"
                   href="warehouses/:warehouseId"
@@ -57,6 +58,7 @@ export default function WarehouseList() {
               <div className="warehouseList__info">+1 (629) 555-0129</div>
               <div className="warehouseList__info">paujla@instock.com</div>
             </div>
+          </div>
           </div>
           <div className="warehouseList__icons">
             <div className="warehouseList__delete">
