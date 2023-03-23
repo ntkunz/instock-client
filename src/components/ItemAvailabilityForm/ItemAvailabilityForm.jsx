@@ -1,6 +1,8 @@
 import "./ItemAvailabilityForm.scss";
 
-function ItemAvailabilityForm() {
+function ItemAvailabilityForm({ warehouses }) {
+
+    console.log(warehouses[0].id) //this is the first warehouse's id
     return (
         <div className="avail">
             <h2 className="avail__title">Item Availability</h2>
@@ -31,6 +33,7 @@ function ItemAvailabilityForm() {
                     name="avail_warehouse" 
                     id="avail_warehouse"
                 >
+                {/* create an option for each of the id's! need to .map it! */}
                     <option value="volvo">Volvo</option>
                     <option value="saab">Saab</option>
                 </select>

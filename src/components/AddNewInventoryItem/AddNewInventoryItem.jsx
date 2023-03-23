@@ -7,6 +7,8 @@ import ItemAvailabilityForm from "../ItemAvailabilityForm/ItemAvailabilityForm";
 
 function AddNewInventoryItem() {
 
+  const [warehouses, setWarehouses] = useState([]);
+
 //USEEFFECT TO GET WAREHOUSE INFORMATION  -  LATER GET PASSED DOWN
 
 const api=process.env.REACT_APP_BASEURL;
@@ -20,7 +22,10 @@ function getWarehouses() {
   axios
       .get(`${api}/warehouses`)
       .then((data) => {
+        if(data) {
+          setWarehouses(data.data);
           console.log(data.data)
+        }
       })
       .catch((err) => {
           console.log("err: ", err);
@@ -43,7 +48,7 @@ function getWarehouses() {
                 <ItemDetailsForm />
             </div>
             <div className="form__component-container">
-                <ItemAvailabilityForm />
+                <ItemAvailabilityForm warehouses={warehouses}/>
             </div>
           <div className="form__button-wrapper">
             <div className="form__button-container">
