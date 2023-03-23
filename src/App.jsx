@@ -6,7 +6,7 @@ import AddNewInventoryItem from "./components/AddNewInventoryItem/AddNewInventor
 // import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 // import ContactDetails from "./components/ContactDetails/ContactDetails";
 import Footer from "./components/Footer/Footer";
-import AddNewWarehouseForm from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
+// import AddNewWarehouseForm from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
 export default function App() {
   return (
     <div className="App">

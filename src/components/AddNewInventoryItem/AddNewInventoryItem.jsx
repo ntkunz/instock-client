@@ -15,7 +15,7 @@ function AddNewInventoryItem() {
                 <ItemDetailsForm />
             </div>
             <div className="form__component-container">
-                <ItemAvailabilityForm />
+                {/* <ItemAvailabilityForm /> */}
             </div>
           <div className="form__button-wrapper">
             <div className="form__button-container">

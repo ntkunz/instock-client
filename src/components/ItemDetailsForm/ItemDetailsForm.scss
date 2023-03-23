@@ -1,3 +1,17 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
+.details {
+
+    &__label {
+        display: block;
+    }
+
+    &__input {
+        width: 100%;
+    }
+
+    &__desc-input {
+        width: 100%;
+    }
+}
