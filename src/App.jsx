@@ -1,12 +1,16 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
-
+import Footer from "./components/Footer/Footer";
+import AddNewWarehouse from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
 export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
+      <Header />
+      <AddNewWarehouse />
+      <Footer />
+        {/* <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
           <Route path="warehouses/edit" element={<EditWarehouse />} />
@@ -23,7 +27,7 @@ export default function App() {
             element={<InventoryDetails />}
           />
           <Route path="inventory/edit" element={<EditInventory />} />
-        </Routes>
+        </Routes> */}
       </BrowserRouter>
     </div>
   );

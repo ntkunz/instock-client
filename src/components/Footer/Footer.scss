@@ -1,12 +1,16 @@
-
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
 .footer {
     text-align: center;
-    padding: 2.5rem 6.8125rem;
+    font-size: 0.6875rem;
+    padding: 2.5rem 0;
     @include tablet {
-        padding: 2.5rem 18.6875rem;
+        padding: 2.5rem 0;
+        margin-top: 16.375rem;
     }
     @include desktop {
-        padding: 3rem 34.625rem;
+        padding: 3rem 0;
+        margin-top: 9.6875rem;
     }
 }
