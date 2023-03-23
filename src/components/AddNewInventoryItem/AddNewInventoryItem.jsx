@@ -1,7 +1,7 @@
 import "./AddNewInventoryItem.scss";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
-// import WarehouseDetails from "../WarehouseDetails/WarehouseDetails";
-// import ContactDetails from "../ContactDetails/ContactDetails";
+import ItemDetailsForm from "../ItemDetailsForm/ItemDetailsForm";
+import ItemAvailabilityForm from "../ItemAvailabilityForm/ItemAvailabilityForm";
 
 function AddNewInventoryItem() {
     return (
@@ -11,14 +11,16 @@ function AddNewInventoryItem() {
           <h1 className="heading__title">Add New Inventory Item</h1>
         </div>
         <form className="form">
-          <div className="form__wrapper">
-            {/* <WarehouseDetails />
-            <ContactDetails /> */}
-          </div>
+            <div className="form__component-container">
+                <ItemDetailsForm />
+            </div>
+            <div className="form__component-container">
+                <ItemAvailabilityForm />
+            </div>
           <div className="form__button-wrapper">
             <div className="form__button-container">
               <button className="form__button form__button--1">Cancel</button>
-              <button className="form__button form__button--2">+ Add Warehouse</button>
+              <button className="form__button form__button--2">+ Add Item</button>
             </div>
           </div>
         </form>
