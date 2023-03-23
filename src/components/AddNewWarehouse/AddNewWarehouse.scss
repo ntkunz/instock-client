@@ -1,0 +1,71 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.heading {
+  display: flex;
+  @include tablet {
+    border-bottom: 1px solid $secondary-color-light;
+    margin-left: 1rem;
+  }
+  @include desktop {
+    margin-left: 2rem;
+  }
+  &__warehouse {
+    padding: 1.5rem 0;
+  }
+}
+
+.form {
+  &__wrapper {
+    @include tablet {
+      display: flex;
+      justify-content: space-evenly;
+      padding-top: 2rem;
+    }
+    @include tablet {
+        margin: 1.5rem;
+    }
+  }
+  &__button-wrapper {
+    background-color: $background-color-light;
+    width: 100%;
+    display: flex;
+    padding: 1rem 0;
+    @include tablet {
+        padding: 1rem 2.5rem;
+    }
+  }
+  &__button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    @include tablet {
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+  }
+  &__button {
+    width: 8.75rem;
+    height: 2.25rem;
+    border-radius: 1.25rem;
+    font-weight: 600;
+    @include tablet {
+      width: 8.625rem;
+      height: 2.375rem;
+    }
+    &--1 {
+      color: $secondary-color-dark;
+      background-color: $primary-color-light;
+      border: 0.0625rem solid $secondary-color-light;
+      @include tablet {
+        height: 2.375rem;
+        width: 4.5rem;
+      }
+    }
+    &--2 {
+      color: $primary-color-light;
+      background-color: $primary-color-medium;
+      border: none;
+    }
+  }
+}
