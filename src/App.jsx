@@ -6,14 +6,14 @@ import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
 import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 import ContactDetails from "./components/ContactDetails/ContactDetails";
 import Footer from "./components/Footer/Footer";
-import AddNewWarehouse from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
+import AddNewWarehouseForm from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
 export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
       <Header />
-      <AddNewInventoryItem />
-
+      <AddNewWarehouseForm />
+      <Footer />
         {/* <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />

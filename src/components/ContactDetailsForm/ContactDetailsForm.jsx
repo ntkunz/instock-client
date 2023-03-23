@@ -1,6 +1,6 @@
-import "./ContactDetails.scss";
+import "./ContactDetailsForm.scss";
 
-function ContactDetails() {
+function ContactDetailsForm() {
   return (
       <div className="contact-details">
         <h2 className="contact-details__heading">Contact Details</h2>
@@ -26,4 +26,4 @@ function ContactDetails() {
   );
 }
 
-export default ContactDetails;
+export default ContactDetailsForm;

@@ -1,12 +1,12 @@
-import "./AddNewWarehouse.scss";
+import "./AddNewWarehouseForm.scss";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
-import WarehouseDetails from "../WarehouseDetailsForm/WarehouseDetailsForm";
-import ContactDetails from "../ContactDetailsForm/ContactDetailsForm";
+import WarehouseDetailsForm from "../WarehouseDetailsForm/WarehouseDetailsForm";
+import ContactDetailsForm from "../ContactDetailsForm/ContactDetailsForm";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function AddNewWarehouse() {
+function AddNewWarehouseForm() {
   const [warehouseName, setWarehouseName] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [city, setCity] = useState("");
@@ -93,13 +93,13 @@ function AddNewWarehouse() {
       </div>
       <form onSubmit={handleSubmit} className="form">
         <div className="form__wrapper">
-          <WarehouseDetails 
+          <WarehouseDetailsForm 
           handleChangeWarehouse = {handleChangeWarehouse}
           handleChangeStreetAddress = {handleChangeStreetAddress}
           handleChangeCity = {handleChangeCity}
           handleChangeCountry = {handleChangeCountry}
            />
-          <ContactDetails 
+          <ContactDetailsForm 
           handleChangeContactName = {handleChangeContactName}
           handleChangePosition = {handleChangePosition}
           handleChangePhoneNumber = {handleChangePhoneNumber}
@@ -119,4 +119,4 @@ function AddNewWarehouse() {
   );
 }
 
-export default AddNewWarehouse;
+export default AddNewWarehouseForm;
