@@ -1,9 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
-
 
 export default function App() {
   return (
@@ -12,7 +9,7 @@ export default function App() {
       <Header />
       <AddNewWarehouse />
       <Footer />
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
           <Route path="warehouses/edit" element={<EditWarehouse />} />
@@ -29,7 +26,7 @@ export default function App() {
             element={<InventoryDetails />}
           />
           <Route path="inventory/edit" element={<EditInventory />} />
-        </Routes> */}
+        </Routes>
       </BrowserRouter>
     </div>
   );
