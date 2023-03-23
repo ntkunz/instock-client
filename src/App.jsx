@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
-// import AddNewInventoryItem from "./components/AddNewInventoryItem/AddNewInventoryItem";
+import AddNewInventoryItem from "./components/AddNewInventoryItem/AddNewInventoryItem";
 // import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
 // import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 // import ContactDetails from "./components/ContactDetails/ContactDetails";
@@ -12,7 +12,7 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
       <Header />
-      <AddNewWarehouseForm />
+      <AddNewInventoryItem />
       <Footer />
         {/* <Routes>
           <Route path="/" element={<WarehouseList />} />
