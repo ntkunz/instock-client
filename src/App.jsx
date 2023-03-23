@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
+import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
+import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
+import ContactDetails from "./components/ContactDetails/ContactDetails";
+import Footer from "./components/Footer/Footer";
 
 export default function App() {
   return (
