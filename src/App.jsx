@@ -6,7 +6,7 @@ import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
 import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 import ContactDetails from "./components/ContactDetails/ContactDetails";
 import Footer from "./components/Footer/Footer";
-
+import AddNewWarehouse from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
 export default function App() {
   return (
     <div className="App">
