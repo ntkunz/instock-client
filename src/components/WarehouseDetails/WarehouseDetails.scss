@@ -2,6 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .warehouse-details {
+  padding: 0 1.5rem;
   @include tablet {
     width: 50%;
     border-right: 1px solid $secondary-color-light;
@@ -16,7 +17,6 @@
 
   &__heading {
     padding: 1rem 0;
-    border-top: 1px solid $secondary-color-light;
     @include tablet {
       padding: 0 0 2rem 0;
       border: none;
@@ -27,7 +27,7 @@
     flex-direction: column;
   }
   &__warehouse {
-    padding-bottom: 2.5rem;
+    padding-bottom: 1rem;
   }
   &__label {
     display: flex;
