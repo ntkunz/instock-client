@@ -5,7 +5,19 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  
+  font-family: "Titillium Web", sans-serif;
+}
+.App {
+  padding: 0 1rem;
+  text-align: center;
+
+  @include tablet {
+    padding: 0 2rem;
+  }
+
+  @include desktop {
+    padding: 0 8.125rem;
+  }
 }
 
 h1 {

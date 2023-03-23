@@ -2,6 +2,22 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  font-family: "Titillium Web", sans-serif;
+}
+
+.App {
+  padding: 0 1rem;
+  text-align: center;
+}
+@media (min-width: 767px) {
+  .App {
+    padding: 0 2rem;
+  }
+}
+@media (min-width: 1280px) {
+  .App {
+    padding: 0 8.125rem;
+  }
 }
 
 h1 {
