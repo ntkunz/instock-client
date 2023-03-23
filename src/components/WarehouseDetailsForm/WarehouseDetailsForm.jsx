@@ -1,6 +1,6 @@
-import "./WarehouseDetails.scss";
+import "./WarehouseDetailsForm.scss";
 
-function WarehouseDetails() {
+function WarehouseDetailsForm() {
   return (
       <div className="warehouse-details">
         
@@ -38,4 +38,4 @@ function WarehouseDetails() {
   );
 }
 
-export default WarehouseDetails;
+export default WarehouseDetailsForm;

@@ -2,13 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import AddNewWarehouse from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
+import AddNewWarehouseForm from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
 export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
       <Header />
-      <AddNewWarehouse />
+      <AddNewWarehouseForm />
       <Footer />
         {/* <Routes>
           <Route path="/" element={<WarehouseList />} />
