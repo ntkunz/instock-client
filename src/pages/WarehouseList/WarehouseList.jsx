@@ -5,20 +5,25 @@ import editicon from "../../../assets/icons/edit-24px.svg";
 export default function WarehouseList() {
   return (
     <section className="warehouseList">
-      <h1 className="warehouseList__title">Warehouses</h1>
+      <div className="warehouseList__box">
+     
+      
       <div className="warehouseList__search">
+      <h1 className="warehouseList__title">Warehouses</h1>
         <form className="warehouseList__form">
           <input
             id="search"
             className="warehouseList__text"
             type="text"
-            placeholder="Search"
+            placeholder="Search..."
             name="searchBar"
           />
-        </form>
+   
         <button
           className="warehouseList__btn"
-          link="warehouses/add">Add New Warehouse</button>
+          link="warehouses/add">+ Add New Warehouse</button>
+               </form>
+          </div>
       </div>
 
       <ul className="warehouseList__list">
