@@ -10,12 +10,7 @@ export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <Header />
-      <AddNewWarehouse />
-      <WarehouseDetails />
-      <ContactDetails />
-      <Footer />
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
           <Route path="warehouses/edit" element={<EditWarehouse />} />
@@ -32,7 +27,7 @@ export default function App() {
             element={<InventoryDetails />}
           />
           <Route path="inventory/edit" element={<EditInventory />} />
-        </Routes> */}
+        </Routes>
       </BrowserRouter>
     </div>
   );
