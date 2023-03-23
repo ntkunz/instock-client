@@ -1,12 +1,13 @@
-import "./WarehouseDetails.scss";
+import "./WarehouseDetailsForm.scss";
 
-function WarehouseDetails() {
+function WarehouseDetailsForm() {
   return (
       <div className="warehouse-details">
-        <h2 className="warehouse-details__heading">Warehouse Details</h2>
+        
 
         <div className="warehouse-details__container">
           <div className="warehouse-details__warehouse">
+            <h2 className="warehouse-details__heading">Warehouse Details</h2>
             <label className="warehouse-details__label">Warehouse Name</label>
             <input
               className="warehouse-details__input"
@@ -37,4 +38,4 @@ function WarehouseDetails() {
   );
 }
 
-export default WarehouseDetails;
+export default WarehouseDetailsForm;
