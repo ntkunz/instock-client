@@ -29,9 +29,30 @@ export default function WarehouseList() {
       <ul className="warehouseList__list">
         <li className="warehouseList__items">
           <div className="warehouseList__list--tablet">
-            <p className="warehouseList__tablet">warehouse</p>
-            <p className="warehouseList__tablet">address</p>
-            <p className="warehouseList__tablet">contact name</p>
+            <p className="warehouseList__tablet">
+              warehouse{" "}
+              <img
+                className="warehouseList__sort"
+                src={sorticon}
+                alt="sort icon"
+              />
+            </p>
+            <p className="warehouseList__tablet">
+              address{" "}
+              <img
+                className="warehouseList__sort"
+                src={sorticon}
+                alt="sort icon"
+              />
+            </p>
+            <p className="warehouseList__tablet">
+              contact name{" "}
+              <img
+                className="warehouseList__sort"
+                src={sorticon}
+                alt="sort icon"
+              />
+            </p>
             <p className="warehouseList__tablet">
               contact information
               <img
@@ -45,8 +66,6 @@ export default function WarehouseList() {
           </div>
 
           <div className="warehouseList__container">
-            {/* <div className="warehouseList__item">
-              <div className="warehouseList__left"> */}
             <div className="warehouseList__item">
               <div className="warehouseList__subtitle">warehouse</div>
               <div className="warehouseList__info">
@@ -71,8 +90,7 @@ export default function WarehouseList() {
                 <p> New york, USA</p>
               </div>
             </div>
-            {/* </div> */}
-            {/* <div className="warehouseList__right"> */}
+
             <div className="warehouseList__item">
               <div className="warehouseList__subtitle">contact name</div>
               <div className="warehouseList__info">Parmin Aujla</div>
@@ -82,8 +100,6 @@ export default function WarehouseList() {
               <div className="warehouseList__info">+1 (629) 555-0129</div>
               <div className="warehouseList__info">paujla@instock.com</div>
             </div>
-            {/* </div> */}
-            {/* </div> */}
             <div className="warehouseList__item warehouseList__item--last">
               <div className="warehouseList__delete">
                 <img src={deleteicon} alt="delete icon" />
