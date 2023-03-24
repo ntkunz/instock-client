@@ -5,6 +5,10 @@ a {
   text-decoration: none;
 }
 
+ul:last-child li .warehouseList__container {
+  border-bottom: none;
+}
+
 .warehouseList {
   display: flex;
   flex-direction: column;
@@ -14,6 +18,7 @@ a {
   margin: auto;
   bottom: 4rem;
   background-color: $primary-color-light;
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
 
   &__box {
     padding-top: 2rem;
@@ -44,6 +49,9 @@ a {
     padding: 0.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @include tablet {
       margin: 0;
@@ -87,7 +95,6 @@ a {
 
   &__list {
     list-style: none;
-    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
   }
 
   &__items {
@@ -195,8 +202,13 @@ a {
       padding: 1rem 2rem;
       border-bottom: solid $secondary-color-light;
     }
+
     @include desktop {
       padding-bottom: 0.5rem;
+    }
+
+    &:hover {
+      background-color: rgba(46, 102, 230, 0.07);
     }
   }
 
