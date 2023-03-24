@@ -18,7 +18,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						type="radio"
 						id="instock"
 						name="instock"
-						value='1'
+						value="In Stock"
 						onChange={handleOnChange}
 					/>
 					<label className="avail__radio-label" htmlFor="instock">
@@ -31,7 +31,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						type="radio"
 						id="outofstock"
 						name="instock"
-						value='0'
+						value="Out of Stock"
 						onChange={handleOnChange}
 					/>
 					<label
@@ -42,7 +42,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 					</label>
 				</div>
 			</div>
-		<div className="avail__quantity-wrap">
+		<div className="avail__quantity-wrap avail__out-of-stock">
 			<label htmlFor="quantity" className="avail__label">
 				Quantity
 			</label>

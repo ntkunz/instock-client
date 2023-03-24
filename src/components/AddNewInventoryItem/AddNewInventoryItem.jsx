@@ -1,7 +1,6 @@
 import "./AddNewInventoryItem.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-const { v4 } = require("uuid");
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import ItemDetailsForm from "../ItemDetailsForm/ItemDetailsForm";
 import ItemAvailabilityForm from "../ItemAvailabilityForm/ItemAvailabilityForm";
@@ -9,15 +8,16 @@ import ItemAvailabilityForm from "../ItemAvailabilityForm/ItemAvailabilityForm";
 function AddNewInventoryItem() {
 	//bring in Api address for axios calls
 	const api = process.env.REACT_APP_BASEURL;
+	const { v4 } = require("uuid");
 
 	//useState for all warehouses and inventories
 	const [warehouses, setWarehouses] = useState([]);
 	const [inventories, setInventories] = useState([]);
-    // const [ outOfStock, setOutOfStock ] = useState("");
+	// const [ outOfStock, setOutOfStock ] = useState("");
 
 	//useState for all form inputs
 	const [inputValues, setInputValues] = useState({
-		instock: "", //not sure
+		instock: "Out of Stock",
 		quantity: 0,
 		selectWarehouse: "",
 		itemName: "",
@@ -27,21 +27,28 @@ function AddNewInventoryItem() {
 
 	//onChange function for all inputs of form
 	const handleOnChange = (event) => {
+		//create variables for checkbox radios
+		const quantityWrapper = document.querySelector(".avail__quantity-wrap");
+		const stockRadio = document.querySelectorAll(".avail__radio");
+
+		//create true value if item in stock, false if out of stock
+		let stockCheck = stockRadio[0].checked;
+
+		//if item in stock then set instock inputValue and show quantity field
+		if (stockCheck) {
+			quantityWrapper.classList.remove("avail__out-of-stock");
+			// setInputValues({ ...inputValues, instock: "In Stock" });
+		}
+		//if item out of stock then set instock inputVluae and hide quantity field
+		if (!stockCheck) {
+			quantityWrapper.classList.add("avail__out-of-stock");
+			// setInputValues({ ...inputValues, instock: "Out of Stock" });
+		}
+		//udpate inputValues
 		const { name, value } = event.target;
 		setInputValues({ ...inputValues, [name]: value });
-		console.log(event.target.value);
-		if (inputValues.instock == 1) {//DON'T SHOW QUANTITY HERE!
-			document.querySelector('.avail__quantity-wrap').classList.add("avail__out-of-stock")
-			console.log(document.querySelector('.avail__quantity-wrap'))
-			// console.log(document.querySelector('.avail__quantity-wrap').classList)
-		}
-		if (inputValues.instock == 0) {
-			document.querySelector('.avail__quantity-wrap').classList.remove("avail__out-of-stock")
-		}
-
+		// console.log(event.target.value);
 	};
-
-
 
 	//on load get warehouses and inventories
 	useEffect(() => {
@@ -82,14 +89,8 @@ function AddNewInventoryItem() {
 	//function to handle form submit
 	function handleFormSubmit(e) {
 		e.preventDefault();
-		// console.log(e.taget)
-		//ADD ERROR HANDLING!
-        // stockCheck(inputValues.outOfStock);
 
-		let currentStatus = "";
-		if (inputValues.instock === 0) currentStatus = "Out of Stock";
-		if (inputValues.instock === 1) currentStatus = "In Stock";
-
+		//form validation
 		if (
 			inputValues.instock === "" ||
 			inputValues.selectWarehouse === "" ||
@@ -100,24 +101,21 @@ function AddNewInventoryItem() {
 			return alert("Please enter all form field information");
 		}
 
-		//WORK ON MAKING SURE QUANTITY IS A NUMBER!!!!!!!!!!!!1==========
-		console.log(typeof parseInt(inputValues.quantity));
-		// if (typeof(inputValues.quantity) !== 'number' || inputValues.quantity !== 0) return alert("Pleaes enter a number for quantity")
-		console.log("hooray!");
-		console.log(inputValues.selectWarehouse);
+		if (isNaN(inputValues.quantity)) {return alert('Please enter a number for quantity')}
 
 		axios
 			.post(`${api}/inventories`, {
-				id: { v4 },
+				id: v4(),
 				warehouse_id: inputValues.selectWarehouse,
 				item_name: inputValues.itemName,
 				description: inputValues.desc,
 				category: inputValues.category,
-				status: currentStatus,
-				quantity: inputValues.quantity,
+				status: inputValues.instock,
+				quantity: inputValues.quantity
 			})
 			.then((response) => {
 				alert(`Your new inventory item ${inputValues.itemName} has been added`);
+				
 				//reset form on successful submit
 				e.target.reset();
 				setInputValues({
@@ -125,10 +123,10 @@ function AddNewInventoryItem() {
 					itemName: "",
 					desc: "",
 					category: "",
-					instock: "",
+					instock: "Out of Stock",
 					quantity: 0,
 				});
-				//HERE MAYBE NAVIGATE TO INVENTORIES PAGE===============
+			// 	//HERE MAYBE NAVIGATE TO INVENTORIES PAGE ??===============
 			})
 			.catch((err) => {
 				console.error(err);
