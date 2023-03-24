@@ -55,4 +55,10 @@
 
 .error-container {
   display: flex;
-}
+  align-items: center;
+  color: red;
+  padding: 0.5rem 0;
+  &__message {
+    font-size: 0.775rem;
+  }
+  }

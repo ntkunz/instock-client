@@ -39,11 +39,6 @@ function AddNewWarehouseForm() {
   const validateEmail = (value) =>
     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
 
-
-  // useEffect(() => {
-  //   updateErrorMessage(errorValues);
-  // }, []);
-
   const isFormValid = () => {
     let isValid = true;
     let newErrorValues = { ...errorValues };
