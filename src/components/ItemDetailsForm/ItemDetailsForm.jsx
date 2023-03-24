@@ -10,8 +10,9 @@ function ItemDetailsForm({ inventories, handleOnChange, inputValues }) {
 			<input
 				type="text"
 				className="details__input"
+				name="itemName"
 				value={inputValues.itemName}
-				onChange={ handleOnChange }
+				onChange={handleOnChange}
 				placeholder="Item Name"
 			/>
 			<label htmlFor="desc" className="details__label">
@@ -20,6 +21,7 @@ function ItemDetailsForm({ inventories, handleOnChange, inputValues }) {
 			<textarea
 				type="text"
 				className="details__desc-input"
+				name="desc"
 				value={inputValues.desc}
 				onChange={ handleOnChange }
 				placeholder="Please enter a brief item description..."
@@ -30,20 +32,19 @@ function ItemDetailsForm({ inventories, handleOnChange, inputValues }) {
 			<div className="details__select-wrap">
 				<select
 					className="details__select"
-					name="details_item"
-					id="details_item"
+					name="itemName"
+					id="details_select"
+					onChange={ handleOnChange }
+					value={inputValues.itemName}
 					// placeholder="Please select"
 				>
 					<option className="details__placeholder" value="" readOnly>
 						Please select
 					</option>
 					{inventories.map((inventory) => (
-						<option 
-							key={inventory.id} 
-							value={inventory.id}
-							// name="cat"
-							onChange={ handleOnChange } 
-							name={inventory.category}
+						<option
+							key={inventory.id}
+							value={inventory.category}
 						>
 							{inventory.category}
 						</option>
