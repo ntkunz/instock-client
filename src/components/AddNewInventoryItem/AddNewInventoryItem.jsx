@@ -1,6 +1,7 @@
 import "./AddNewInventoryItem.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
+const { v4 } = require("uuid");
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import ItemDetailsForm from "../ItemDetailsForm/ItemDetailsForm";
 import ItemAvailabilityForm from "../ItemAvailabilityForm/ItemAvailabilityForm";
@@ -107,6 +108,7 @@ function AddNewInventoryItem() {
 
 		axios
 			.post(`${api}/inventories`, {
+				id: { v4 },
 				warehouse_id: inputValues.selectWarehouse,
 				item_name: inputValues.itemName,
 				description: inputValues.desc,
