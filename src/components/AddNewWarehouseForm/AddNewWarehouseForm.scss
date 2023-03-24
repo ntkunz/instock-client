@@ -15,6 +15,8 @@
 
 .heading {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0.5rem;
   border-bottom: 1px solid $secondary-color-light;
   @include tablet {
