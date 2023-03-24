@@ -32,11 +32,10 @@ function ItemDetailsForm({ inventories, handleOnChange, inputValues }) {
 			<div className="details__select-wrap">
 				<select
 					className="details__select"
-					name="itemName"
+					name="category"
 					id="details_select"
 					onChange={ handleOnChange }
-					value={inputValues.itemName}
-					// placeholder="Please select"
+					value={inputValues.category}
 				>
 					<option className="details__placeholder" value="" readOnly>
 						Please select

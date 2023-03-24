@@ -11,7 +11,6 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 			<label htmlFor="name" className="avail__label">
 				Status
 			</label>
-			{/* <fieldset className="avail__status"> */}
 			<div className="avail__radio-container">
 				<div className="avail__radio-set">
 					<input
@@ -21,7 +20,6 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						name="instock"
 						value='1'
 						onChange={handleOnChange}
-
 					/>
 					<label className="avail__radio-label" htmlFor="instock">
 						In stock
@@ -44,7 +42,6 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 					</label>
 				</div>
 			</div>
-			{/* </fieldset> */}
 			<label htmlFor="quantity" className="avail__label">
 				Quantity
 			</label>
@@ -73,7 +70,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 					{warehouses.map((warehouse) => (
 						<option 
 							key={warehouse.id} 
-							value={warehouse.warehouse_name}>
+							value={warehouse.id}>
 							{warehouse.warehouse_name}
 						</option>
 					))}
