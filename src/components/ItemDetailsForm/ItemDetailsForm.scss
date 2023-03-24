@@ -9,6 +9,11 @@
         padding: 0 2rem;
         margin: 1.5rem 0;
 	}
+
+	@include desktop {
+		padding: 0 2.5rem;
+	}
+
 	&__title {
 		padding: 0 0 1.5rem;
 
@@ -22,9 +27,9 @@
 		@include body-medium-mobile;
 		font-weight: 600;
 
-        // @include tablet {
-        //     padding-bottom: .5rem;
-        // }
+        @include tablet {
+            @include body-medium-tablet;
+        }
 	}
 
 	&__input {
