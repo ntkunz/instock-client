@@ -9,11 +9,16 @@
     box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
     border-radius: 3px;
     background-color: $primary-color-light;
+
+    @include tablet {
+        margin-top: -6.0625rem;
+    }
 }
 
 .heading {
     padding: 1.75rem 1.75rem;
     border-bottom: 1px solid $secondary-color-light;
+    display: flex;
 
     &__title {
         padding: 0 0 0 .75rem;
@@ -22,13 +27,34 @@
 }
 
 .form {
+    
+    @include tablet {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-    &__wrapper {
-        padding: 0 1.5rem;
+    &__component-container {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid $secondary-color-light;
+
+        @include tablet {
+            border-bottom: none;
+        }
+
+        @include tablet {
+            display: flex;
+            flex-basis: 50%;
+            padding: 0;
+        }
     }
 
     &__button-wrapper {
 
+        @include tablet {
+            width: 100%;
+            height: 4.5rem;
+            @include body-large-tablet;
+        }
     }
 
     &__button-container {
@@ -36,6 +62,12 @@
     }
 
     &__button {
+        @include tablet {
+
+            &--2 {
+                width: 6rem;
+            }
+        }
 
     }
 }
