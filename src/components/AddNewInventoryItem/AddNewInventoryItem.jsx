@@ -8,6 +8,7 @@ import ItemAvailabilityForm from "../ItemAvailabilityForm/ItemAvailabilityForm";
 function AddNewInventoryItem() {
 
   const [warehouses, setWarehouses] = useState([]);
+  const [inventories, setInventories] = useState([]);
 
 //USEEFFECT TO GET WAREHOUSE INFORMATION  -  LATER GET PASSED DOWN
 
@@ -15,9 +16,10 @@ const api=process.env.REACT_APP_BASEURL;
 //on load get warehouses
 useEffect(() => {
   getWarehouses()
+  getInventories()
 }, []);
 
-//api get call function to retrieve single video details and setMainVideo
+//api get call function to get warehouses ==PASS DOWN LATER... MOVE FUNCTION UP LATER
 function getWarehouses() {
   axios
       .get(`${api}/warehouses`)
@@ -33,6 +35,20 @@ function getWarehouses() {
       });
 }
 
+function getInventories() {
+  axios
+      .get(`${api}/inventories`)
+      .then((data) => {
+        if(data) {
+          setInventories(data.data);
+          console.log(data.data)
+        }
+      })
+      .catch((err) => {
+          console.log("err: ", err);
+          // navigate("/404");
+      });
+}
 
 
 
@@ -45,10 +61,10 @@ function getWarehouses() {
         </div>
         <form className="form">
             <div className="form__component-container">
-                <ItemDetailsForm />
+                <ItemDetailsForm inventories={inventories} />
             </div>
             <div className="form__component-container">
-                <ItemAvailabilityForm warehouses={warehouses}/>
+                <ItemAvailabilityForm warehouses={warehouses} />
             </div>
           <div className="form__button-wrapper">
             <div className="form__button-container">

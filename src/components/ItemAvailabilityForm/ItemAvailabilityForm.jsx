@@ -29,17 +29,19 @@ function ItemAvailabilityForm({ warehouses }) {
                 placeholder="" 
             />
             <label htmlFor="" className="avail__label">Warehouse</label>
+            <div className="avail__select-wrap">
                 <select 
                     className="avail__warehouse" 
                     name="avail_warehouse" 
                     id="avail_warehouse"
-                    // placeholder="Please select"
+                    placeholder="Please select"
                 >
-                <option className="avail__placeholder" value="" readOnly>Please select</option>
+                <option value="" readOnly>Please select</option>
                 {warehouses.map((warehouse) =>  (
                     <option key={warehouse.id} value={warehouse.id}>{warehouse.warehouse_name}</option>
                 ))}
                 </select>
+            </div>
         </div>
     )
 }
