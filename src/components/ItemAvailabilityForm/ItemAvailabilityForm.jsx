@@ -19,7 +19,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						type="radio"
 						id="instock"
 						name="instock"
-						value={inputValues.instock}
+						value='1'
 						onChange={handleOnChange}
 
 					/>
@@ -33,7 +33,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						type="radio"
 						id="outofstock"
 						name="instock"
-						value={inputValues.outofstock}
+						value='0'
 						onChange={handleOnChange}
 					/>
 					<label
@@ -54,6 +54,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 				value={inputValues.quantity}
 				onChange={handleOnChange}
 				placeholder=""
+				name="quantity"
 			/>
 			<label htmlFor="" className="avail__label">
 				Warehouse
@@ -61,7 +62,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 			<div className="avail__select-wrap">
 				<select
 					className="avail__warehouse"
-					name="avail_warehouse"
+					name="selectWarehouse"
 					id="avail_warehouse"
 					onChange={handleOnChange}
 					value={inputValues.selectWarehouse}

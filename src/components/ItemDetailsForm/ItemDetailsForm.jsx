@@ -1,6 +1,6 @@
 import "./ItemDetailsForm.scss";
 
-function ItemDetailsForm({ inventories }) {
+function ItemDetailsForm({ inventories, handleOnChange, inputValues }) {
 	return (
 		<div className="details">
 			<h2 className="details__title">Item Details</h2>
@@ -10,8 +10,8 @@ function ItemDetailsForm({ inventories }) {
 			<input
 				type="text"
 				className="details__input"
-				// value={state.itemName}
-				// onChange={ handleChange }
+				value={inputValues.itemName}
+				onChange={ handleOnChange }
 				placeholder="Item Name"
 			/>
 			<label htmlFor="desc" className="details__label">
@@ -20,8 +20,8 @@ function ItemDetailsForm({ inventories }) {
 			<textarea
 				type="text"
 				className="details__desc-input"
-				// value={state.desc}
-				// onChange={ handleChange }
+				value={inputValues.desc}
+				onChange={ handleOnChange }
 				placeholder="Please enter a brief item description..."
 			/>
 			<label htmlFor="" className="details__label">
@@ -38,7 +38,13 @@ function ItemDetailsForm({ inventories }) {
 						Please select
 					</option>
 					{inventories.map((inventory) => (
-						<option key={inventory.id} value={inventory.id}>
+						<option 
+							key={inventory.id} 
+							value={inventory.id}
+							// name="cat"
+							onChange={ handleOnChange } 
+							name={inventory.category}
+						>
 							{inventory.category}
 						</option>
 					))}

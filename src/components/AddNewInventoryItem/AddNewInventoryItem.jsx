@@ -12,10 +12,11 @@ function AddNewInventoryItem() {
   const [inputValues, setInputValues] = useState({
     // warehouses: [], 
     // inventories: [],
-    // instock: checked, //not sure
-    outofstock: '',  //not sure
-    quantity: null,
-    selectWarehouse: ''
+    instock: '', //not sure
+    quantity: 0,
+    selectWarehouse: '',
+    itemName: '',
+    desc: ''
   });
   
   const handleOnChange = event => {
@@ -40,7 +41,6 @@ function getWarehouses() {
       .then((data) => {
         if(data) {
           setWarehouses(data.data);
-          console.log(data.data)
         }
       })
       .catch((err) => {
@@ -55,7 +55,6 @@ function getInventories() {
       .then((data) => {
         if(data) {
           setInventories(data.data);
-          console.log(data.data)
         }
       })
       .catch((err) => {
@@ -74,10 +73,6 @@ function handleFormCancel(e) {
 
 }
 
-console.log(inputValues.warehouses)
-
-
-
     return (
       <section className="container">
         <div className="heading">
@@ -86,7 +81,11 @@ console.log(inputValues.warehouses)
         </div>
         <form className="form" onSubmit={handleSubmit}>
             <div className="form__component-container">
-                <ItemDetailsForm inventories={inventories} handleOnChange={handleOnChange} />
+                <ItemDetailsForm 
+                  inventories={inventories}
+                  handleOnChange={handleOnChange} 
+                  inputValues={inputValues}
+                />
             </div>
             <div className="form__component-container">
                 <ItemAvailabilityForm 
