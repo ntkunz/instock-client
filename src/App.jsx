@@ -13,7 +13,6 @@ export default function App() {
       <BrowserRouter>
       <Header />
       <AddInventory />
-      <AddNewWarehouseForm />
       <Footer />
         {/* <Routes>
           <Route path="/" element={<WarehouseList />} />

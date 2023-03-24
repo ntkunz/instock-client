@@ -3,14 +3,29 @@
 
 .avail {
 
+
+    @include tablet {
+        width: 100%;
+        padding: 0 2rem;
+        margin: 1.5rem 0;
+    }
+
     &__title {
         padding: 0 0 1.5rem;
+
+        @include tablet {
+            padding: 0 0 2rem;
+        }
     }
     &__label {
         display: block;
         padding-bottom: 0.25rem;
         @include body-medium-mobile;
         font-weight: 600;
+
+        // @include tablet {
+        //     padding-bottom: .5rem;
+        // }
     }
 
     &__input {
@@ -22,7 +37,8 @@
         margin-bottom: 1rem;
         
         @include tablet {
-          height: 2.375rem;
+            height: 2.375rem;
+            margin-bottom: 1.5rem;
         }
     }
 
@@ -30,6 +46,10 @@
         display: flex;
         justify-content: space-between;
         padding-bottom: 1rem;
+        
+        @include tablet {
+			padding-bottom: 1.625rem;
+		}
     }
 
     &__radio-set {
