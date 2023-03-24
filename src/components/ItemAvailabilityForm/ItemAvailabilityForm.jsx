@@ -2,7 +2,8 @@ import "./ItemAvailabilityForm.scss";
 
 function ItemAvailabilityForm({ warehouses }) {
 
-    console.log(warehouses[0].id) //this is the first warehouse's id
+    // if(typeof(warehouses) !== 'undefined') {console.log(warehouses[0])}; //this is the first warehouse's id
+    if(warehouses) {console.log(warehouses[0])}; //this is the first warehouse's id
     return (
         <div className="avail">
             <h2 className="avail__title">Item Availability</h2>
@@ -10,12 +11,12 @@ function ItemAvailabilityForm({ warehouses }) {
             {/* <fieldset className="avail__status"> */}
             <div className="avail__radio-container">
                 <div className="avail__radio-set">
-                  <input className="avail__radio" type="radio" id="instock" name="instock" value="huey" checked />
-                  <label className="avail__radio-label" for="instock">In stock</label>
+                  <input className="avail__radio" type="radio" id="instock" name="instock" value="huey" />
+                  <label className="avail__radio-label" htmlFor="instock">In stock</label>
                 </div>
                 <div className="avail__radio-set">
                   <input className="avail__radio" type="radio" id="outofstock" name="instock" value="outofstock" />
-                  <label className="avail__radio-label out-of-stock" for="outofstock">Out of stock</label>
+                  <label className="avail__radio-label out-of-stock" htmlFor="outofstock">Out of stock</label>
                 </div>
             </div>
             {/* </fieldset> */}
@@ -32,10 +33,12 @@ function ItemAvailabilityForm({ warehouses }) {
                     className="avail__warehouse" 
                     name="avail_warehouse" 
                     id="avail_warehouse"
+                    // placeholder="Please select"
                 >
-                {/* create an option for each of the id's! need to .map it! */}
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
+                <option className="avail__placeholder" value="" readOnly>Please select</option>
+                {warehouses.map((warehouse) =>  (
+                    <option key={warehouse.id} value={warehouse.id}>{warehouse.warehouse_name}</option>
+                ))}
                 </select>
         </div>
     )
