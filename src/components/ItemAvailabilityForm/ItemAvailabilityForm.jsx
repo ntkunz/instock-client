@@ -1,10 +1,10 @@
 import "./ItemAvailabilityForm.scss";
 
-function ItemAvailabilityForm({ warehouses }) {
+function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 	// if(typeof(warehouses) !== 'undefined') {console.log(warehouses[0])}; //this is the first warehouse's id
-	if (warehouses) {
-		console.log(warehouses[0]);
-	} //this is the first warehouse's id
+	// if (warehouses.length > 0) {
+	// 	console.log(warehouses[0]);
+	// } //this is the first warehouse's id
 	return (
 		<div className="avail">
 			<h2 className="avail__title">Item Availability</h2>
@@ -19,7 +19,9 @@ function ItemAvailabilityForm({ warehouses }) {
 						type="radio"
 						id="instock"
 						name="instock"
-						value="huey"
+						value={inputValues.instock}
+						onChange={handleOnChange}
+
 					/>
 					<label className="avail__radio-label" htmlFor="instock">
 						In stock
@@ -31,7 +33,8 @@ function ItemAvailabilityForm({ warehouses }) {
 						type="radio"
 						id="outofstock"
 						name="instock"
-						value="outofstock"
+						value={inputValues.outofstock}
+						onChange={handleOnChange}
 					/>
 					<label
 						className="avail__radio-label out-of-stock"
@@ -48,8 +51,8 @@ function ItemAvailabilityForm({ warehouses }) {
 			<input
 				type="text"
 				className="avail__input"
-				// value={state.quantity}
-				// onChange={ handleChange }
+				value={inputValues.quantity}
+				onChange={handleOnChange}
 				placeholder=""
 			/>
 			<label htmlFor="" className="avail__label">
@@ -60,13 +63,15 @@ function ItemAvailabilityForm({ warehouses }) {
 					className="avail__warehouse"
 					name="avail_warehouse"
 					id="avail_warehouse"
-					// placeholder="Please select"
+					onChange={handleOnChange}
+					value={inputValues.selectWarehouse}
 				>
 					<option value="" readOnly>
 						Please select
 					</option>
 					{warehouses.map((warehouse) => (
-						<option key={warehouse.id} value={warehouse.id}>
+						<option key={warehouse.id} value={warehouse.warehouse_name}>
+						{/* <option key={warehouse.id}> */}
 							{warehouse.warehouse_name}
 						</option>
 					))}

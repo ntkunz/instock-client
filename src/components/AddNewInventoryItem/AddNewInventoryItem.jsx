@@ -9,6 +9,20 @@ function AddNewInventoryItem() {
 
   const [warehouses, setWarehouses] = useState([]);
   const [inventories, setInventories] = useState([]);
+  const [inputValues, setInputValues] = useState({
+    // warehouses: [], 
+    // inventories: [],
+    // instock: checked, //not sure
+    outofstock: '',  //not sure
+    quantity: null,
+    selectWarehouse: ''
+  });
+  
+  const handleOnChange = event => {
+    const { name, value } = event.target;
+    setInputValues({ ...inputValues, [name]: value });
+  console.log(event.target.value)
+  };
 
 //USEEFFECT TO GET WAREHOUSE INFORMATION  -  LATER GET PASSED DOWN
 
@@ -50,6 +64,17 @@ function getInventories() {
       });
 }
 
+function handleSubmit(e) {
+  e.preventDefault();
+  console.log(e.taget.value)
+};
+
+function handleFormCancel(e) {
+  e.preventDefault();
+
+}
+
+console.log(inputValues.warehouses)
 
 
 
@@ -59,16 +84,21 @@ function getInventories() {
           <img src={ArrowBack} alt="ArrowBackButton" />
           <h1 className="heading__title">Add New Inventory Item</h1>
         </div>
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
             <div className="form__component-container">
-                <ItemDetailsForm inventories={inventories} />
+                <ItemDetailsForm inventories={inventories} handleOnChange={handleOnChange} />
             </div>
             <div className="form__component-container">
-                <ItemAvailabilityForm warehouses={warehouses} />
+                <ItemAvailabilityForm 
+                  warehouses={warehouses} 
+                  handleOnChange={handleOnChange} 
+                  inputValues={inputValues}
+                  
+                />
             </div>
           <div className="form__button-wrapper">
             <div className="form__button-container">
-              <button className="form__button form__button--1">Cancel</button>
+              <button className="form__button form__button--1" onClick={handleFormCancel}>Cancel</button>
               <button className="form__button form__button--2">+ Add Item</button>
             </div>
           </div>
