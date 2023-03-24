@@ -12,6 +12,7 @@ function AddNewInventoryItem() {
 	//useState for all warehouses and inventories
 	const [warehouses, setWarehouses] = useState([]);
 	const [inventories, setInventories] = useState([]);
+    // const [ outOfStock, setOutOfStock ] = useState("");
 
 	//useState for all form inputs
 	const [inputValues, setInputValues] = useState({
@@ -28,7 +29,18 @@ function AddNewInventoryItem() {
 		const { name, value } = event.target;
 		setInputValues({ ...inputValues, [name]: value });
 		console.log(event.target.value);
+		if (inputValues.instock == 1) {//DON'T SHOW QUANTITY HERE!
+			document.querySelector('.avail__quantity-wrap').classList.add("avail__out-of-stock")
+			console.log(document.querySelector('.avail__quantity-wrap'))
+			// console.log(document.querySelector('.avail__quantity-wrap').classList)
+		}
+		if (inputValues.instock == 0) {
+			document.querySelector('.avail__quantity-wrap').classList.remove("avail__out-of-stock")
+		}
+
 	};
+
+
 
 	//on load get warehouses and inventories
 	useEffect(() => {
@@ -62,7 +74,7 @@ function AddNewInventoryItem() {
 			})
 			.catch((err) => {
 				console.log("err: ", err);
-				// navigate("/404");
+				// navigate("/404");e.target.videoDesc.value
 			});
 	}
 
@@ -71,7 +83,9 @@ function AddNewInventoryItem() {
 		e.preventDefault();
 		// console.log(e.taget)
 		//ADD ERROR HANDLING!
-    let currentStatus = "";
+        // stockCheck(inputValues.outOfStock);
+
+		let currentStatus = "";
 		if (inputValues.instock === 0) currentStatus = "Out of Stock";
 		if (inputValues.instock === 1) currentStatus = "In Stock";
 
@@ -85,13 +99,11 @@ function AddNewInventoryItem() {
 			return alert("Please enter all form field information");
 		}
 
-    //WORK ON MAKING SURE QUANTITY IS A NUMBER!!!!!!!!!!!!1==========
-    console.log(typeof(parseInt(inputValues.quantity)))
-    // if (typeof(inputValues.quantity) !== 'number' || inputValues.quantity !== 0) return alert("Pleaes enter a number for quantity")
+		//WORK ON MAKING SURE QUANTITY IS A NUMBER!!!!!!!!!!!!1==========
+		console.log(typeof parseInt(inputValues.quantity));
+		// if (typeof(inputValues.quantity) !== 'number' || inputValues.quantity !== 0) return alert("Pleaes enter a number for quantity")
 		console.log("hooray!");
 		console.log(inputValues.selectWarehouse);
-
-
 
 		axios
 			.post(`${api}/inventories`, {
@@ -104,36 +116,35 @@ function AddNewInventoryItem() {
 			})
 			.then((response) => {
 				alert(`Your new inventory item ${inputValues.itemName} has been added`);
-        //HERE MAYBE NAVIGATE TO INVENTORIES PAGE===============
+				//reset form on successful submit
+				e.target.reset();
+				setInputValues({
+					selectWarehouse: "",
+					itemName: "",
+					desc: "",
+					category: "",
+					instock: "",
+					quantity: 0,
+				});
+				//HERE MAYBE NAVIGATE TO INVENTORIES PAGE===============
 			})
 			.catch((err) => {
 				console.error(err);
 			});
-      //reset form on submit
-		e.target.reset();
-        setInputValues({ 
-      selectWarehouse: '',
-      itemName: '',
-      desc: '',
-      category: '',
-      instock: '',
-      quantity: 0
-    })
 	}
 
 	//function to handle form cancel
 	function handleFormCancel(e) {
 		e.preventDefault();
-    document.querySelector("form").reset();
-    setInputValues({ 
-      selectWarehouse: '',
-      itemName: '',
-      desc: '',
-      category: '',
-      instock: '',
-      quantity: 0
-    })
-
+		document.querySelector("form").reset();
+		setInputValues({
+			selectWarehouse: "",
+			itemName: "",
+			desc: "",
+			category: "",
+			instock: "",
+			quantity: 0,
+		});
 	}
 
 	return (

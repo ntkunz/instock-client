@@ -42,6 +42,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 					</label>
 				</div>
 			</div>
+		<div className="avail__quantity-wrap">
 			<label htmlFor="quantity" className="avail__label">
 				Quantity
 			</label>
@@ -53,6 +54,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 				placeholder=""
 				name="quantity"
 			/>
+		</div>
 			<label htmlFor="" className="avail__label">
 				Warehouse
 			</label>

@@ -71,9 +71,13 @@
         padding-left: .5rem;
     }
 
-    // &__warehouse-container {
-    //     width: 100%;
+    // &__quantity-wrap {
+
     // }
+
+    &__out-of-stock {
+        display: none;
+    }
 
     &__select-wrap {
         position: relative;
