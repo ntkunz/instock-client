@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import WarehouseList from "./pages/WarehouseList/WarehouseList";
 import Header from "./components/Header/Header";
-// import AddNewInventoryItem from "./components/AddNewInventoryItem/AddNewInventoryItem";
+import AddInventory from "./components/AddNewInventoryItem/AddNewInventoryItem";
 // import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
 // import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 // import ContactDetails from "./components/ContactDetails/ContactDetails";
@@ -30,9 +30,14 @@ export default function App() {
             path="/inventory/:inventoryId"
             element={<InventoryDetails />}
           />
-          <Route path="inventory/edit" element={<EditInventory />} /> */}
+
+          <Route path="inventory/edit" element={<EditInventory />} /> 
         </Routes>
         <Footer />
+
+         // <Route path="inventory/edit" element={<EditInventory />} />
+     //   </Routes>
+
       </BrowserRouter>
     </div>
   );
