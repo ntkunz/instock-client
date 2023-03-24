@@ -13,11 +13,11 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-        {/* <AddNewWarehouseForm /> */}
-        <Routes>
+        <AddNewWarehouseForm />
+        {/* <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
-          {/* <Route path="warehouses/edit/:warehouseId" element={<EditWarehouse />} />
+          <Route path="warehouses/edit/:warehouseId" element={<EditWarehouse />} />
           <Route path="warehouses/add" element={<AddWarehouse />} />
           <Route path="inventory/edit" element={<EditInventory />} />
           <Route
@@ -35,9 +35,8 @@ export default function App() {
         </Routes>
         <Footer />
 
-         // <Route path="inventory/edit" element={<EditInventory />} />
-     //   </Routes>
-
+         <Route path="inventory/edit" element={<EditInventory />} />
+        </Routes> */}
       </BrowserRouter>
     </div>
   );

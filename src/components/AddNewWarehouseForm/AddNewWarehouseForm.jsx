@@ -2,7 +2,7 @@ import "./AddNewWarehouseForm.scss";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import WarehouseDetailsForm from "../WarehouseDetailsForm/WarehouseDetailsForm";
 import ContactDetailsForm from "../ContactDetailsForm/ContactDetailsForm";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const { v4: uuid } = require("uuid");
