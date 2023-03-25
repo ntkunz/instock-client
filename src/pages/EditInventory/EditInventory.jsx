@@ -9,7 +9,6 @@ import EditItemAvailabilityForm from "../../components/EditItemAvailabilityForm/
 function EditInventory() {
 	//bring in Api address for axios calls
 	const api = process.env.REACT_APP_BASEURL;
-	const { v4 } = require("uuid");
 	const id = useParams();
 	const navigate = useNavigate();
 
@@ -84,7 +83,6 @@ function EditInventory() {
 			})
 			.catch((err) => {
 				console.log("err: ", err);
-				// navigate("/404");
 			});
 	}
 
