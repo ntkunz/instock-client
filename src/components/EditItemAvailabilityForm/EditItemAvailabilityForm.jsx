@@ -72,7 +72,7 @@ function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 					{warehouses.map((warehouse) => (
 						<option 
 							key={warehouse.id} 
-							value={warehouse.id}>
+							value={warehouse.warehouse_name}>
 							{warehouse.warehouse_name}
 						</option>
 					))}

@@ -14,9 +14,9 @@ function EditInventory() {
 
 	//useState for all warehouses and inventories
 	const [warehouses, setWarehouses] = useState([]);
+	const [inventoriesArray, setInventoriesArray] = useState([]);
 	const [inventoryItem, setInventoryItem] = useState([]);
 	// const [ outOfStock, setOutOfStock ] = useState("");
-
 
 	//useState for all form inputs
 	const [inputValues, setInputValues] = useState({
@@ -59,17 +59,19 @@ function EditInventory() {
 	useEffect(() => {
 		getWarehouses();
 		getInventoryItem();
+		getInventoriesArray();
 	}, []);
 
 	useEffect(() => {
 		// setInputValues({ ...inputValues, instock: inventoryItem.status });
-		setInputValues({ ...inputValues, 
-			itemName: inventoryItem.item_name, 
+		setInputValues({
+			...inputValues,
+			itemName: inventoryItem.item_name,
 			desc: inventoryItem.description,
 			quantity: inventoryItem.quantity,
 			selectWarehouse: inventoryItem.warehouse_name,
-			category: inventoryItem.category
-		 });
+			category: inventoryItem.category,
+		});
 	}, [inventoryItem]);
 
 	//api get call function to get warehouses ==PASS DOWN LATER... MOVE FUNCTION UP LATER
@@ -88,13 +90,28 @@ function EditInventory() {
 	}
 
 	//api get call function to get inventories ==move function up later
+	function getInventoriesArray() {
+		axios
+			.get(`${api}/inventories`)
+			.then((data) => {
+				if (data) {
+					setInventoriesArray(data.data);
+				}
+			})
+			.catch((err) => {
+				console.log("err: ", err);
+				// navigate("/404");e.target.videoDesc.value
+			});
+	}
+
+	//api get call function to get inventories ==move function up later
 	function getInventoryItem() {
 		axios
 			// .get(`${api}/inventories/94e3110a-3a1d-485f-89de-558230d1e27a`)
 			.get(`${api}/inventories/${id.inventoryId}`)
 			.then((data) => {
 				if (data) {
-					setInventoryItem(data.data)
+					setInventoryItem(data.data);
 					// setInputValues({category: data.data.category, selectWarehouse: data.data.warehouse_name});
 				}
 			})
@@ -176,6 +193,7 @@ function EditInventory() {
 			<form className="form" onSubmit={handleFormSubmit}>
 				<div className="form__component-container">
 					<EditItemDetailsForm
+						inventoriesArray={inventoriesArray}
 						inventoryItem={inventoryItem}
 						handleOnChange={handleOnChange}
 						inputValues={inputValues}
