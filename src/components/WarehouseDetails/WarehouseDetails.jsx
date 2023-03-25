@@ -60,6 +60,8 @@ function WarehouseDetails() {
           <h1>{warehouse.warehouse_name}</h1>
         </div>
 
+        {/* TO DO: ADD ROUTE TO EDIT BUTTON*/}
+
         <Link className="warehouse__edit-button" to="#">
           <img src={editIconWhite} alt="edit icon" />
           <h3 className="warehouse__edit-button-caption">Edit</h3>
