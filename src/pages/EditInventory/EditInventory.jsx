@@ -1,16 +1,17 @@
 import "./EditInventory.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate, Link, useParams } from 'react-router-dom';
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import EditItemDetailsForm from "../../components/EditItemDetailsForm/EditItemDetailsForm";
 import EditItemAvailabilityForm from "../../components/EditItemAvailabilityForm/EditItemAvailabilityForm";
-import { useParams } from "react-router-dom";
 
 function EditInventory() {
 	//bring in Api address for axios calls
 	const api = process.env.REACT_APP_BASEURL;
 	const { v4 } = require("uuid");
 	const id = useParams();
+	const navigate = useNavigate();
 
 	//useState for all warehouses and inventories
 	const [warehouses, setWarehouses] = useState([]);
@@ -196,7 +197,8 @@ function EditInventory() {
 	return (
 		<section className="container">
 			<div className="heading">
-				<img src={ArrowBack} alt="ArrowBackButton" />
+			<Link to={'..'} onClick={(e) => { e.preventDefault(); navigate(-1);}}>
+				<img src={ArrowBack} alt="ArrowBackButton" /></Link>
 				<h1 className="heading__title">Edit Inventory</h1>
 			</div>
 			<form className="form" onSubmit={handleFormSubmit}>

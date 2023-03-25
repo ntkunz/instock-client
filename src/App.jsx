@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.scss";
 import WarehouseList from "./pages/WarehouseList/WarehouseList";
 import Header from "./components/Header/Header";
-import AddInventory from "./components/AddNewInventoryItem/AddNewInventoryItem";
+import AddInventory from "./pages/AddNewInventoryItem/AddNewInventoryItem";
 // import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
 import EditInventory from "./pages/EditInventory/EditInventory";
 import WarehouseDetailsForm from "./components/WarehouseDetailsForm/WarehouseDetailsForm";
