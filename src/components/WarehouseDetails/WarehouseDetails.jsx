@@ -168,7 +168,12 @@ function WarehouseDetails() {
                       <h4 className="table__heading table__heading--mobile">
                         Status
                       </h4>
-                      <p className="table__tag table__tag--out">
+                      <p
+                        className={
+                          "table__tag" +
+                          (item.quantity === 0 ? " table__tag--out" : "")
+                        }
+                      >
                         {item.status}
                       </p>
                     </div>
