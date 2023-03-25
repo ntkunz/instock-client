@@ -18,7 +18,6 @@ export default function WarehouseList() {
   }, []);
 
   function getWarehouses() {
-    console.log(process.env);
     axios
       .get(`${api}/warehouses`)
       .then((response) => {
@@ -43,7 +42,7 @@ export default function WarehouseList() {
               name="searchBar"
             />
 
-            <Link className="warehouseList__btn" to="add/">
+            <Link className="warehouseList__btn" to="warehouses/add/">
               + Add New Warehouse
             </Link>
           </form>
