@@ -20,7 +20,7 @@ function EditWarehouseDetailsForm({ formData, handleChange, errorValues }) {
           />
           {errorValues.empty && (
             <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
+            <img src={ErrorLogo} alt="Error enter valid warehouse name" />
           <p className="error-container__message">Required field.</p>
           </div>
           )}
@@ -29,7 +29,7 @@ function EditWarehouseDetailsForm({ formData, handleChange, errorValues }) {
         <div className="warehouse-details__warehouse">
           <label htmlFor="streetAddress" className="warehouse-details__label">Street Address</label>
           <input
-            value={formData.streetAddress}
+            value={formData.address}
             className="warehouse-details__input"
             placeholder="Street Address"
             type="text"
@@ -39,7 +39,7 @@ function EditWarehouseDetailsForm({ formData, handleChange, errorValues }) {
           />
           {errorValues.empty && (
             <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
+            <img src={ErrorLogo} alt="Error enter valid street address" />
           <p className="error-container__message">Required field.</p>
           </div>
           )}
@@ -58,7 +58,7 @@ function EditWarehouseDetailsForm({ formData, handleChange, errorValues }) {
           />
           {errorValues.empty && (
             <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
+            <img src={ErrorLogo} alt="Error exclamation " />
           <p className="error-container__message">Required field.</p>
           </div>
           )}

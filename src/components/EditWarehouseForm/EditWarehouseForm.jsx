@@ -4,8 +4,8 @@ import EditWarehouseDetailsForm from "../WarehouseDetailsForm/WarehouseDetailsFo
 import EditContactDetailsForm from "../ContactDetailsForm/ContactDetailsForm";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { useEffect } from "react";
+import axios from "axios";
 
 function EditNewWarehouseForm() {
   const [formData, setFormData] = useState({
@@ -24,38 +24,40 @@ function EditNewWarehouseForm() {
     empty: false,
   });
   const [submitting, setSubmitting] = useState(false);
+  const [edit, setEdit] = useState(false);
   // const [edit, setEdit] = useState(false)
   const { id } = useParams();
-  const URL = `http://localhost:8080/warehouses/${id}`
+  const URL = `http://localhost:8080/warehouses/${id}`;
 
   useEffect(() => {
     axios.get(`${URL}`).then((response) => {
       const warehouseData = response.data;
-      setFormData ({
+      setFormData({
         ...formData,
         warehouse: warehouseData.warehouse_name,
+        streetAddress: warehouseData.address,
         city: warehouseData.city,
         country: warehouseData.country,
         contactName: warehouseData.contact_name,
-        position: warehouseData.position,
+        position: warehouseData.contact_position,
         phoneNumber: warehouseData.contact_phone,
-        email: warehouseData.email
-      })
+        email: warehouseData.contact_email,
+      });
     });
   }, []);
-
 
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    setFormData((values) => ({
-      ...values,
-      [event.target.name]: event.target.value,
-    }));
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const validatePhoneNumber = (value) =>
-    /^[0-9]*$/.test(value) && value.length >= 7;
+    /^[0-9]*$/.test(value) && value.length >= 10;
 
   const validateEmail = (value) =>
     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
@@ -84,39 +86,39 @@ function EditNewWarehouseForm() {
 
     return isValid;
   };
-
+  
   const handleSubmit = async (event) => {
     setSubmitting(true);
-
+    event.preventDefault();
     if (isFormValid()) {
-      try {
-        const response = await axios.put(`http://localhost:8080/warehouses/${id}`, {
-          warehouse_id: id,
+      axios
+        .put(`${URL}`, {
           warehouse_name: formData.warehouse,
           address: formData.streetAddress,
           city: formData.city,
           country: formData.country,
           contact_name: formData.contactName,
           contact_position: formData.position,
-          contact_phone: formData.phoneNumber,
           contact_email: formData.email,
+          contact_phone: formData.phoneNumber,
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
         });
-
-        console.log(response.data);
-        alert(`${formData.warehouse} successfully edited, redirecting to homepage.`);
-        navigate("/warehouses");
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      setSubmitting(false);
-      alert("Please fill in all required fields correctly.");
+      setEdit(true);
+      setTimeout(()=> {
+             navigate("/");
+          }, 2000)
+          alert("Edit Successful, redirecting to warehouse page.")
+      return navigate("/warehouses")
     }
-    event.preventDefault();
   };
 
   const handleCancel = () => {
-    return navigate("/warehouses");
+    return navigate("/");
   };
 
   return (

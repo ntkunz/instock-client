@@ -27,10 +27,11 @@ function AddNewWarehouseForm() {
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    setFormData((values) => ({
-      ...values,
-      [event.target.name]: event.target.value,
-    }));
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const validatePhoneNumber = (value) =>
@@ -69,7 +70,7 @@ function AddNewWarehouseForm() {
 
     if (isFormValid()) {
       try {
-        const response = await axios.post("http://localhost:8080/warehouses", {
+        const response = await axios.post("http://localhost:8080/warehouses/", {
           id: uuid(),
           warehouse_name: formData.warehouse,
           address: formData.streetAddress,
@@ -83,7 +84,9 @@ function AddNewWarehouseForm() {
 
         console.log(response.data);
         alert("Warehouse successfully added, redirecting to homepage.");
-        navigate("/warehouses");
+        setTimeout(() => {
+          navigate("/");
+        }, 2000)
       } catch (error) {
         console.log(error);
       }

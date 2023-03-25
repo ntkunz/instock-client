@@ -17,11 +17,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
-          <Route
-            path="warehouses/edit/:warehouseId"
-            element={<EditWarehouseForm />}
-          />
-          <Route path="warehouses/add" element={<AddNewWarehouseForm />} />
+          <Route path="/warehouses/edit/:id"element={<EditWarehouseForm />}/>
+          <Route path="/warehouses/add" element={<AddNewWarehouseForm />} />
           {/* <Route path="inventory/edit" element={<EditInventory />} /> */}
           {/* <Route
             path="warehouses/:warehouseId"

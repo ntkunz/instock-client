@@ -43,7 +43,7 @@ export default function WarehouseList() {
               name="searchBar"
             />
 
-            <Link className="warehouseList__btn" to="add/">
+            <Link className="warehouseList__btn" to={"/warehouses/add"}>
               + Add New Warehouse
             </Link>
           </form>
@@ -115,7 +115,7 @@ export default function WarehouseList() {
                 <div className="warehouseList__delete">
                   <img src={deleteicon} alt="delete icon" />
                 </div>
-                <Link to={`edit/${warehouse.id}`}>
+                <Link to={`/warehouses/edit/${warehouse.id}`}>
                   <div className="warehouseList__edit">
                     <img src={editicon} alt="edit icon" />
                   </div>

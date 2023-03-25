@@ -1,0 +1,105 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: green;
+  height: 12.5rem;
+  background-color: #232940;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+@media (min-width: 767px) {
+  .header {
+    flex-direction: row;
+    align-items: flex-start;
+    height: 11.625rem;
+    justify-content: space-between;
+    margin: 0 -2rem;
+    padding: 0 2rem;
+  }
+}
+@media (min-width: 1280px) {
+  .header {
+    margin: 0 -8.125rem;
+    padding: 0 8.125rem;
+  }
+}
+.header__img {
+  width: 8rem;
+  padding: 1.5rem 0 1rem;
+}
+@media (min-width: 767px) {
+  .header__img {
+    margin: 2rem 0;
+    padding: 0;
+    width: 8.125rem;
+  }
+}
+@media (min-width: 1280px) {
+  .header__img {
+    margin: 2rem 0;
+  }
+}
+.header__buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+@media (min-width: 767px) {
+  .header__buttons {
+    padding: 1.75rem 0;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    gap: 0.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .header__buttons {
+    padding: 1.75rem 0;
+  }
+}
+.header__warehouse-button {
+  height: 2.25rem;
+  padding: 0 2.75rem;
+  background-color: #232940;
+  color: #bdc5d5;
+  border: none;
+  border-radius: 1.125rem;
+  font-size: 0.625rem;
+}
+.header__warehouse-button:hover {
+  background-color: #13182c;
+  color: #ffffff;
+  cursor: pointer;
+}
+@media (min-width: 767px) {
+  .header__warehouse-button {
+    height: 2.375rem;
+    width: 6.75rem;
+    padding: 0;
+    border-radius: 1.125rem;
+  }
+}
+.header__inventory-button {
+  height: 2.25rem;
+  padding: 0 3.3rem;
+  background-color: #232940;
+  color: #bdc5d5;
+  border: none;
+  border-radius: 1.125rem;
+  font-size: 0.625rem;
+  flex-basis: 50%;
+}
+.header__inventory-button:hover {
+  background-color: #13182c;
+  color: #ffffff;
+  cursor: pointer;
+}
+@media (min-width: 767px) {
+  .header__inventory-button {
+    height: 2.375rem;
+    width: 5.625rem;
+    padding: 0;
+  }
+}/*# sourceMappingURL=Header.css.map */
