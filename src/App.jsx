@@ -4,6 +4,7 @@ import WarehouseList from "./pages/WarehouseList/WarehouseList";
 import Header from "./components/Header/Header";
 import AddInventory from "./components/AddNewInventoryItem/AddNewInventoryItem";
 // import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
+import EditInventory from "./pages/EditInventory/EditInventory";
 import WarehouseDetailsForm from "./components/WarehouseDetailsForm/WarehouseDetailsForm";
 // import ContactDetails from "./components/ContactDetails/ContactDetails";
 import Footer from "./components/Footer/Footer";
@@ -19,8 +20,8 @@ export default function App() {
           <Route path="/warehouses" element={<WarehouseList />} />
           {/* <Route path="warehouses/edit/:warehouseId" element={<EditWarehouse />} /> */}
           {/* <Route path="warehouses/add" element={<AddWarehouse />} /> */}
-          <Route path="warehouses/add" element={<AddNewWarehouseForm />} />
-          {/* <Route path="inventory/edit" element={<EditInventory />} /> */}
+          {/* <Route path="warehouses/add" element={<AddNewWarehouseForm />} /> */}
+          <Route path="inventory/edit/:inventoryId" element={<EditInventory />} />
           <Route
             path="warehouses/:warehouseId"
             element={<WarehouseDetailsForm />}
