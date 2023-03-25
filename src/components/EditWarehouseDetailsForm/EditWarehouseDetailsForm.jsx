@@ -3,15 +3,15 @@ import ErrorLogo from "../../assets/icons/error-24px.svg";
 
 function EditWarehouseDetailsForm({ formData, handleChange, errorValues, submit }) {
   return (
-    <div className="warehouse-details">
-      <div className="warehouse-details__container">
-        <div className="warehouse-details__warehouse">
-          <h2 className="warehouse-details__heading">Warehouse Details</h2>
+    <div className="edit-warehouse-details">
+      <div className="edit-warehouse-details__container">
+        <div className="edit-warehouse-details__warehouse">
+          <h2 className="edit-warehouse-details__heading">Warehouse Details</h2>
     
-          <label htmlFor="warehouseName" className="warehouse-details__label">Warehouse Name</label>
+          <label htmlFor="warehouseName" className="edit-warehouse-details__label">Warehouse Name</label>
           <input
             value={formData.warehouse}
-            className="warehouse-details__input"
+            className="edit-warehouse-details__input"
             placeholder="Warehouse Name"
             type="text"
             name="warehouse"
@@ -26,11 +26,11 @@ function EditWarehouseDetailsForm({ formData, handleChange, errorValues, submit 
           )}
         </div>
 
-        <div className="warehouse-details__warehouse">
-          <label htmlFor="streetAddress" className="warehouse-details__label">Street Address</label>
+        <div className="edit-warehouse-details__warehouse">
+          <label htmlFor="streetAddress" className="edit-warehouse-details__label">Street Address</label>
           <input
             value={formData.address}
-            className="warehouse-details__input"
+            className="edit-warehouse-details__input"
             placeholder="Street Address"
             type="text"
             name="streetAddress"
@@ -45,11 +45,11 @@ function EditWarehouseDetailsForm({ formData, handleChange, errorValues, submit 
           )}
         </div>
 
-        <div className="warehouse-details__warehouse">
-          <label htmlFor="city" className="warehouse-details__label">City</label>
+        <div className="edit-warehouse-details__warehouse">
+          <label htmlFor="city" className="edit-warehouse-details__label">City</label>
           <input
             value={formData.city}
-            className="warehouse-details__input"
+            className="edit-warehouse-details__input"
             placeholder="City"
             type="text"
             id="city"
@@ -64,11 +64,11 @@ function EditWarehouseDetailsForm({ formData, handleChange, errorValues, submit 
           )}
         </div>
 
-        <div className="warehouse-details__warehouse">
-          <label htmlFor="country" className="warehouse-details__label">Country</label>
+        <div className="edit-warehouse-details__warehouse">
+          <label htmlFor="country" className="edit-warehouse-details__label">Country</label>
           <input
             value={formData.country}
-            className="warehouse-details__input"
+            className="edit-warehouse-details__input"
             placeholder="Country"
             type="text"
             id="country"

@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.warehouse-details {
+.edit-warehouse-details {
   padding: 0 1.5rem;
   @include tablet {
     width: 50%;
