@@ -2,28 +2,32 @@ import "./EditInventory.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
-import ItemDetailsForm from "../../components/ItemDetailsForm/ItemDetailsForm";
-import ItemAvailabilityForm from "../../components/ItemAvailabilityForm/ItemAvailabilityForm"
+import EditItemDetailsForm from "../../components/EditItemDetailsForm/EditItemDetailsForm";
+import EditItemAvailabilityForm from "../../components/EditItemAvailabilityForm/EditItemAvailabilityForm";
+import { useParams } from "react-router-dom";
 
 function EditInventory() {
-    
-    	//bring in Api address for axios calls
+	//bring in Api address for axios calls
 	const api = process.env.REACT_APP_BASEURL;
 	const { v4 } = require("uuid");
+	const id = useParams();
 
 	//useState for all warehouses and inventories
 	const [warehouses, setWarehouses] = useState([]);
-	const [inventories, setInventories] = useState([]);
+	const [inventoryItem, setInventoryItem] = useState([]);
 	// const [ outOfStock, setOutOfStock ] = useState("");
+
 
 	//useState for all form inputs
 	const [inputValues, setInputValues] = useState({
-		instock: "Out of Stock",
+		instock: "In Stock",
 		quantity: 0,
+		// selectWarehouse: inventoryItem.warehouse_name,
 		selectWarehouse: "",
 		itemName: "",
 		desc: "",
 		category: "",
+		// category: "inventoryItem.category",
 	});
 
 	//onChange function for all inputs of form
@@ -54,8 +58,19 @@ function EditInventory() {
 	//on load get warehouses and inventories
 	useEffect(() => {
 		getWarehouses();
-		getInventories();
+		getInventoryItem();
 	}, []);
+
+	useEffect(() => {
+		// setInputValues({ ...inputValues, instock: inventoryItem.status });
+		setInputValues({ ...inputValues, 
+			itemName: inventoryItem.item_name, 
+			desc: inventoryItem.description,
+			quantity: inventoryItem.quantity,
+			selectWarehouse: inventoryItem.warehouse_name,
+			category: inventoryItem.category
+		 });
+	}, [inventoryItem]);
 
 	//api get call function to get warehouses ==PASS DOWN LATER... MOVE FUNCTION UP LATER
 	function getWarehouses() {
@@ -73,12 +88,14 @@ function EditInventory() {
 	}
 
 	//api get call function to get inventories ==move function up later
-	function getInventories() {
+	function getInventoryItem() {
 		axios
-			.get(`${api}/inventories`)
+			// .get(`${api}/inventories/94e3110a-3a1d-485f-89de-558230d1e27a`)
+			.get(`${api}/inventories/${id.inventoryId}`)
 			.then((data) => {
 				if (data) {
-					setInventories(data.data);
+					setInventoryItem(data.data)
+					// setInputValues({category: data.data.category, selectWarehouse: data.data.warehouse_name});
 				}
 			})
 			.catch((err) => {
@@ -102,7 +119,9 @@ function EditInventory() {
 			return alert("Please enter all form field information");
 		}
 
-		if (isNaN(inputValues.quantity)) {return alert('Please enter a number for quantity')}
+		if (isNaN(inputValues.quantity)) {
+			return alert("Please enter a number for quantity");
+		}
 
 		axios
 			.post(`${api}/inventories`, {
@@ -112,11 +131,11 @@ function EditInventory() {
 				description: inputValues.desc,
 				category: inputValues.category,
 				status: inputValues.instock,
-				quantity: inputValues.quantity
+				quantity: inputValues.quantity,
 			})
 			.then((response) => {
 				alert(`Your new inventory item ${inputValues.itemName} has been added`);
-				
+
 				//reset form on successful submit
 				e.target.reset();
 				setInputValues({
@@ -127,7 +146,7 @@ function EditInventory() {
 					instock: "Out of Stock",
 					quantity: 0,
 				});
-			// 	//HERE MAYBE NAVIGATE TO INVENTORIES PAGE ??===============
+				// 	//HERE MAYBE NAVIGATE TO INVENTORIES PAGE ??===============
 			})
 			.catch((err) => {
 				console.error(err);
@@ -148,41 +167,41 @@ function EditInventory() {
 		});
 	}
 
-    return (
-        <section className="container">
-        <div className="heading">
-            <img src={ArrowBack} alt="ArrowBackButton" />
-            <h1 className="heading__title">Edit Inventory</h1>
-        </div>
-        <form className="form" onSubmit={handleFormSubmit}>
-            <div className="form__component-container">
-                <ItemDetailsForm
-                    inventories={inventories}
-                    handleOnChange={handleOnChange}
-                    inputValues={inputValues}
-                />
-            </div>
-            <div className="form__component-container">
-                <ItemAvailabilityForm
-                    warehouses={warehouses}
-                    handleOnChange={handleOnChange}
-                    inputValues={inputValues}
-                />
-            </div>
-            <div className="form__button-wrapper">
-                <div className="form__button-container">
-                    <button
-                        className="form__button form__button--1"
-                        onClick={handleFormCancel}
-                    >
-                        Cancel
-                    </button>
-                    <button className="form__button form__button--2">+ Add Item</button>
-                </div>
-            </div>
-        </form>
-    </section>
-    )
+	return (
+		<section className="container">
+			<div className="heading">
+				<img src={ArrowBack} alt="ArrowBackButton" />
+				<h1 className="heading__title">Edit Inventory</h1>
+			</div>
+			<form className="form" onSubmit={handleFormSubmit}>
+				<div className="form__component-container">
+					<EditItemDetailsForm
+						inventoryItem={inventoryItem}
+						handleOnChange={handleOnChange}
+						inputValues={inputValues}
+					/>
+				</div>
+				<div className="form__component-container">
+					<EditItemAvailabilityForm
+						warehouses={warehouses}
+						handleOnChange={handleOnChange}
+						inputValues={inputValues}
+					/>
+				</div>
+				<div className="form__button-wrapper">
+					<div className="form__button-container">
+						<button
+							className="form__button form__button--1"
+							onClick={handleFormCancel}
+						>
+							Cancel
+						</button>
+						<button className="form__button form__button--2">+ Add Item</button>
+					</div>
+				</div>
+			</form>
+		</section>
+	);
 }
 
 export default EditInventory;
