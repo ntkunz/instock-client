@@ -1,7 +1,7 @@
 import "./EditInventory.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate, Link, useParams } from 'react-router-dom';
+import { useNavigate, Link, useParams } from "react-router-dom";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import EditItemDetailsForm from "../../components/EditItemDetailsForm/EditItemDetailsForm";
 import EditItemAvailabilityForm from "../../components/EditItemAvailabilityForm/EditItemAvailabilityForm";
@@ -23,12 +23,10 @@ function EditInventory() {
 	const [inputValues, setInputValues] = useState({
 		instock: "In Stock",
 		quantity: 0,
-		// selectWarehouse: inventoryItem.warehouse_name,
 		selectWarehouse: "",
 		itemName: "",
 		desc: "",
 		category: "",
-		// category: "inventoryItem.category",
 	});
 
 	//onChange function for all inputs of form
@@ -53,7 +51,7 @@ function EditInventory() {
 		//udpate inputValues
 		const { name, value } = event.target;
 		setInputValues({ ...inputValues, [name]: value });
-		console.log(event.target.value);
+		// console.log(event.target.value);
 	};
 
 	//on load get warehouses and inventories
@@ -92,12 +90,14 @@ function EditInventory() {
 
 	//removeDup example modified from a respons at https://stackoverflow.com/questions/54757902/remove-duplicates-in-an-array-using-foreach
 	function removeDup(arr) {
-		let result = []
-		arr.forEach((item) => { if (!result.includes(item.category)) result.push(item.category) });
+		let result = [];
+		arr.forEach((item) => {
+			if (!result.includes(item.category)) result.push(item.category);
+		});
 		return result;
-	  }
+	}
 
-	  const categoryArray = removeDup(inventories);
+	const categoryArray = removeDup(inventories);
 
 	//api get call function to get inventories ==move function up later
 	function getInventories() {
@@ -134,6 +134,12 @@ function EditInventory() {
 	function handleFormSubmit(e) {
 		e.preventDefault();
 
+		//Get warehouse id based off of warehosue name of inventory item selected
+		function getWarehouseId(array) {
+			return array.warehouse_name === inputValues.selectWarehouse;
+		}
+		let warehouseId = warehouses.find(getWarehouseId);
+
 		//form validation
 		if (
 			inputValues.instock === "" ||
@@ -145,18 +151,30 @@ function EditInventory() {
 			return alert("Please enter all form field information");
 		}
 
+		//make sure that quantity is a number
 		if (isNaN(inputValues.quantity)) {
 			return alert("Please enter a number for quantity");
 		}
 
+		//confirm that a radio button is selected for quantity
+		const stockRadio = document.querySelectorAll(".avail__radio");
+		let stockCheck = stockRadio[0].checked;
+		let outOfStockCheck = stockRadio[1].checked;
+		if (!stockCheck && !outOfStockCheck)
+			return alert("Please select if item is In Stock or Out of Stock");
+
+			//
+		if (outOfStockCheck) setInputValues({ quantity: 0})
+
+		// axios put request to update inventory item
 		axios
 			.put(`${api}/inventories/${id.inventoryId}`, {
-				warehouse_id: inputValues.selectWarehouse,
+				warehouse_id: warehouseId.id,
 				item_name: inputValues.itemName,
 				description: inputValues.desc,
 				category: inputValues.category,
 				status: inputValues.instock,
-				quantity: inputValues.quantity
+				quantity: inputValues.quantity,
 			})
 			.then((response) => {
 				alert(`Inventory item ${inputValues.itemName} has been updated`);
@@ -171,7 +189,8 @@ function EditInventory() {
 					instock: "Out of Stock",
 					quantity: 0,
 				});
-				// 	//HERE MAYBE NAVIGATE TO INVENTORIES PAGE ??===============
+				//navigate to inventory page
+				navigate(`/inventory/${id.inventoryId}`)
 			})
 			.catch((err) => {
 				console.error(err);
@@ -195,8 +214,12 @@ function EditInventory() {
 	return (
 		<section className="container">
 			<div className="heading">
-			<Link to={'..'} onClick={(e) => { e.preventDefault(); navigate(-1);}}>
-				<img src={ArrowBack} alt="ArrowBackButton" /></Link>
+				<Link to={".."} onClick={(e) => {
+						e.preventDefault(); 
+						navigate(-1); }}
+				>
+					<img src={ArrowBack} alt="ArrowBackButton" />
+				</Link>
 				<h1 className="heading__title">Edit Inventory</h1>
 			</div>
 			<form className="form" onSubmit={handleFormSubmit}>

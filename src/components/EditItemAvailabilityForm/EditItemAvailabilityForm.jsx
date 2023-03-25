@@ -1,10 +1,6 @@
 import "./EditItemAvailabilityForm.scss";
 
 function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
-	// if(typeof(warehouses) !== 'undefined') {console.log(warehouses[0])}; //this is the first warehouse's id
-	// if (warehouses.length > 0) {
-	// 	console.log(warehouses[0]);
-	// } //this is the first warehouse's id
 	return (
 		<div className="avail">
 			<h2 className="avail__title">Edit Item Availability</h2>
@@ -34,27 +30,24 @@ function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						value="Out of Stock"
 						onChange={handleOnChange}
 					/>
-					<label
-						className="avail__radio-label"
-						htmlFor="outofstock"
-					>
+					<label className="avail__radio-label" htmlFor="outofstock">
 						Out of stock
 					</label>
 				</div>
 			</div>
-		<div className="avail__quantity-wrap avail__out-of-stock">
-			<label htmlFor="quantity" className="avail__label">
-				Quantity
-			</label>
-			<input
-				type="text"
-				className="avail__input"
-				value={inputValues.quantity}
-				onChange={handleOnChange}
-				placeholder=""
-				name="quantity"
-			/>
-		</div>
+			<div className="avail__quantity-wrap avail__out-of-stock">
+				<label htmlFor="quantity" className="avail__label">
+					Quantity
+				</label>
+				<input
+					type="text"
+					className="avail__input"
+					value={inputValues.quantity}
+					onChange={handleOnChange}
+					placeholder=""
+					name="quantity"
+				/>
+			</div>
 			<label htmlFor="" className="avail__label">
 				Warehouse
 			</label>
@@ -70,9 +63,7 @@ function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						{inputValues.selectWarehouse}
 					</option>
 					{warehouses.map((warehouse) => (
-						<option 
-							key={warehouse.id} 
-							value={warehouse.warehouse_name}>
+						<option key={warehouse.id} value={warehouse.warehouse_name}>
 							{warehouse.warehouse_name}
 						</option>
 					))}
