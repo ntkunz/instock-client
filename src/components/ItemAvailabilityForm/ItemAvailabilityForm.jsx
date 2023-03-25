@@ -1,10 +1,7 @@
 import "./ItemAvailabilityForm.scss";
 
 function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
-	// if(typeof(warehouses) !== 'undefined') {console.log(warehouses[0])}; //this is the first warehouse's id
-	// if (warehouses.length > 0) {
-	// 	console.log(warehouses[0]);
-	// } //this is the first warehouse's id
+
 	return (
 		<div className="avail">
 			<h2 className="avail__title">Item Availability</h2>

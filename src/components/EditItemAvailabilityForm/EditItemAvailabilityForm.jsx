@@ -1,6 +1,7 @@
 import "./EditItemAvailabilityForm.scss";
 
 function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
+	
 	return (
 		<div className="avail">
 			<h2 className="avail__title">Edit Item Availability</h2>

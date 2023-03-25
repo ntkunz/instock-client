@@ -1,7 +1,7 @@
 import "./AddNewInventoryItem.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import ItemDetailsForm from "../../components/ItemDetailsForm/ItemDetailsForm";
 import ItemAvailabilityForm from "../../components/ItemAvailabilityForm/ItemAvailabilityForm";
@@ -20,7 +20,7 @@ function AddNewInventoryItem() {
 	//useState for all form inputs
 	const [inputValues, setInputValues] = useState({
 		instock: "Out of Stock",
-		quantity: 0,
+		quantity: "0",
 		selectWarehouse: "",
 		itemName: "",
 		desc: "",
@@ -49,7 +49,7 @@ function AddNewInventoryItem() {
 		//udpate inputValues
 		const { name, value } = event.target;
 		setInputValues({ ...inputValues, [name]: value });
-		// console.log(event.target.value);
+		console.log(event.target.value);
 	};
 
 	//on load get warehouses and inventories
@@ -88,15 +88,16 @@ function AddNewInventoryItem() {
 			});
 	}
 
-		//removeDup example modified from a respons at https://stackoverflow.com/questions/54757902/remove-duplicates-in-an-array-using-foreach
-		function removeDup(arr) {
-			let result = []
-			arr.forEach((item) => { if (!result.includes(item.category)) result.push(item.category) });
-			return result;
-		}
-	
-		const categoryArray = removeDup(inventories);
-	
+	//removeDup example modified from a respons at https://stackoverflow.com/questions/54757902/remove-duplicates-in-an-array-using-foreach
+	function removeDup(arr) {
+		let result = [];
+		arr.forEach((item) => {
+			if (!result.includes(item.category)) result.push(item.category);
+		});
+		return result;
+	}
+	//categoryArray has all categories from inventories without duplicates
+	const categoryArray = removeDup(inventories);
 
 	//function to handle form submit
 	function handleFormSubmit(e) {
@@ -113,21 +114,27 @@ function AddNewInventoryItem() {
 			return alert("Please enter all form field information");
 		}
 
-		if (isNaN(inputValues.quantity)) {return alert('Please enter a number for quantity')}
+		//confirm quantity is a number
+		if (isNaN(inputValues.quantity)) {
+			return alert("Please enter a number for quantity");
+		}
+
+		//set new id variable to be able to navigate to page after
+		let newId = v4();
 
 		axios
 			.post(`${api}/inventories`, {
-				id: v4(),
+				id: newId,
 				warehouse_id: inputValues.selectWarehouse,
 				item_name: inputValues.itemName,
 				description: inputValues.desc,
 				category: inputValues.category,
 				status: inputValues.instock,
-				quantity: inputValues.quantity
+				quantity: inputValues.quantity,
 			})
 			.then((response) => {
 				alert(`Your new inventory item ${inputValues.itemName} has been added`);
-				
+
 				//reset form on successful submit
 				e.target.reset();
 				setInputValues({
@@ -138,7 +145,7 @@ function AddNewInventoryItem() {
 					instock: "Out of Stock",
 					quantity: 0,
 				});
-			// 	//HERE MAYBE NAVIGATE TO INVENTORIES PAGE ??===============
+				navigate(`/inventory/${newId}`);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -162,14 +169,20 @@ function AddNewInventoryItem() {
 	return (
 		<section className="container">
 			<div className="heading">
-			<Link to={'..'} onClick={(e) => { e.preventDefault(); navigate(-1);}}><
-				img src={ArrowBack} alt="ArrowBackButton" /></Link>
+				<Link
+					to={".."}
+					onClick={(e) => {
+						e.preventDefault();
+						navigate(-1);
+					}}
+				>
+					<img src={ArrowBack} alt="ArrowBackButton" />
+				</Link>
 				<h1 className="heading__title">Add New Inventory Item</h1>
 			</div>
 			<form className="form" onSubmit={handleFormSubmit}>
 				<div className="form__component-container">
 					<ItemDetailsForm
-						inventories={inventories}
 						categoryArray={categoryArray}
 						handleOnChange={handleOnChange}
 						inputValues={inputValues}

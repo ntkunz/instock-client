@@ -163,7 +163,7 @@ function EditInventory() {
 		if (!stockCheck && !outOfStockCheck)
 			return alert("Please select if item is In Stock or Out of Stock");
 
-			//
+			//set quantity to 0 if out of stock checked
 		if (outOfStockCheck) setInputValues({ quantity: 0})
 
 		// axios put request to update inventory item
