@@ -20,11 +20,12 @@ export default function App() {
           <Route path="/warehouses" element={<WarehouseList />} />
           <Route path="/warehouses/edit/:id"element={<EditWarehouseForm />}/>
           <Route path="/warehouses/add" element={<AddNewWarehouseForm />} />
-          {/* <Route path="inventory/edit" element={<EditInventory />} /> */}
+          <Route path="inventory/edit/:inventoryId" element={<EditInventory />} />
           {/* <Route
             path="warehouses/:warehouseId"
             element={<WarehouseDetails />}
           /> */}
+          <Route path="inventory/add" element={<AddInventory />} />
           {/* <Route path="/inventory" element={<InventoryList />} />
           <Route path="inventory/add" element={<AddInventory />} />
           <Route
