@@ -117,7 +117,6 @@ function EditInventory() {
 	//api get call function to get inventories ==move function up later
 	function getInventoryItem() {
 		axios
-			// .get(`${api}/inventories/94e3110a-3a1d-485f-89de-558230d1e27a`)
 			.get(`${api}/inventories/${id.inventoryId}`)
 			.then((data) => {
 				if (data) {
@@ -151,17 +150,16 @@ function EditInventory() {
 		}
 
 		axios
-			.post(`${api}/inventories`, {
-				id: v4(),
+			.put(`${api}/inventories/${id.inventoryId}`, {
 				warehouse_id: inputValues.selectWarehouse,
 				item_name: inputValues.itemName,
 				description: inputValues.desc,
 				category: inputValues.category,
 				status: inputValues.instock,
-				quantity: inputValues.quantity,
+				quantity: inputValues.quantity
 			})
 			.then((response) => {
-				alert(`Your new inventory item ${inputValues.itemName} has been added`);
+				alert(`Inventory item ${inputValues.itemName} has been updated`);
 
 				//reset form on successful submit
 				e.target.reset();
