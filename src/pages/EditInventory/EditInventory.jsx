@@ -202,7 +202,6 @@ function EditInventory() {
 			<form className="form" onSubmit={handleFormSubmit}>
 				<div className="form__component-container">
 					<EditItemDetailsForm
-						inventories={inventories}
 						categoryArray={categoryArray}
 						inventoryItem={inventoryItem}
 						handleOnChange={handleOnChange}

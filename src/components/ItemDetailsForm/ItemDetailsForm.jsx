@@ -1,6 +1,6 @@
 import "./ItemDetailsForm.scss";
 
-function ItemDetailsForm({ inventories, handleOnChange, inputValues }) {
+function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 	return (
 		<div className="details">
 			<h2 className="details__title">Item Details</h2>
@@ -40,12 +40,12 @@ function ItemDetailsForm({ inventories, handleOnChange, inputValues }) {
 					<option className="details__placeholder" value="" readOnly>
 						Please select
 					</option>
-					{inventories.map((inventory) => (
+					{categoryArray.map((inventory) => (
 						<option
-							key={inventory.id}
-							value={inventory.category}
+							key={inventory}
+							value={inventory}
 						>
-							{inventory.category}
+							{inventory}
 						</option>
 					))}
 				</select>

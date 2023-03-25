@@ -1,6 +1,6 @@
 import "./EditItemDetailsForm.scss";
 
-function EditItemDetailsForm({ inventoryItem, categoryArray, inventories, handleOnChange, inputValues }) {
+function EditItemDetailsForm({ inventoryItem, categoryArray, handleOnChange, inputValues }) {
 	return (
 		<div className="details">
 			<h2 className="details__title">Edit Item Details</h2>
@@ -44,7 +44,6 @@ function EditItemDetailsForm({ inventoryItem, categoryArray, inventories, handle
 						<option
 							key={inventory}
 							value={inventory}
-							// value={inventory.category}
 						>
 							{inventory}
 						</option>

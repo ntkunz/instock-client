@@ -86,6 +86,16 @@ function AddNewInventoryItem() {
 			});
 	}
 
+		//removeDup example modified from a respons at https://stackoverflow.com/questions/54757902/remove-duplicates-in-an-array-using-foreach
+		function removeDup(arr) {
+			let result = []
+			arr.forEach((item) => { if (!result.includes(item.category)) result.push(item.category) });
+			return result;
+		}
+	
+		const categoryArray = removeDup(inventories);
+	
+
 	//function to handle form submit
 	function handleFormSubmit(e) {
 		e.preventDefault();
@@ -157,6 +167,7 @@ function AddNewInventoryItem() {
 				<div className="form__component-container">
 					<ItemDetailsForm
 						inventories={inventories}
+						categoryArray={categoryArray}
 						handleOnChange={handleOnChange}
 						inputValues={inputValues}
 					/>
