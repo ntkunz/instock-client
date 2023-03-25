@@ -6,8 +6,50 @@ import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import arrowRight from "../../assets/icons/chevron_right-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function WarehouseDetails() {
+  const api = "http://localhost:8080";
+  const { warehouseId } = useParams();
+  const [warehouse, setWarehouse] = useState({});
+  const [inventory, setInventory] = useState([]);
+
+  useEffect(() => {
+    getSingleWarehouse(warehouseId);
+  }, []);
+
+  function getSingleWarehouse(warehouseId) {
+    axios
+      .get(`${api}/warehouses/${warehouseId}`)
+      .then((response) => {
+        setWarehouse(response.data);
+        console.log("response data: ", response.data);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  useEffect(() => {
+    getInventoryList(warehouseId);
+  }, []);
+
+  function getInventoryList(warehouseId) {
+    axios
+      .get(`${api}/warehouses/${warehouseId}/inventories`)
+      .then((response) => {
+        setInventory(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  if (!Object.keys(warehouse).length) return;
+
   return (
     <section className="warehouse">
       <div className="warehouse__header">
@@ -15,143 +57,140 @@ function WarehouseDetails() {
           <Link to="/warehouses">
             <img src={arrowBackIcon} alt="arrow back" />
           </Link>
-          <h1>Washington</h1>
+          <h1>{warehouse.warehouse_name}</h1>
         </div>
-        <div className="edit-icon">
+
+        <Link className="warehouse__edit-button" to="#">
           <img src={editIconWhite} alt="edit icon" />
+          <h3 className="warehouse__edit-button-caption">Edit</h3>
+        </Link>
+      </div>
+
+      <div className="warehouse-info">
+        <div className="warehouse-info__address-wrapper">
+          <h4 className="warehouse__sub-heading">Warehouse Address:</h4>
+          <div>
+            <p className="warehouse-info__address">
+              {warehouse.address}
+              {", "}
+            </p>
+            <p className="warehouse-info__address">{warehouse.city}</p>
+          </div>
         </div>
-        <div className="edit-icon--large">
-          <img src={editIconWhite} alt="edit icon" />
-          <h3 className="edit-icon__title">Edit</h3>
+        <div className="warehouse-info__contact">
+          <div className="warehouse-info__contact-wrapper">
+            <h4 className="warehouse__sub-heading">Contact Name:</h4>
+            <p>{warehouse.contact_name}</p>
+            <p>{warehouse.contact_position}</p>
+          </div>
+          <div className="warehouse-info__contact warehouse-info__contact--right">
+            <div>
+              <h4 className="warehouse__sub-heading">Contact Information:</h4>
+              <p>{warehouse.contact_phone}</p>
+              <p>{warehouse.contact_email}</p>
+            </div>
+          </div>
         </div>
       </div>
+
       <div className="table">
-        <div className="table__container">
-          <div className="table__wrapper">
-            <h4 className="table__headers">Warehouse Address:</h4>
-            <p className="table__text">33 Pearl Street SW, Washington, USA</p>
+        <div className="table__headings">
+          <div className="table__heading-wrapper">
+            <h4 className="table__heading">Inventory Item</h4>
+            <button className="table__heading-button">
+              <img
+                className="table__heading-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
           </div>
-          <div className="table__contact">
-            <div className="table__contact-wrapper">
-              <h4 className="table__headers">Contact Name:</h4>
-              <p className="table__text">Graeme Lyon</p>
-              <p className="table__text">Warehouse Manager</p>
-            </div>
-            <div className="table__contact table__contact--right">
-              <div>
-                <h4 className="table__headers">Contact Information:</h4>
-                <p className="table__text">+1 (647) 504-0911</p>
-                <p className="table__text">glyon@instock.com</p>
-              </div>
-            </div>
+          <div className="table__heading-wrapper">
+            <h4 className="table__heading">Category</h4>
+            <button className="table__heading-button">
+              <img
+                className="table__heading-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
           </div>
-        </div>
-        {/* // Code below to be applied for tablet/desktop // */}
-        <div className="list-headers">
-          <div className="list-headers__left">
-            <div className="list-headers__wrapper">
-              <h4 className="list-headers__title">Inventory Item</h4>
-              <button className="list-headers__button">
-                <img
-                  className="list-headers__icon"
-                  src={sortIcon}
-                  alt="sort icon"
-                />
-              </button>
-            </div>
-            <div className="list-headers__wrapper">
-              <h4 className="list-headers__title">Category</h4>
-              <button className="list-headers__button">
-                <img
-                  className="list-headers__icon"
-                  src={sortIcon}
-                  alt="sort icon"
-                />
-              </button>
-            </div>
-            <div className="list-headers__wrapper">
-              <h4 className="list-headers__title">Status</h4>
-              <button className="list-headers__button">
-                <img
-                  className="list-headers__icon"
-                  src={sortIcon}
-                  alt="sort icon"
-                />
-              </button>
-            </div>
+          <div className="table__heading-wrapper">
+            <h4 className="table__heading">Status</h4>
+            <button className="table__heading-button">
+              <img
+                className="table__heading-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
           </div>
-          <div className="list-headers__right">
-            <div className="list-headers__wrapper">
-              <h4 className="list-headers__title">Quantity</h4>
-              <button className="list-headers__button">
-                <img
-                  className="list-headers__icon"
-                  src={sortIcon}
-                  alt="sort icon"
-                />
-              </button>
-            </div>
-            <h4 className="list-headers__title">Actions</h4>
+          <div className="table__heading-wrapper">
+            <h4 className="table__heading">Quantity</h4>
+            <button className="table__heading-button">
+              <img
+                className="table__heading-icon"
+                src={sortIcon}
+                alt="sort icon"
+              />
+            </button>
+          </div>
+          <div className="table__heading-wrapper table__heading-wrapper--actions">
+            <h4 className="table__heading">Actions</h4>
           </div>
         </div>
-
-        {/* // Code below to be applied for tablet/desktop // */}
-
-        <ul className="table__list table__list--tablet">
-          <div className="table__left">
-            <li className="table__list-item">
-              <Link className="link" to="/inventory/:inventoryId">
-                Television{" "}
-                <img className="arrow-right" src={arrowRight} alt="" />
-              </Link>
-            </li>
-            <li className="table__text table__list-item">Electronics</li>
-            <li className="table__list-item table__tag table__tag--out">
-              In Stock
-            </li>
-          </div>
-          <div className="table__right">
-            <li className="table__list-item table__text">500</li>
-            <li className="edit__icons table__list-item">
-              <img src={deleteIcon} alt="delete icon" />
-              <img src={editIcon} alt="edit icon  " />
-            </li>
-          </div>
-        </ul>
 
         <ul className="table__list">
-          <li className="table__list-item">
-            <div className="table__list-divider">
-              <div className="table__list-container">
-                <div className="table__list-wrapper">
-                  <h4 className="table__headers">Inventory Item</h4>
-                  <Link className="link" to="/inventory/:inventoryId">
-                    Television{" "}
-                    <img className="arrow-right" src={arrowRight} alt="" />
-                  </Link>
-                </div>
-                <div>
-                  <h4 className="table__headers">Category</h4>
-                  <p className="table__text">Electronics</p>
-                </div>
-              </div>
+          {inventory.map((item) => {
+            return (
+              <li key={item.id} className="table__list-item">
+                <div className="table__list-divider">
+                  <div className="table__list-container">
+                    <div className="table__list-wrapper">
+                      <h4 className="table__heading table__heading--mobile">
+                        Inventory Item
+                      </h4>
+                      <Link className="link" to="/inventory/:inventoryId">
+                        {item.item_name}
+                        <img className="arrow-right" src={arrowRight} alt="" />
+                      </Link>
+                    </div>
+                    <div className="table__list-wrapper">
+                      <h4 className="table__heading table__heading--mobile">
+                        Category
+                      </h4>
+                      <p className="table__text">{item.category}</p>
+                    </div>
+                  </div>
 
-              <div className="table__list-container">
-                <div className="table__list-wrapper">
-                  <h4 className="table__headers">Status</h4>
-                  <p className="table__tag table__tag--out">In Stock</p>
+                  <div className="table__list-container">
+                    <div className="table__list-wrapper">
+                      <h4 className="table__heading table__heading--mobile">
+                        Status
+                      </h4>
+                      <p className="table__tag table__tag--out">
+                        {item.status}
+                      </p>
+                    </div>
+                    <div className="table__list-wrapper">
+                      <h4 className="table__heading table__heading--mobile">
+                        QTY
+                      </h4>
+                      <p className="table__text">{item.quantity}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="table__list-wrapper">
-                  <h4 className="table__headers">QTY</h4>
-                  <p className="table__text">500</p>
+                <div className="table__icons">
+                  <img
+                    className="table__icon"
+                    src={deleteIcon}
+                    alt="delete icon"
+                  />
+                  <img className="table__icon" src={editIcon} alt="edit icon" />
                 </div>
-              </div>
-            </div>
-            <div className="edit__icons">
-              <img src={deleteIcon} alt="delete icon" />
-              <img src={editIcon} alt="edit icon  " />
-            </div>
-          </li>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
