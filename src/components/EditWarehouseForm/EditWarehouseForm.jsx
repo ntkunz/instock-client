@@ -1,13 +1,13 @@
-import "./AddNewWarehouseForm.scss";
+import "./EditWarehouseForm.scss";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
-import WarehouseDetailsForm from "../WarehouseDetailsForm/WarehouseDetailsForm";
-import ContactDetailsForm from "../ContactDetailsForm/ContactDetailsForm";
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import EditWarehouseDetailsForm from "../WarehouseDetailsForm/WarehouseDetailsForm";
+import EditContactDetailsForm from "../ContactDetailsForm/ContactDetailsForm";
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 import axios from "axios";
-const { v4: uuid } = require("uuid");
 
-function AddNewWarehouseForm() {
+function EditNewWarehouseForm() {
   const [formData, setFormData] = useState({
     warehouse: "",
     streetAddress: "",
@@ -23,7 +23,29 @@ function AddNewWarehouseForm() {
     email: false,
     empty: false,
   });
-  const [submitting, setSubmitting] = useState(false);
+  const [submit, setSubmit] = useState(false);
+  const [edit, setEdit] = useState(false);
+  // const [edit, setEdit] = useState(false)
+  const { id } = useParams();
+  const URL = `http://localhost:8080/warehouses/${id}`;
+
+  useEffect(() => {
+    axios.get(`${URL}`).then((response) => {
+      const warehouseData = response.data;
+      setFormData({
+        ...formData,
+        warehouse: warehouseData.warehouse_name,
+        streetAddress: warehouseData.address,
+        city: warehouseData.city,
+        country: warehouseData.country,
+        contactName: warehouseData.contact_name,
+        position: warehouseData.contact_position,
+        phoneNumber: warehouseData.contact_phone,
+        email: warehouseData.contact_email,
+      });
+    });
+  }, []);
+
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -35,7 +57,7 @@ function AddNewWarehouseForm() {
   };
 
   const validatePhoneNumber = (value) =>
-    /^[0-9]*$/.test(value) && value.length >= 7;
+    /^[0-9]*$/.test(value) && value.length >= 10;
 
   const validateEmail = (value) =>
     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
@@ -64,41 +86,39 @@ function AddNewWarehouseForm() {
 
     return isValid;
   };
-
+  
   const handleSubmit = async (event) => {
-    setSubmitting(true);
-
+    setSubmit(true);
+    event.preventDefault();
     if (isFormValid()) {
-      try {
-        const response = await axios.post("http://localhost:8080/warehouses/", {
-          id: uuid(),
+      axios
+        .put(`${URL}`, {
           warehouse_name: formData.warehouse,
           address: formData.streetAddress,
           city: formData.city,
           country: formData.country,
           contact_name: formData.contactName,
           contact_position: formData.position,
-          contact_phone: formData.phoneNumber,
           contact_email: formData.email,
+          contact_phone: formData.phoneNumber,
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
         });
-
-        console.log(response.data);
-        alert("Warehouse successfully added, redirecting to homepage.");
-        setTimeout(() => {
-          navigate("/");
-        }, 2000)
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      setSubmitting(false);
-      alert("Please fill in all required fields correctly.");
+      setEdit(true);
+      setTimeout(()=> {
+             navigate("/");
+          }, 2000)
+          alert("Edit Successful, redirecting to warehouse page.")
+      return navigate("/warehouses")
     }
-    event.preventDefault();
   };
 
   const handleCancel = () => {
-    return navigate("/warehouses");
+    return navigate("/");
   };
 
   return (
@@ -107,19 +127,21 @@ function AddNewWarehouseForm() {
         <Link to="/warehouses">
           <img src={ArrowBack} alt="ArrowBackButton" />
         </Link>
-        <h1 className="heading__warehouse">Add New Warehouse</h1>
+        <h1 className="heading__warehouse">Edit Warehouse</h1>
       </div>
       <form onSubmit={handleSubmit} className="form">
         <div className="form__wrapper">
-          <WarehouseDetailsForm
+          <EditWarehouseDetailsForm
             formData={formData}
             handleChange={handleChange}
             errorValues={errorValues}
+            submit={submit}
           />
-          <ContactDetailsForm
+          <EditContactDetailsForm
             formData={formData}
             handleChange={handleChange}
             errorValues={errorValues}
+            submit={submit}
           />
         </div>
         <div className="form__button-wrapper">
@@ -131,7 +153,7 @@ function AddNewWarehouseForm() {
               Cancel
             </button>
             <button type="submit" className="form__button form__button--2">
-              +Add Warehouse
+              Save
             </button>
           </div>
         </div>
@@ -140,4 +162,4 @@ function AddNewWarehouseForm() {
   );
 }
 
-export default AddNewWarehouseForm;
+export default EditNewWarehouseForm;
