@@ -1,9 +1,9 @@
-import "./ItemDetailsForm.scss";
+import "./EditItemDetailsForm.scss";
 
-function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
+function EditItemDetailsForm({ inventoryItem, categoryArray, handleOnChange, inputValues }) {
 	return (
 		<div className="details">
-			<h2 className="details__title">Item Details</h2>
+			<h2 className="details__title">Edit Item Details</h2>
 			<label htmlFor="name" className="details__label">
 				Item Name
 			</label>
@@ -37,8 +37,8 @@ function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 					onChange={ handleOnChange }
 					value={inputValues.category}
 				>
-					<option className="details__placeholder" value="" readOnly>
-						Please select
+					<option className="details__placeholder" value={inventoryItem.category} >
+						{inventoryItem.category}
 					</option>
 					{categoryArray.map((inventory) => (
 						<option
@@ -54,4 +54,4 @@ function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 	);
 }
 
-export default ItemDetailsForm;
+export default EditItemDetailsForm;

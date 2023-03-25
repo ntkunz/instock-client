@@ -18,7 +18,6 @@ export default function WarehouseList() {
   }, []);
 
   function getWarehouses() {
-    console.log(process.env);
     axios
       .get(`${api}/warehouses`)
       .then((response) => {
