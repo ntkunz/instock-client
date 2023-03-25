@@ -1,7 +1,7 @@
 import "./EditWarehouseDetailsForm.scss";
 import ErrorLogo from "../../assets/icons/error-24px.svg";
 
-function EditWarehouseDetailsForm({ formData, handleChange, errorValues }) {
+function EditWarehouseDetailsForm({ formData, handleChange, errorValues, submit }) {
   return (
     <div className="warehouse-details">
       <div className="warehouse-details__container">
@@ -18,7 +18,7 @@ function EditWarehouseDetailsForm({ formData, handleChange, errorValues }) {
             id="warehouse"
             onChange={handleChange}
           />
-          {errorValues.empty && (
+          {submit && errorValues.empty && (
             <div className="error-container">
             <img src={ErrorLogo} alt="Error enter valid warehouse name" />
           <p className="error-container__message">Required field.</p>

@@ -1,7 +1,7 @@
 import "./EditContactDetailsForm.scss";
 import ErrorLogo from "../../assets/icons/error-24px.svg"
 
-function EditContactDetailsForm({ formData, handleChange, errorValues }) {
+function EditContactDetailsForm({ formData, handleChange, errorValues, submit }) {
   return (
     <div className="contact-details">
       <h2 className="contact-details__heading">Contact Details</h2>

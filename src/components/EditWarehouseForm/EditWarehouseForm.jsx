@@ -23,7 +23,7 @@ function EditNewWarehouseForm() {
     email: false,
     empty: false,
   });
-  const [submitting, setSubmitting] = useState(false);
+  const [submit, setSubmit] = useState(false);
   const [edit, setEdit] = useState(false);
   // const [edit, setEdit] = useState(false)
   const { id } = useParams();
@@ -88,7 +88,7 @@ function EditNewWarehouseForm() {
   };
   
   const handleSubmit = async (event) => {
-    setSubmitting(true);
+    setSubmit(true);
     event.preventDefault();
     if (isFormValid()) {
       axios
@@ -135,11 +135,13 @@ function EditNewWarehouseForm() {
             formData={formData}
             handleChange={handleChange}
             errorValues={errorValues}
+            submit={submit}
           />
           <EditContactDetailsForm
             formData={formData}
             handleChange={handleChange}
             errorValues={errorValues}
+            submit={submit}
           />
         </div>
         <div className="form__button-wrapper">
