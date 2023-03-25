@@ -14,7 +14,7 @@ function EditInventory() {
 
 	//useState for all warehouses and inventories
 	const [warehouses, setWarehouses] = useState([]);
-	const [inventoriesArray, setInventoriesArray] = useState([]);
+	const [inventories, setInventories] = useState([]);
 	const [inventoryItem, setInventoryItem] = useState([]);
 	// const [ outOfStock, setOutOfStock ] = useState("");
 
@@ -52,14 +52,14 @@ function EditInventory() {
 		//udpate inputValues
 		const { name, value } = event.target;
 		setInputValues({ ...inputValues, [name]: value });
-		// console.log(event.target.value);
+		console.log(event.target.value);
 	};
 
 	//on load get warehouses and inventories
 	useEffect(() => {
 		getWarehouses();
 		getInventoryItem();
-		getInventoriesArray();
+		getInventories();
 	}, []);
 
 	useEffect(() => {
@@ -89,13 +89,22 @@ function EditInventory() {
 			});
 	}
 
+	//removeDup example modified from a respons at https://stackoverflow.com/questions/54757902/remove-duplicates-in-an-array-using-foreach
+	function removeDup(arr) {
+		let result = []
+		arr.forEach((item) => { if (!result.includes(item.category)) result.push(item.category) });
+		return result;
+	  }
+
+	  const categoryArray = removeDup(inventories);
+
 	//api get call function to get inventories ==move function up later
-	function getInventoriesArray() {
+	function getInventories() {
 		axios
 			.get(`${api}/inventories`)
 			.then((data) => {
 				if (data) {
-					setInventoriesArray(data.data);
+					setInventories(data.data);
 				}
 			})
 			.catch((err) => {
@@ -193,7 +202,8 @@ function EditInventory() {
 			<form className="form" onSubmit={handleFormSubmit}>
 				<div className="form__component-container">
 					<EditItemDetailsForm
-						inventoriesArray={inventoriesArray}
+						inventories={inventories}
+						categoryArray={categoryArray}
 						inventoryItem={inventoryItem}
 						handleOnChange={handleOnChange}
 						inputValues={inputValues}
