@@ -71,10 +71,6 @@
         padding-left: .5rem;
     }
 
-    // &__quantity-wrap {
-
-    // }
-
     &__out-of-stock {
         display: none;
     }
@@ -107,4 +103,8 @@
             height: 2.375rem;
         }
     }
+}
+
+.error {
+    border: $supporting-color-out solid 1px;
 }

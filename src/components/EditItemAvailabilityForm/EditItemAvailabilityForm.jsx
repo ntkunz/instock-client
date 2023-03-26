@@ -3,7 +3,7 @@ import "./EditItemAvailabilityForm.scss";
 function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 	return (
 		<div className="avail">
-			<h2 className="avail__title">Item Availability</h2>
+		<h2 className="avail__title">Item Availability</h2>
 			<label htmlFor="name" className="avail__label">
 				Status
 			</label>

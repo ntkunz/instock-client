@@ -27,50 +27,6 @@ function EditInventory() {
 		checked: true,
 	});
 
-	//======TOMMY ADDITION ====+++++++++++++++++++++++++++++++++++++++++
-	// //error handling states
-	// const [errorValues, setErrorValues] = useState({
-	// 	itemName: false,
-	// 	desc: false,
-	// 	empty: false,
-	//   });
-	//   const [submit, setSubmit] = useState(false);
-	//   const [edit, setEdit] = useState(false);
-
-
-	//   const validateItemName = (value) =>
-	//   /value !== ''/.test(value)
-
-  
-	// const validateDesc = (value) =>
-	//   /desc !== ''/.test(value);
-  
-	// const isFormValid = () => {
-	//   let isValid = true;
-	//   let newErrorValues = { ...errorValues };
-  
-	//   Object.keys(inputValues).forEach((key) => {
-	// 	if (!inputValues[key]) {
-	// 	  newErrorValues.empty = true;
-	// 	  isValid = false;
-	// 	}
-	//   });
-  
-	//   if (!validateItemName(inputValues.itemName)) {
-	// 	newErrorValues.itemName = true;
-	// 	isValid = false;
-	//   }
-	//   if (!validateDesc(inputValues.desc)) {
-	// 	newErrorValues.desc = true;
-	// 	isValid = false;
-	//   }
-  
-	//   setErrorValues(newErrorValues);
-  
-	//   return isValid;
-	// };
-  
-
 	//onChange function for all inputs of form
 	const handleOnChange = (event) => {
 		
@@ -84,13 +40,10 @@ function EditInventory() {
 		//if item in stock then set instock inputValue and show quantity field
 		if (stockCheck) {
 			quantityWrapper.classList.remove("avail__out-of-stock");
-			// setInputValues({ ...inputValues, instock: "In Stock" });
 		}
 		//if item out of stock then set instock inputVluae and hide quantity field
 		if (!stockCheck) {
 			quantityWrapper.classList.add("avail__out-of-stock");
-			// setInputValues({ quantity: '0' })
-			// setInputValues({ ...inputValues, instock: "Out of Stock" });
 		}
 		//udpate inputValues
 		const { name, value } = event.target;
@@ -169,33 +122,36 @@ function EditInventory() {
 			});
 	}
 
+
 	//function to handle form submit
 	function handleFormSubmit(e) {
 		e.preventDefault();
 
-		//======TOMMY ADDITION ====+++++++++++++++++++++++++++++++++++++
-		// setSubmit(true);
-
-		//Get warehouse id based off of warehosue name of inventory item selected
+			//Get warehouse id based off of warehosue name of inventory item selected
 		function getWarehouseId(array) {
 			return array.warehouse_name === inputValues.selectWarehouse;
 		}
 		let warehouseId = warehouses.find(getWarehouseId);
 
-		//form validation
-		if (
-			inputValues.instock === "" ||
-			inputValues.selectWarehouse === "" ||
-			inputValues.itemName === "" ||
-			inputValues.desc === "" ||
-			inputValues.category === ""
-		) {
-			return alert("Please enter all form field information");
+		if (inputValues.itemName === '') {
+			document.querySelector('.details__input').classList.add('error')
+			return alert('Please enter an item name')
+		}
+
+		if (inputValues.desc === '') {
+			document.querySelector('.details__desc-input').classList.add('error')
+			return alert('Please enter an item description')
 		}
 
 		//make sure that quantity is a number
-		if (isNaN(inputValues.quantity)) {
+		if (isNaN(inputValues.quantity) || inputValues.quantity === '') {
+			document.querySelector('.avail__input').classList.add('error')
 			return alert("Please enter a number for quantity");
+		}
+				//make sure that quantity is a number
+		if (inputValues.category === '') {
+			document.querySelector('.details__select-wrap').classList.add('error')
+			return alert("Please select a category");
 		}
 
 		//confirm that a radio button is selected for quantity
@@ -203,9 +159,11 @@ function EditInventory() {
 		let stockCheck = stockRadio[0].checked;
 		let outOfStockCheck = stockRadio[1].checked;
 		if (!stockCheck && !outOfStockCheck)
+			document.querySelector('.avail__radio-container').classList.add('error')
 			return alert("Please select if item is In Stock or Out of Stock");
 
 			//set quantity to 0 if out of stock checked
+			// ===========THIS DOESN'T WORK!!!!!!!!!11==================
 		if (outOfStockCheck) setInputValues({ quantity: 0})
 
 		// axios put request to update inventory item
