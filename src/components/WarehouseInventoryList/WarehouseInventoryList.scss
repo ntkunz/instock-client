@@ -56,6 +56,9 @@
     @include tablet {
       display: flex;
       padding: 1rem 1.5rem;
+      &:hover {
+        background-color: rgba(46, 102, 230, 0.07);
+      }
     }
   }
 
