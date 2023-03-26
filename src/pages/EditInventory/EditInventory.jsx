@@ -16,7 +16,6 @@ function EditInventory() {
 	const [warehouses, setWarehouses] = useState([]);
 	const [inventories, setInventories] = useState([]);
 	const [inventoryItem, setInventoryItem] = useState([]);
-	// const [ outOfStock, setOutOfStock ] = useState("");
 
 	//useState for all form inputs
 	const [inputValues, setInputValues] = useState({
@@ -59,18 +58,6 @@ function EditInventory() {
 		getInventoryItem();
 		getInventories();
 	}, []);
-
-	// useEffect(() => {
-	// 	// setInputValues({ ...inputValues, instock: inventoryItem.status });
-	// 	setInputValues({
-	// 		...inputValues,
-	// 		itemName: inventoryItem.item_name,
-	// 		desc: inventoryItem.description,
-	// 		quantity: inventoryItem.quantity,
-	// 		selectWarehouse: inventoryItem.warehouse_name,
-	// 		category: inventoryItem.category,
-	// 	});
-	// }, [inventoryItem]);
 
 	//api get call function to get warehouses ==PASS DOWN LATER... MOVE FUNCTION UP LATER
 	function getWarehouses() {
@@ -118,9 +105,8 @@ function EditInventory() {
 			.get(`${api}/inventories/${id.inventoryId}`)
 			.then((data) => {
 				if (data) {
-					// setInventoryItem(data.data);
 					const inventoryItem = data.data
-					// setInputValues({ ...inputValues, instock: inventoryItem.status });
+
 					setInputValues({
 						...inputValues,
 						itemName: inventoryItem.item_name,
@@ -234,7 +220,6 @@ function EditInventory() {
 				<div className="form__component-container">
 					<EditItemDetailsForm
 						categoryArray={categoryArray}
-						inventoryItem={inventoryItem}
 						handleOnChange={handleOnChange}
 						inputValues={inputValues}
 					/>
