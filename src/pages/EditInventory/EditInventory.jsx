@@ -143,12 +143,10 @@ function EditInventory() {
 			return alert('Please enter an item description')
 		}
 
-		//make sure that quantity is a number
 		if (isNaN(inputValues.quantity) || inputValues.quantity === '') {
 			document.querySelector('.avail__input').classList.add('error')
 			return alert("Please enter a number for quantity");
 		}
-				//make sure that quantity is a number
 		if (inputValues.category === '') {
 			document.querySelector('.details__select-wrap').classList.add('error')
 			return alert("Please select a category");
@@ -158,13 +156,14 @@ function EditInventory() {
 		const stockRadio = document.querySelectorAll(".avail__radio");
 		let stockCheck = stockRadio[0].checked;
 		let outOfStockCheck = stockRadio[1].checked;
-		if (!stockCheck && !outOfStockCheck)
+		if (!stockCheck && !outOfStockCheck) {
 			document.querySelector('.avail__radio-container').classList.add('error')
 			return alert("Please select if item is In Stock or Out of Stock");
+	}
 
 			//set quantity to 0 if out of stock checked
 			// ===========THIS DOESN'T WORK!!!!!!!!!11==================
-		if (outOfStockCheck) setInputValues({ quantity: 0})
+		// if (outOfStockCheck) setInputValues({ quantity: 0})
 
 		// axios put request to update inventory item
 		axios
