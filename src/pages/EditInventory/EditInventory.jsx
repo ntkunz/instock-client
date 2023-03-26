@@ -60,17 +60,17 @@ function EditInventory() {
 		getInventories();
 	}, []);
 
-	useEffect(() => {
-		// setInputValues({ ...inputValues, instock: inventoryItem.status });
-		setInputValues({
-			...inputValues,
-			itemName: inventoryItem.item_name,
-			desc: inventoryItem.description,
-			quantity: inventoryItem.quantity,
-			selectWarehouse: inventoryItem.warehouse_name,
-			category: inventoryItem.category,
-		});
-	}, [inventoryItem]);
+	// useEffect(() => {
+	// 	// setInputValues({ ...inputValues, instock: inventoryItem.status });
+	// 	setInputValues({
+	// 		...inputValues,
+	// 		itemName: inventoryItem.item_name,
+	// 		desc: inventoryItem.description,
+	// 		quantity: inventoryItem.quantity,
+	// 		selectWarehouse: inventoryItem.warehouse_name,
+	// 		category: inventoryItem.category,
+	// 	});
+	// }, [inventoryItem]);
 
 	//api get call function to get warehouses ==PASS DOWN LATER... MOVE FUNCTION UP LATER
 	function getWarehouses() {
@@ -118,8 +118,17 @@ function EditInventory() {
 			.get(`${api}/inventories/${id.inventoryId}`)
 			.then((data) => {
 				if (data) {
-					setInventoryItem(data.data);
-					// setInputValues({category: data.data.category, selectWarehouse: data.data.warehouse_name});
+					// setInventoryItem(data.data);
+					const inventoryItem = data.data
+					// setInputValues({ ...inputValues, instock: inventoryItem.status });
+					setInputValues({
+						...inputValues,
+						itemName: inventoryItem.item_name,
+						desc: inventoryItem.description,
+						quantity: inventoryItem.quantity,
+						selectWarehouse: inventoryItem.warehouse_name,
+						category: inventoryItem.category,
+					});
 				}
 			})
 			.catch((err) => {

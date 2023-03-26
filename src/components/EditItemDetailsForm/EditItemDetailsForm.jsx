@@ -3,7 +3,7 @@ import "./EditItemDetailsForm.scss";
 function EditItemDetailsForm({ inventoryItem, categoryArray, handleOnChange, inputValues }) {
 	return (
 		<div className="details">
-			<h2 className="details__title">Edit Item Details</h2>
+			<h2 className="details__title">Item Details</h2>
 			<label htmlFor="name" className="details__label">
 				Item Name
 			</label>
