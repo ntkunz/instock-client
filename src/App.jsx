@@ -6,6 +6,7 @@ import AddInventory from "./pages/AddNewInventoryItem/AddNewInventoryItem";
 // import AddNewWarehouse from "./components/AddNewWarehouse/AddNewWarehouse";
 import EditInventory from "./pages/EditInventory/EditInventory";
 import WarehouseDetailsForm from "./components/WarehouseDetailsForm/WarehouseDetailsForm";
+import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 // import ContactDetails from "./components/ContactDetails/ContactDetails";
 import Footer from "./components/Footer/Footer";
 import AddNewWarehouseForm from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
@@ -21,10 +22,8 @@ export default function App() {
           <Route path="/warehouses/edit/:id"element={<EditWarehouseForm />}/>
           <Route path="/warehouses/add" element={<AddNewWarehouseForm />} />
           <Route path="inventory/edit/:inventoryId" element={<EditInventory />} />
-          {/* <Route
-            path="warehouses/:warehouseId"
-            element={<WarehouseDetails />}
-          /> */}
+          <Route path="warehouses/:warehouseId" element={<WarehouseDetails />}/>
+          {/* <Route path="warehouses/:warehouseId" element={<WarehouseDetailsForm />}/> */}
           <Route path="inventory/add" element={<AddInventory />} />
           {/* <Route path="/inventory" element={<InventoryList />} />
           <Route path="inventory/add" element={<AddInventory />} />
