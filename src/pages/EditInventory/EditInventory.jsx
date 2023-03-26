@@ -29,6 +29,7 @@ function EditInventory() {
 
 	//onChange function for all inputs of form
 	const handleOnChange = (event) => {
+		
 		//create variables for checkbox radios
 		const quantityWrapper = document.querySelector(".avail__quantity-wrap");
 		const stockRadio = document.querySelectorAll(".avail__radio");
@@ -44,7 +45,7 @@ function EditInventory() {
 		//if item out of stock then set instock inputVluae and hide quantity field
 		if (!stockCheck) {
 			quantityWrapper.classList.add("avail__out-of-stock");
-			setInputValues({ ...inputValues, quantity: 0 })
+			// setInputValues({ quantity: '0' })
 			// setInputValues({ ...inputValues, instock: "Out of Stock" });
 		}
 		//udpate inputValues
