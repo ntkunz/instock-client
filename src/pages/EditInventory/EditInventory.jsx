@@ -45,6 +45,23 @@ function EditInventory() {
 		if (!stockCheck) {
 			quantityWrapper.classList.add("avail__out-of-stock");
 		}
+
+		// remove error states
+		if (inputValues.itemName !== '') {
+			document.querySelector('.details__input').classList.remove('error')
+		}
+
+		if (inputValues.desc !== '') {
+			document.querySelector('.details__desc-input').classList.remove('error')
+		}
+
+		if (inputValues.quantity !== '') {
+			document.querySelector('.avail__input').classList.remove('error')
+		}
+		if (inputValues.category !== '') {
+			document.querySelector('.details__select').classList.remove('error')
+		}
+
 		//udpate inputValues
 		const { name, value } = event.target;
 		setInputValues({ ...inputValues, [name]: value });
