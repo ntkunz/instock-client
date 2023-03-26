@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.contact-details {
+.edit-contact-details {
   padding: 0 1.5rem;
   border-top: 1px solid $secondary-color-light;
   @include tablet {
