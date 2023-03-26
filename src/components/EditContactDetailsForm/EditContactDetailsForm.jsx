@@ -3,15 +3,15 @@ import ErrorLogo from "../../assets/icons/error-24px.svg"
 
 function EditContactDetailsForm({ formData, handleChange, errorValues, submit }) {
   return (
-    <div className="contact-details">
-      <h2 className="contact-details__heading">Contact Details</h2>
+    <div className="edit-contact-details">
+      <h2 className="edit-contact-details__heading">Contact Details</h2>
 
-      <div className="contact-details__container">
-        <div className="contact-details__warehouse">
-          <label className="contact-details__label">Contact Name</label>
+      <div className="edit-contact-details__container">
+        <div className="edit-contact-details__warehouse">
+          <label className="edit-contact-details__label">Contact Name</label>
           <input
             value={formData.contactName}
-            className="contact-details__input"
+            className="edit-contact-details__input"
             placeholder="Contact Name"
             name="contactName"
             onChange={handleChange}
@@ -24,11 +24,11 @@ function EditContactDetailsForm({ formData, handleChange, errorValues, submit })
           )}
         </div>
 
-        <div className="contact-details__warehouse">
-          <label className="contact-details__label">Position</label>
+        <div className="edit-contact-details__warehouse">
+          <label className="edit-contact-details__label">Position</label>
           <input
             value={formData.position}
-            className="contact-details__input"
+            className="edit-contact-details__input"
             placeholder="Position"
             name="position"
             onChange={handleChange}
@@ -41,11 +41,11 @@ function EditContactDetailsForm({ formData, handleChange, errorValues, submit })
           )}
         </div>
 
-        <div className="contact-details__warehouse">
-          <label className="contact-details__label">Phone Number</label>
+        <div className="edit-contact-details__warehouse">
+          <label className="edit-contact-details__label">Phone Number</label>
           <input
             value={formData.phoneNumber}
-            className="contact-details__input"
+            className="edit-contact-details__input"
             placeholder="Phone Number"
             name="phoneNumber"
             onChange={handleChange}
@@ -58,11 +58,11 @@ function EditContactDetailsForm({ formData, handleChange, errorValues, submit })
           )}
         </div>
 
-        <div className="contact-details__warehouse">
-          <label className="contact-details__label">Email</label>
+        <div className="edit-contact-details__warehouse">
+          <label className="edit-contact-details__label">Email</label>
           <input
             value={formData.email}
-            className="contact-details__input"
+            className="edit-contact-details__input"
             placeholder="Email"
             name="email"
             onChange={handleChange}

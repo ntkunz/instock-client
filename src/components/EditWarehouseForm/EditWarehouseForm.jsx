@@ -122,15 +122,15 @@ function EditNewWarehouseForm() {
   };
 
   return (
-    <section className="form-wrapper">
-      <div className="heading">
+    <section className="edit-wrapper">
+      <div className="edit-wrapper__heading">
         <Link to="/warehouses">
           <img src={ArrowBack} alt="ArrowBackButton" />
         </Link>
-        <h1 className="heading__warehouse">Edit Warehouse</h1>
+        <h1 className="edit-wrapper__warehouse">Edit Warehouse</h1>
       </div>
-      <form onSubmit={handleSubmit} className="form">
-        <div className="form__wrapper">
+      <form onSubmit={handleSubmit} className="edit-form">
+        <div className="edit-form__wrapper">
           <EditWarehouseDetailsForm
             formData={formData}
             handleChange={handleChange}
@@ -144,15 +144,15 @@ function EditNewWarehouseForm() {
             submit={submit}
           />
         </div>
-        <div className="form__button-wrapper">
-          <div className="form__button-container">
+        <div className="edit-form__button-wrapper">
+          <div className="edit-form__button-container">
             <button
               onClick={handleCancel}
-              className="form__button form__button--1"
+              className="edit-form__button edit-form__button--1"
             >
               Cancel
             </button>
-            <button type="submit" className="form__button form__button--2">
+            <button type="submit" className="edit-form__button edit-form__button--2">
               Save
             </button>
           </div>
