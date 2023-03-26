@@ -15,7 +15,6 @@ function EditInventory() {
 	//useState for all warehouses and inventories
 	const [warehouses, setWarehouses] = useState([]);
 	const [inventories, setInventories] = useState([]);
-	const [inventoryItem, setInventoryItem] = useState([]);
 
 	//useState for all form inputs
 	const [inputValues, setInputValues] = useState({
@@ -25,6 +24,7 @@ function EditInventory() {
 		itemName: "",
 		desc: "",
 		category: "",
+		checked: true,
 	});
 
 	//onChange function for all inputs of form
