@@ -1,10 +1,10 @@
-import "./ItemAvailabilityForm.scss";
+import "./EditItemAvailabilityForm.scss";
 
-function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
-
+function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
+	
 	return (
 		<div className="avail">
-			<h2 className="avail__title">Item Availability</h2>
+			<h2 className="avail__title">Edit Item Availability</h2>
 			<label htmlFor="name" className="avail__label">
 				Status
 			</label>
@@ -31,27 +31,24 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						value="Out of Stock"
 						onChange={handleOnChange}
 					/>
-					<label
-						className="avail__radio-label out-of-stock"
-						htmlFor="outofstock"
-					>
+					<label className="avail__radio-label" htmlFor="outofstock">
 						Out of stock
 					</label>
 				</div>
 			</div>
-		<div className="avail__quantity-wrap avail__out-of-stock">
-			<label htmlFor="quantity" className="avail__label">
-				Quantity
-			</label>
-			<input
-				type="text"
-				className="avail__input"
-				value={inputValues.quantity}
-				onChange={handleOnChange}
-				placeholder=""
-				name="quantity"
-			/>
-		</div>
+			<div className="avail__quantity-wrap avail__out-of-stock">
+				<label htmlFor="quantity" className="avail__label">
+					Quantity
+				</label>
+				<input
+					type="text"
+					className="avail__input"
+					value={inputValues.quantity}
+					onChange={handleOnChange}
+					placeholder=""
+					name="quantity"
+				/>
+			</div>
 			<label htmlFor="" className="avail__label">
 				Warehouse
 			</label>
@@ -63,13 +60,11 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 					onChange={handleOnChange}
 					value={inputValues.selectWarehouse}
 				>
-					<option value="" readOnly>
-						Please select
+					<option value={inputValues.selectWarehouse}>
+						{inputValues.selectWarehouse}
 					</option>
 					{warehouses.map((warehouse) => (
-						<option 
-							key={warehouse.id} 
-							value={warehouse.id}>
+						<option key={warehouse.id} value={warehouse.warehouse_name}>
 							{warehouse.warehouse_name}
 						</option>
 					))}
@@ -79,4 +74,4 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 	);
 }
 
-export default ItemAvailabilityForm;
+export default EditItemAvailabilityForm;
