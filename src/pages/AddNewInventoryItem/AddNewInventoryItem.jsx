@@ -164,14 +164,13 @@ function AddNewInventoryItem() {
 			instock: "",
 			quantity: 0,
 		});
+		navigate(-1)
 	}
 
 	return (
 		<section className="container">
 			<div className="heading">
-				<Link
-					to={".."}
-					onClick={(e) => {
+				<Link className="heading__link" to={".."} onClick={(e) => {
 						e.preventDefault();
 						navigate(-1);
 					}}
@@ -199,6 +198,7 @@ function AddNewInventoryItem() {
 					<div className="form__button-container">
 						<button
 							className="form__button form__button--1"
+							to={".."}
 							onClick={handleFormCancel}
 						>
 							Cancel
