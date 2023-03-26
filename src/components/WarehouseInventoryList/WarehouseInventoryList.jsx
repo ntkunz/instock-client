@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 function WarehouseInventoryList() {
   const { warehouseId } = useParams();
   const [inventory, setInventory] = useState([]);
-  const api = "http://localhost:8080";
+  const api = process.env.REACT_APP_BASEURL;
   useEffect(() => {
     getInventoryList(warehouseId);
   }, []);

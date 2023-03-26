@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import WarehouseInventoryList from "../WarehouseInventoryList/WarehouseInventoryList";
 
 function WarehouseDetails() {
-  const api = "http://localhost:8080";
+  const api = process.env.REACT_APP_BASEURL;
   const { warehouseId } = useParams();
   const [warehouse, setWarehouse] = useState({});
 
