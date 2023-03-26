@@ -44,6 +44,7 @@ function EditInventory() {
 		//if item out of stock then set instock inputVluae and hide quantity field
 		if (!stockCheck) {
 			quantityWrapper.classList.add("avail__out-of-stock");
+			setInputValues({ ...inputValues, quantity: 0 })
 			// setInputValues({ ...inputValues, instock: "Out of Stock" });
 		}
 		//udpate inputValues
@@ -240,7 +241,7 @@ function EditInventory() {
 						>
 							Cancel
 						</button>
-						<button className="form__button form__button--2">+ Add Item</button>
+						<button className="form__button form__button--2">+ Edit Item</button>
 					</div>
 				</div>
 			</form>
