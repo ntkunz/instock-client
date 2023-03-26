@@ -123,11 +123,11 @@ function EditNewWarehouseForm() {
 
   return (
     <section className="edit-wrapper">
-      <div className="edit-heading">
+      <div className="edit-wrapper__heading">
         <Link to="/warehouses">
           <img src={ArrowBack} alt="ArrowBackButton" />
         </Link>
-        <h1 className="edit-heading__warehouse">Edit Warehouse</h1>
+        <h1 className="edit-wrapper__warehouse">Edit Warehouse</h1>
       </div>
       <form onSubmit={handleSubmit} className="edit-form">
         <div className="edit-form__wrapper">

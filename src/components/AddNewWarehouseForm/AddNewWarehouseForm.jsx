@@ -102,15 +102,15 @@ function AddNewWarehouseForm() {
   };
 
   return (
-    <section className="form-wrapper">
-      <div className="heading">
+    <section className="add-form-wrapper">
+      <div className="add-form-wrapper__heading">
         <Link to="/warehouses">
           <img src={ArrowBack} alt="ArrowBackButton" />
         </Link>
-        <h1 className="heading__warehouse">Add New Warehouse</h1>
+        <h1 className="add-form-wrapper__warehouse">Add New Warehouse</h1>
       </div>
-      <form onSubmit={handleSubmit} className="form">
-        <div className="form__wrapper">
+      <form onSubmit={handleSubmit} className="add-form">
+        <div className="add-form__wrapper">
           <WarehouseDetailsForm
             formData={formData}
             handleChange={handleChange}
@@ -122,15 +122,15 @@ function AddNewWarehouseForm() {
             errorValues={errorValues}
           />
         </div>
-        <div className="form__button-wrapper">
-          <div className="form__button-container">
+        <div className="add-form__button-wrapper">
+          <div className="add-form__button-container">
             <button
               onClick={handleCancel}
-              className="form__button form__button--1"
+              className="add-form__button add-form__button--1"
             >
               Cancel
             </button>
-            <button type="submit" className="form__button form__button--2">
+            <button type="submit" className="add-form__button add-form__button--2">
               +Add Warehouse
             </button>
           </div>
