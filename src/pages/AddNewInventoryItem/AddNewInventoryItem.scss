@@ -49,24 +49,62 @@
     }
 
     &__button-wrapper {
+        width: 100%;
+    }
+
+    &__button-container {
+        height: 4.25rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: $background-color-light;
 
         @include tablet {
-            width: 100%;
-            height: 4.5rem;
-            @include body-large-tablet;
+          justify-content: flex-end;
+          gap: 1rem;
+          height: 4.5rem;
+          padding-right: 2rem;
+          @include body-large-tablet;
+        }
+
+        @include desktop {
+            padding-right: 2.5rem;
         }
     }
 
     &__button {
+        width: 8rem;
+        height: 2.2rem;
+        border-radius: 1.25rem;
+        font-weight: 600;
         @include tablet {
-            &--2 {
-                width: 6rem;
-            }
-        }
-
-        &:hover {
+          width: 8.625rem;
+          height: 2.375rem;
+          &:hover {
             cursor: pointer;
+          }
         }
-
-    }
+        &--1 {
+          color: $secondary-color-dark;
+          background-color: $primary-color-light;
+          border: 0.0625rem solid $secondary-color-light;
+          @include tablet {
+            height: 2.375rem;
+            width: 4.5rem;
+          }
+          &:hover {
+            border-color: $primary-color-medium;
+            color: $primary-color-medium;
+          }
+        }
+        &--2 {
+          color: $primary-color-light;
+          background-color: $primary-color-medium;
+          border: none;
+          &:hover {
+            background-color: $background-color-dark;
+          }
+        }
+      }
 }
