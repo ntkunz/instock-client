@@ -15,8 +15,6 @@ function EditInventory() {
 	//useState for all warehouses and inventories
 	const [warehouses, setWarehouses] = useState([]);
 	const [inventories, setInventories] = useState([]);
-	const [inventoryItem, setInventoryItem] = useState([]);
-	// const [ outOfStock, setOutOfStock ] = useState("");
 
 	//useState for all form inputs
 	const [inputValues, setInputValues] = useState({
@@ -26,10 +24,12 @@ function EditInventory() {
 		itemName: "",
 		desc: "",
 		category: "",
+		checked: true,
 	});
 
 	//onChange function for all inputs of form
 	const handleOnChange = (event) => {
+		
 		//create variables for checkbox radios
 		const quantityWrapper = document.querySelector(".avail__quantity-wrap");
 		const stockRadio = document.querySelectorAll(".avail__radio");
@@ -45,6 +45,7 @@ function EditInventory() {
 		//if item out of stock then set instock inputVluae and hide quantity field
 		if (!stockCheck) {
 			quantityWrapper.classList.add("avail__out-of-stock");
+			// setInputValues({ quantity: '0' })
 			// setInputValues({ ...inputValues, instock: "Out of Stock" });
 		}
 		//udpate inputValues
@@ -59,18 +60,6 @@ function EditInventory() {
 		getInventoryItem();
 		getInventories();
 	}, []);
-
-	useEffect(() => {
-		// setInputValues({ ...inputValues, instock: inventoryItem.status });
-		setInputValues({
-			...inputValues,
-			itemName: inventoryItem.item_name,
-			desc: inventoryItem.description,
-			quantity: inventoryItem.quantity,
-			selectWarehouse: inventoryItem.warehouse_name,
-			category: inventoryItem.category,
-		});
-	}, [inventoryItem]);
 
 	//api get call function to get warehouses ==PASS DOWN LATER... MOVE FUNCTION UP LATER
 	function getWarehouses() {
@@ -118,8 +107,16 @@ function EditInventory() {
 			.get(`${api}/inventories/${id.inventoryId}`)
 			.then((data) => {
 				if (data) {
-					setInventoryItem(data.data);
-					// setInputValues({category: data.data.category, selectWarehouse: data.data.warehouse_name});
+					const inventoryItem = data.data
+
+					setInputValues({
+						...inputValues,
+						itemName: inventoryItem.item_name,
+						desc: inventoryItem.description,
+						quantity: inventoryItem.quantity,
+						selectWarehouse: inventoryItem.warehouse_name,
+						category: inventoryItem.category,
+					});
 				}
 			})
 			.catch((err) => {
@@ -225,7 +222,6 @@ function EditInventory() {
 				<div className="form__component-container">
 					<EditItemDetailsForm
 						categoryArray={categoryArray}
-						inventoryItem={inventoryItem}
 						handleOnChange={handleOnChange}
 						inputValues={inputValues}
 					/>
@@ -246,7 +242,7 @@ function EditInventory() {
 						>
 							Cancel
 						</button>
-						<button className="form__button form__button--2">+ Add Item</button>
+						<button className="form__button form__button--2">+ Edit Item</button>
 					</div>
 				</div>
 			</form>

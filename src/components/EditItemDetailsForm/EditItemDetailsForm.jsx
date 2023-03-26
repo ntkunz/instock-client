@@ -1,9 +1,9 @@
 import "./EditItemDetailsForm.scss";
 
-function EditItemDetailsForm({ inventoryItem, categoryArray, handleOnChange, inputValues }) {
+function EditItemDetailsForm({ categoryArray, handleOnChange, inputValues }) {
 	return (
 		<div className="details">
-			<h2 className="details__title">Edit Item Details</h2>
+			<h2 className="details__title">Item Details</h2>
 			<label htmlFor="name" className="details__label">
 				Item Name
 			</label>
@@ -37,8 +37,8 @@ function EditItemDetailsForm({ inventoryItem, categoryArray, handleOnChange, inp
 					onChange={ handleOnChange }
 					value={inputValues.category}
 				>
-					<option className="details__placeholder" value={inventoryItem.category} >
-						{inventoryItem.category}
+					<option className="details__placeholder" value={inputValues.category} >
+						{inputValues.category}
 					</option>
 					{categoryArray.map((inventory) => (
 						<option
