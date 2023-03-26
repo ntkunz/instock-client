@@ -87,6 +87,19 @@
     }
   }
 
+  &__link-item {
+    text-decoration: none;
+    color: $primary-color-medium;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    align-items: end;
+  }
+
+  &__link-arrow {
+    width: 1.2rem;
+    vertical-align: middle;
+  }
+
   &__tag {
     color: $supporting-color-in;
     background: rgba(21, 132, 99, 0.07);
