@@ -27,6 +27,50 @@ function EditInventory() {
 		checked: true,
 	});
 
+	//======TOMMY ADDITION ====+++++++++++++++++++++++++++++++++++++++++
+	// //error handling states
+	// const [errorValues, setErrorValues] = useState({
+	// 	itemName: false,
+	// 	desc: false,
+	// 	empty: false,
+	//   });
+	//   const [submit, setSubmit] = useState(false);
+	//   const [edit, setEdit] = useState(false);
+
+
+	//   const validateItemName = (value) =>
+	//   /value !== ''/.test(value)
+
+  
+	// const validateDesc = (value) =>
+	//   /desc !== ''/.test(value);
+  
+	// const isFormValid = () => {
+	//   let isValid = true;
+	//   let newErrorValues = { ...errorValues };
+  
+	//   Object.keys(inputValues).forEach((key) => {
+	// 	if (!inputValues[key]) {
+	// 	  newErrorValues.empty = true;
+	// 	  isValid = false;
+	// 	}
+	//   });
+  
+	//   if (!validateItemName(inputValues.itemName)) {
+	// 	newErrorValues.itemName = true;
+	// 	isValid = false;
+	//   }
+	//   if (!validateDesc(inputValues.desc)) {
+	// 	newErrorValues.desc = true;
+	// 	isValid = false;
+	//   }
+  
+	//   setErrorValues(newErrorValues);
+  
+	//   return isValid;
+	// };
+  
+
 	//onChange function for all inputs of form
 	const handleOnChange = (event) => {
 		
@@ -128,6 +172,9 @@ function EditInventory() {
 	//function to handle form submit
 	function handleFormSubmit(e) {
 		e.preventDefault();
+
+		//======TOMMY ADDITION ====+++++++++++++++++++++++++++++++++++++
+		// setSubmit(true);
 
 		//Get warehouse id based off of warehosue name of inventory item selected
 		function getWarehouseId(array) {
