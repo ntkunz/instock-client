@@ -43,6 +43,10 @@
             height: 2.375rem;
             margin-bottom: 1.5rem;
         }
+
+        &:focus {
+			outline: $primary-color-medium solid 1px;
+		}
     }
 
     &__radio-container {

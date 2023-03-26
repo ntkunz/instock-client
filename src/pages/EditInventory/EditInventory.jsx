@@ -133,6 +133,7 @@ function EditInventory() {
 		}
 		let warehouseId = warehouses.find(getWarehouseId);
 
+		//validate inputs and add error classes if not complete
 		if (inputValues.itemName === '') {
 			document.querySelector('.details__input').classList.add('error')
 			return alert('Please enter an item name')

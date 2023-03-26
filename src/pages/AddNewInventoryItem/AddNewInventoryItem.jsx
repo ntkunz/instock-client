@@ -39,12 +39,10 @@ function AddNewInventoryItem() {
 		//if item in stock then set instock inputValue and show quantity field
 		if (stockCheck) {
 			quantityWrapper.classList.remove("avail__out-of-stock");
-			// setInputValues({ ...inputValues, instock: "In Stock" });
 		}
 		//if item out of stock then set instock inputVluae and hide quantity field
 		if (!stockCheck) {
 			quantityWrapper.classList.add("avail__out-of-stock");
-			// setInputValues({ ...inputValues, instock: "Out of Stock" });
 		}
 		//udpate inputValues
 		const { name, value } = event.target;
@@ -103,20 +101,29 @@ function AddNewInventoryItem() {
 	function handleFormSubmit(e) {
 		e.preventDefault();
 
-		//form validation
-		if (
-			inputValues.instock === "" ||
-			inputValues.selectWarehouse === "" ||
-			inputValues.itemName === "" ||
-			inputValues.desc === "" ||
-			inputValues.category === ""
-		) {
-			return alert("Please enter all form field information");
+		//validate inputs and add error classes if not complete
+		if (inputValues.itemName === '') {
+			document.querySelector('.details__input').classList.add('error')
+			return alert('Please enter an item name')
 		}
 
-		//confirm quantity is a number
-		if (isNaN(inputValues.quantity)) {
+		if (inputValues.desc === '') {
+			document.querySelector('.details__desc-input').classList.add('error')
+			return alert('Please enter an item description')
+		}
+
+		if (isNaN(inputValues.quantity) || inputValues.quantity === '') {
+			document.querySelector('.avail__input').classList.add('error')
 			return alert("Please enter a number for quantity");
+		}
+		if (inputValues.category === '') {
+			document.querySelector('.details__select').classList.add('error')
+			return alert("Please select a category");
+		}
+
+		if (inputValues.selectWarehouse === '') {
+			document.querySelector('.avail__warehouse').classList.add('error')
+			return alert("Please select a warehouse");
 		}
 
 		//set new id variable to be able to navigate to page after
