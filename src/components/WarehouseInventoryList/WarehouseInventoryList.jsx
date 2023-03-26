@@ -86,9 +86,16 @@ function WarehouseInventoryList() {
                     <h4 className="table__heading table__heading--mobile">
                       Inventory Item
                     </h4>
-                    <Link className="link" to="/inventory/:inventoryId">
+                    <Link
+                      className="table__link-item"
+                      to={`/inventories/${item.id}`}
+                    >
                       {item.item_name}
-                      <img className="arrow-right" src={arrowRight} alt="" />
+                      <img
+                        className="table__link-arrow"
+                        src={arrowRight}
+                        alt=""
+                      />
                     </Link>
                   </div>
                   <div className="table__list-wrapper">
@@ -127,7 +134,9 @@ function WarehouseInventoryList() {
                   src={deleteIcon}
                   alt="delete icon"
                 />
-                <img className="table__icon" src={editIcon} alt="edit icon" />
+                <Link to={`/inventories/edit/${item.id}`}>
+                  <img className="table__icon" src={editIcon} alt="edit icon" />
+                </Link>
               </div>
             </li>
           );
