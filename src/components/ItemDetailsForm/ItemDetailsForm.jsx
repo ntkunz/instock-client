@@ -1,4 +1,5 @@
 import "./ItemDetailsForm.scss";
+import ErrorLogo from "../../assets/icons/error-24px.svg";
 
 function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 	return (
@@ -15,6 +16,13 @@ function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 				onChange={handleOnChange}
 				placeholder="Item Name"
 			/>
+			{/* MAYBE HAVE ERROR IMG AND P TAGS HERE, THEN USE ONSUBMIT TO SET ERRORS TO VISIBLE, AND ON CHANGE TO REMOVE ERRORS!!! */}
+
+            	<div className="details__required">
+            		<img className="required-img" src={ErrorLogo} alt="Error enter valid item name" />
+					<p className="required-message">Required field.</p>
+				</div>
+
 			<label htmlFor="desc" className="details__label">
 				Description
 			</label>

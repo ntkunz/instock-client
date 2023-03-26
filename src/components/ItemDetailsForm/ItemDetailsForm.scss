@@ -104,3 +104,12 @@
 .error {
     outline: $supporting-color-out solid 1px;
 }
+
+.details__required {
+	// display: flex;
+	display: none;
+}
+
+.show {
+	display: flex;
+}

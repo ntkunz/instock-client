@@ -46,7 +46,10 @@ function AddNewInventoryItem() {
 		}
 
 		// remove error states
-		if (inputValues.itemName !== '') document.querySelector('.details__input').classList.remove('error')
+		if (inputValues.itemName !== '') {
+			document.querySelector('.details__input').classList.remove('error')
+			document.querySelector('.details__required').classList.remove('show') 
+		}
 		if (inputValues.desc !== '') document.querySelector('.details__desc-input').classList.remove('error')
 		if (inputValues.quantity !== '') document.querySelector('.avail__input').classList.remove('error')
 		if (inputValues.category !== '') document.querySelector('.details__select').classList.remove('error')
@@ -62,9 +65,11 @@ function AddNewInventoryItem() {
 	useEffect(() => {
 		getWarehouses();
 		getInventories();
+		//disable dependency request to avoid creating infinite loop
+		// eslint-disable-next-line
 	}, []);
 
-	//api get call function to get warehouses ==PASS DOWN LATER... MOVE FUNCTION UP LATER
+	//api get call function to get warehouses 
 	function getWarehouses() {
 		axios
 			.get(`${api}/warehouses`)
@@ -112,6 +117,7 @@ function AddNewInventoryItem() {
 		//validate inputs and add error classes if not complete
 		if (inputValues.itemName === '') {
 			document.querySelector('.details__input').classList.add('error')
+			document.querySelector('.details__required').classList.add('show')
 			return alert('Please enter an item name')
 		}
 

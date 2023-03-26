@@ -18,7 +18,7 @@ export default function App() {
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Routes>
+        <Routes >
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
           <Route path="/warehouses/edit/:id" element={<EditWarehouseForm />} />
