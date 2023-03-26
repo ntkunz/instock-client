@@ -1,0 +1,121 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.table {
+  &__headings {
+    display: none;
+
+    @include tablet {
+      display: flex;
+      background: rgba(247, 248, 249, 0.7);
+      padding: 0.5rem 1.5rem;
+    }
+  }
+
+  &__heading-wrapper {
+    display: flex;
+    align-items: center;
+    width: 22.5%;
+
+    &--actions {
+      justify-content: flex-end;
+      width: 10%;
+    }
+  }
+
+  &__heading {
+    color: $secondary-color-dark;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+
+    @include tablet {
+      margin-bottom: 0;
+    }
+
+    &--mobile {
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+
+  &__heading-button {
+    all: unset;
+  }
+
+  &__heading-icon {
+    width: 0.8rem;
+    margin-left: 0.3rem;
+  }
+
+  &__list-item {
+    list-style-type: none;
+    border-bottom: 1px solid $secondary-color-light;
+    padding: 1.5rem;
+
+    @include tablet {
+      display: flex;
+      padding: 1rem 1.5rem;
+    }
+  }
+
+  &__list-container {
+    width: 50%;
+
+    @include tablet {
+      display: flex;
+    }
+  }
+
+  &__list-divider {
+    display: flex;
+
+    @include tablet {
+      flex-grow: 1;
+    }
+  }
+
+  &__list-wrapper {
+    margin-bottom: 1rem;
+
+    @include tablet {
+      margin-bottom: 0;
+      width: 50%;
+    }
+  }
+
+  &__tag {
+    color: $supporting-color-in;
+    background: rgba(21, 132, 99, 0.07);
+    height: 1.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 0.5rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    min-width: fit-content;
+    max-width: max-content;
+
+    &--out {
+      background: rgba(201, 69, 21, 0.07);
+      color: $supporting-color-out;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: space-between;
+
+    @include tablet {
+      justify-content: flex-end;
+      width: 10%;
+      gap: 1rem;
+    }
+  }
+
+  &__icon {
+    height: 18px;
+  }
+}
