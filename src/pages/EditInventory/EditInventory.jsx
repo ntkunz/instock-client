@@ -186,20 +186,25 @@ function EditInventory() {
 			return alert("Please select a warehouse");
 		}
 
+				//Get warehouse id based off of warehosue name of inventory item selected
+		function getWarehouseId(array) {
+			return array.warehouse_name === selectWarehouse;
+		}
+		let warehouseId = warehouses.find(getWarehouseId);
 		//set new id variable to be able to navigate to page after
 		let newId = v4();
 
 			axios
 				.put(`${api}/inventories/${id.inventoryId}`, {
 					warehouse_id: warehouseId.id,
-					item_name: inputValues.itemName,
-					description: inputValues.desc,
-					category: inputValues.category,
-					status: inputValues.instock,
-					quantity: inputValues.quantity,
+					item_name: itemName,
+					description: desc,
+					category: category,
+					status: status,
+					quantity: quantity,
 				})
 				.then((response) => {
-					alert(`Your new inventory item ${itemName} has been added`);
+					alert(`${itemName} has been updated`);
 
 					//reset form on successful submit
 					e.target.reset();

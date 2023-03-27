@@ -164,13 +164,20 @@ const handleChangeSelectWarehouse = (event) => {
 			return alert("Please select a warehouse");
 		}
 
+
+		//Get warehouse id based off of warehosue name of inventory item selected
+		function getWarehouseId(array) {
+			return array.warehouse_name === selectWarehouse;
+		}
+		let warehouseId = warehouses.find(getWarehouseId);
+
 		//set new id variable to be able to navigate to page after
 		let newId = v4();
 
 		axios
 			.post(`${api}/inventories`, {
 				id: newId,
-				warehouse_id: selectWarehouse,
+				warehouse_id: warehouseId.id,
 				item_name: itemName,
 				description: desc,
 				category: category,
