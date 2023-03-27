@@ -1,10 +1,25 @@
 import "./ItemAvailabilityForm.scss";
+import InventoryItemErrorMessage from "../InventoryItemErrorMessage/InventoryItemErrorMessage";
 
-function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues, status, quantity, selectWarehouse, handleChangeStatus, handleChangeQuantity, handleChangeSelectWarehouse }) {
+function ItemAvailabilityForm({ 
+	warehouses, 
+	handleOnChange, 
+	inputValues, 
+	status, 
+	quantity, 
+	selectWarehouse, 
+	handleChangeStatus, 
+	handleChangeQuantity, 
+	handleChangeSelectWarehouse,
+	statusError,
+	quantityError,
+	selectWarehouseError,
+	submit }) {
 
 	return (
 		<div className="avail">
 			<h2 className="avail__title">Item Availability</h2>
+
 			<label htmlFor="name" className="avail__label">
 				Status
 			</label>
@@ -21,6 +36,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues, status,
 						// onChange={handleOnChange}
 						onChange={handleChangeStatus}
 					/>
+
 					<label className="avail__radio-label" htmlFor="instock">
 						In stock
 					</label>
@@ -42,6 +58,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues, status,
 					>
 						Out of stock
 					</label>
+					{submit === true && statusError === true && <InventoryItemErrorMessage />}
 				</div>
 			</div>
 		<div className="avail__quantity-wrap avail__out-of-stock">
@@ -59,6 +76,8 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues, status,
 				name="quantity"
 			/>
 		</div>
+		{submit === true && quantityError === true && <InventoryItemErrorMessage />}
+
 			<label htmlFor="" className="avail__label">
 				Warehouse
 			</label>
@@ -84,6 +103,7 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues, status,
 					))}
 				</select>
 			</div>
+			{submit === true && selectWarehouseError === true && <InventoryItemErrorMessage />}
 		</div>
 	);
 }
