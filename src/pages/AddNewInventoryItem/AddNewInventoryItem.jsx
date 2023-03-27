@@ -197,19 +197,16 @@ const handleChangeSelectWarehouse = (event) => {
 				quantity: quantity,
 			})
 			.then((response) => {
-				// alert(`Your new inventory item ${inputValues.itemName} has been added`);
 				alert(`Your new inventory item ${itemName} has been added`);
 
 				//reset form on successful submit
 				e.target.reset();
-				// setInputValues({
-				// 	selectWarehouse: "",
-				// 	itemName: "",
-				// 	desc: "",
-				// 	category: "",
-				// 	status: "Out of Stock",
-				// 	quantity: 0,
-				// });
+				setSelectWarehouse("")
+				setItemName("")
+				setDesc("")
+				setCategory("")
+				setStatus("")
+				setQuantity(0)
 				navigate(`/inventory/${newId}`);
 			})
 			.catch((err) => {
@@ -247,8 +244,6 @@ const handleChangeSelectWarehouse = (event) => {
 				<div className="form__component-container">
 					<ItemDetailsForm
 						categoryArray={categoryArray}
-						// handleOnChange={handleOnChange}
-						// inputValues={inputValues}
 						handleChangeItemName={handleChangeItemName}
 						itemName={itemName}
 						itemNameError={itemNameError}
@@ -264,8 +259,6 @@ const handleChangeSelectWarehouse = (event) => {
 				<div className="form__component-container">
 					<ItemAvailabilityForm
 						warehouses={warehouses}
-						// handleOnChange={handleOnChange}
-						// inputValues={inputValues}
 						handleChangeStatus={handleChangeStatus}
 						status={status}
 						handleChangeQuantity={handleChangeQuantity}
