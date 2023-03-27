@@ -8,52 +8,66 @@ import { useEffect } from "react";
 import axios from "axios";
 
 function EditNewWarehouseForm() {
-  const [formData, setFormData] = useState({
-    warehouse: "",
-    streetAddress: "",
-    city: "",
-    country: "",
-    contactName: "",
-    position: "",
-    phoneNumber: "",
-    email: "",
-  });
-  const [errorValues, setErrorValues] = useState({
-    phone: false,
-    email: false,
-    empty: false,
-  });
+  const [warehouse, setWarehouse] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [position, setPosition] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneError, setPhoneError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [submit, setSubmit] = useState(false);
+  const [empty, setEmpty] = useState(false);
   const [edit, setEdit] = useState(false);
-  // const [edit, setEdit] = useState(false)
   const { id } = useParams();
+  const navigate = useNavigate();
   const URL = `http://localhost:8080/warehouses/${id}`;
 
   useEffect(() => {
-    axios.get(`${URL}`).then((response) => {
-      const warehouseData = response.data;
-      setFormData({
-        ...formData,
-        warehouse: warehouseData.warehouse_name,
-        streetAddress: warehouseData.address,
-        city: warehouseData.city,
-        country: warehouseData.country,
-        contactName: warehouseData.contact_name,
-        position: warehouseData.contact_position,
-        phoneNumber: warehouseData.contact_phone,
-        email: warehouseData.contact_email,
-      });
+    axios.get(URL).then((response) => {
+      setWarehouse(response.data.warehouse_name);
+      setStreetAddress(response.data.address);
+      setCity(response.data.city);
+      setCountry(response.data.country);
+      setContactName(response.data.contact_name);
+      setPosition(response.data.contact_position);
+      setPhoneNumber(response.data.contact_phone);
+      setEmail(response.data.contact_email);
     });
   }, []);
 
-  const navigate = useNavigate();
+  const handleChangeWarehouse = (event) => {
+    setWarehouse(event.target.value);
+  };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleChangeStreetAddress = (event) => {
+    setStreetAddress(event.target.value);
+  };
+
+  const handleChangeCity = (event) => {
+    setCity(event.target.value);
+  };
+
+  const handleChangeCountry = (event) => {
+    setCountry(event.target.value);
+  };
+
+  const handleChangeContactName = (event) => {
+    setContactName(event.target.value);
+  };
+
+  const handleChangePosition = (event) => {
+    setPosition(event.target.value);
+  };
+
+  const handleChangePhoneNumber = (event) => {
+    setPhoneNumber(event.target.value);
+  };
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
   };
 
   const validatePhoneNumber = (value) =>
@@ -63,57 +77,58 @@ function EditNewWarehouseForm() {
     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
 
   const isFormValid = () => {
-    let isValid = true;
-    let newErrorValues = { ...errorValues };
-
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
-        newErrorValues.empty = true;
-        isValid = false;
-      }
-    });
-
-    if (!validatePhoneNumber(formData.phoneNumber)) {
-      newErrorValues.phone = true;
-      isValid = false;
-    }
-    if (!validateEmail(formData.email)) {
-      newErrorValues.email = true;
-      isValid = false;
+    if (
+      warehouse === "" ||
+      streetAddress === "" ||
+      city === "" ||
+      country === "" ||
+      contactName === "" ||
+      position === "" ||
+      phoneNumber === "" ||
+      email === ""
+    ) {
+      return setEmpty(true);
     }
 
-    setErrorValues(newErrorValues);
+    setEmpty(false);
 
-    return isValid;
+    if (!validatePhoneNumber(phoneNumber)) {
+      return setPhoneError(true);
+    }
+
+    setPhoneError(false);
+
+    if (!validateEmail(email)) {
+      return setEmailError(true);
+    }
+    setEmailError(false);
+
+    return true;
   };
-  
-  const handleSubmit = async (event) => {
+
+  const handleSubmit = (event) => {
     setSubmit(true);
     event.preventDefault();
     if (isFormValid()) {
       axios
-        .put(`${URL}`, {
-          warehouse_name: formData.warehouse,
-          address: formData.streetAddress,
-          city: formData.city,
-          country: formData.country,
-          contact_name: formData.contactName,
-          contact_position: formData.position,
-          contact_email: formData.email,
-          contact_phone: formData.phoneNumber,
-        })
-        .then((response) => {
-          console.log(response.data);
+        .put(URL, {
+          warehouse_name: warehouse,
+          address: streetAddress,
+          city: city,
+          country: country,
+          contact_name: contactName,
+          contact_position: position,
+          contact_email: email,
+          contact_phone: phoneNumber,
         })
         .catch((error) => {
           console.log(error.response);
         });
       setEdit(true);
-      setTimeout(()=> {
-             navigate("/");
-          }, 2000)
-          alert("Edit Successful, redirecting to warehouse page.")
-      return navigate("/warehouses")
+      alert("Edit succesful redirecting to warehouses.")
+      return setTimeout(() => {
+        navigate("/warehouses");
+      }, 1500);
     }
   };
 
@@ -132,15 +147,27 @@ function EditNewWarehouseForm() {
       <form onSubmit={handleSubmit} className="edit-form">
         <div className="edit-form__wrapper">
           <EditWarehouseDetailsForm
-            formData={formData}
-            handleChange={handleChange}
-            errorValues={errorValues}
+            handleChangeWarehouse={handleChangeWarehouse}
+            handleChangeStreetAddress={handleChangeStreetAddress}
+            handleChangeCity={handleChangeCity}
+            handleChangeCountry={handleChangeCountry}
+            warehouse={warehouse}
+            streetAddress={streetAddress}
+            city={city}
+            country={country}
             submit={submit}
           />
           <EditContactDetailsForm
-            formData={formData}
-            handleChange={handleChange}
-            errorValues={errorValues}
+            handleChangeContactName={handleChangeContactName}
+            handleChangePosition={handleChangePosition}
+            handleChangePhoneNumber={handleChangePhoneNumber}
+            handleChangeEmail={handleChangeEmail}
+            contactName={contactName}
+            position={position}
+            phoneNumber={phoneNumber}
+            phoneError={phoneError}
+            email={email}
+            emailError={emailError}
             submit={submit}
           />
         </div>
@@ -152,7 +179,10 @@ function EditNewWarehouseForm() {
             >
               Cancel
             </button>
-            <button type="submit" className="edit-form__button edit-form__button--2">
+            <button
+              type="submit"
+              className="edit-form__button edit-form__button--2"
+            >
               Save
             </button>
           </div>
