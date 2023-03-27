@@ -1,7 +1,19 @@
 import "./ContactDetailsForm.scss";
-import ErrorLogo from "../../assets/icons/error-24px.svg"
-
-function ContactDetailsForm({ formData, handleChange, errorValues }) {
+import ErrorStateForm from "../ErrorStateForm/ErrorStateForm";
+import ErrorLogo from "../../assets/icons/error-24px.svg";
+function ContactDetailsForm({
+  handleChangeContactName,
+  handleChangePosition,
+  handleChangePhoneNumber,
+  handleChangeEmail,
+  contactName,
+  position,
+  phoneNumber,
+  email,
+  submit,
+  phoneError,
+  emailError,
+}) {
   return (
     <div className="contact-details">
       <h2 className="contact-details__heading">Contact Details</h2>
@@ -10,70 +22,76 @@ function ContactDetailsForm({ formData, handleChange, errorValues }) {
         <div className="contact-details__warehouse">
           <label className="contact-details__label">Contact Name</label>
           <input
-            value={formData.contactName}
-            className="contact-details__input"
+            value={contactName}
+            className={
+              submit === true && !contactName
+                ? "contact-details__input--error"
+                : "contact-details__input"
+            }
             placeholder="Contact Name"
             name="contactName"
-            onChange={handleChange}
+            onChange={handleChangeContactName}
           />
-          {errorValues.empty && (
-            <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
-          <p className="error-container__message">Required field.</p>
-          </div>
-          )}
+          {submit === true && !contactName === true && <ErrorStateForm />}
         </div>
 
         <div className="contact-details__warehouse">
           <label className="contact-details__label">Position</label>
           <input
-            value={formData.position}
-            className="contact-details__input"
+            value={position}
+            className={
+              submit === true && !position
+                ? "contact-details__input--error"
+                : "contact-details__input"
+            }
             placeholder="Position"
             name="position"
-            onChange={handleChange}
+            onChange={handleChangePosition}
           />
-          {errorValues.empty && (
-            <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
-          <p className="error-container__message">Required field.</p>
-          </div>
-          )}
+          {submit === true && !position === true && <ErrorStateForm />}
         </div>
 
         <div className="contact-details__warehouse">
           <label className="contact-details__label">Phone Number</label>
           <input
-            value={formData.phoneNumber}
-            className="contact-details__input"
+            value={phoneNumber}
+            className={
+              submit === true && !phoneNumber
+                ? "contact-details__input--error"
+                : "contact-details__input"
+            }
             placeholder="Phone Number"
             name="phoneNumber"
-            onChange={handleChange}
+            onChange={handleChangePhoneNumber}
           />
-          {errorValues.phone && (
+          {submit === true && !phoneNumber === true && (
             <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
-          <p className="error-container__message">Please enter a valid phone number.</p>
-          </div>
+              <img src={ErrorLogo} alt="Red error exclamation mark" />
+              <p className="error-container__message">Please enter a valid phone number.</p>
+            </div>
           )}
+
         </div>
 
         <div className="contact-details__warehouse">
           <label className="contact-details__label">Email</label>
           <input
-            value={formData.email}
-            className="contact-details__input"
+            value={email}
+            className={
+              submit === true && !email
+                ? "contact-details__input--error"
+                : "contact-details__input"
+            }
             placeholder="Email"
             name="email"
-            onChange={handleChange}
+            onChange={handleChangeEmail}
           />
-          {errorValues.email && (
+          {submit === true && !email === true && (
             <div className="error-container">
-              <img src={ErrorLogo} alt="Error enter valid email" />
-            <p className="error-container__message">Please enter a valid email. 123example@this.com</p>
+              <img src={ErrorLogo} alt="Red error exclamation mark" />
+              <p className="error-container__message">Please enter a valid email. example@this1.that</p>
             </div>
           )}
-
         </div>
       </div>
     </div>

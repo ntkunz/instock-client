@@ -1,7 +1,17 @@
 import "./EditContactDetailsForm.scss";
-import ErrorLogo from "../../assets/icons/error-24px.svg"
+import ErrorStateForm from "../ErrorStateForm/ErrorStateForm";
 
-function EditContactDetailsForm({ formData, handleChange, errorValues, submit }) {
+function EditContactDetailsForm({
+  handleChangeContactName,
+  handleChangePosition,
+  handleChangePhoneNumber,
+  handleChangeEmail,
+  contactName,
+  position,
+  phoneNumber,
+  email,
+  submit,
+}) {
   return (
     <div className="edit-contact-details">
       <h2 className="edit-contact-details__heading">Contact Details</h2>
@@ -10,70 +20,65 @@ function EditContactDetailsForm({ formData, handleChange, errorValues, submit })
         <div className="edit-contact-details__warehouse">
           <label className="edit-contact-details__label">Contact Name</label>
           <input
-            value={formData.contactName}
-            className="edit-contact-details__input"
+            value={contactName}
+            className={
+              submit === true && !contactName
+                ? "edit-contact-details__input--error"
+                : "edit-contact-details__input"
+            }
             placeholder="Contact Name"
             name="contactName"
-            onChange={handleChange}
+            onChange={handleChangeContactName}
           />
-          {errorValues.empty && (
-            <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
-          <p className="error-container__message">Required field.</p>
-          </div>
-          )}
+          {submit === true && !contactName === true && <ErrorStateForm />}
         </div>
 
         <div className="edit-contact-details__warehouse">
           <label className="edit-contact-details__label">Position</label>
           <input
-            value={formData.position}
-            className="edit-contact-details__input"
+            value={position}
+            className={
+              submit === true && !position
+                ? "edit-contact-details__input--error"
+                : "edit-contact-details__input"
+            }
             placeholder="Position"
             name="position"
-            onChange={handleChange}
+            onChange={handleChangePosition}
           />
-          {errorValues.empty && (
-            <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
-          <p className="error-container__message">Required field.</p>
-          </div>
-          )}
+          {submit === true && !position === true && <ErrorStateForm />}
         </div>
 
         <div className="edit-contact-details__warehouse">
           <label className="edit-contact-details__label">Phone Number</label>
           <input
-            value={formData.phoneNumber}
-            className="edit-contact-details__input"
+            value={phoneNumber}
+            className={
+              submit === true && !phoneNumber
+                ? "edit-contact-details__input--error"
+                : "edit-contact-details__input"
+            }
             placeholder="Phone Number"
             name="phoneNumber"
-            onChange={handleChange}
+            onChange={handleChangePhoneNumber}
           />
-          {errorValues.phone && (
-            <div className="error-container">
-            <img src={ErrorLogo} alt="Error enter valid email" />
-          <p className="error-container__message">Please enter a valid phone number.</p>
-          </div>
-          )}
+          {submit === true && !phoneNumber === true && <ErrorStateForm />}
         </div>
 
         <div className="edit-contact-details__warehouse">
           <label className="edit-contact-details__label">Email</label>
           <input
-            value={formData.email}
-            className="edit-contact-details__input"
+            value={email}
+            className={
+              submit === true && !email
+                ? "edit-contact-details__input--error"
+                : "edit-contact-details__input"
+            }
             placeholder="Email"
             name="email"
-            onChange={handleChange}
+            onChange={handleChangeEmail}
           />
-          {errorValues.email && (
-            <div className="error-container">
-              <img src={ErrorLogo} alt="Error enter valid email" />
-            <p className="error-container__message">Please enter a valid email. 123example@this.com</p>
-            </div>
-          )}
-
+          {submit === true && !email === true && <ErrorStateForm />}
         </div>
       </div>
     </div>

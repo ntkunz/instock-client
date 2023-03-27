@@ -2,101 +2,122 @@ import "./AddNewWarehouseForm.scss";
 import ArrowBack from "../../assets/icons/arrow_back-24px.svg";
 import WarehouseDetailsForm from "../WarehouseDetailsForm/WarehouseDetailsForm";
 import ContactDetailsForm from "../ContactDetailsForm/ContactDetailsForm";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const { v4: uuid } = require("uuid");
 
-function AddNewWarehouseForm() {
-  const [formData, setFormData] = useState({
-    warehouse: "",
-    streetAddress: "",
-    city: "",
-    country: "",
-    contactName: "",
-    position: "",
-    phoneNumber: "",
-    email: "",
-  });
-  const [errorValues, setErrorValues] = useState({
-    phone: false,
-    email: false,
-    empty: false,
-  });
-  const [submitting, setSubmitting] = useState(false);
+const AddNewWarehouseForm = () => {
+  const [warehouse, setWarehouse] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [position, setPosition] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneError, setPhoneError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [submit, setSubmit] = useState(false);
+  const [empty, setEmpty] = useState(false);
+  const [add, setAdd] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleChangeWarehouse = (event) => {
+    setWarehouse(event.target.value);
   };
 
-  const validatePhoneNumber = (value) =>
-    /^[0-9]*$/.test(value) && value.length >= 7;
+  const handleChangeStreetAddress = (event) => {
+    setStreetAddress(event.target.value);
+  };
 
-  const validateEmail = (value) =>
-    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
+  const handleChangeCity = (event) => {
+    setCity(event.target.value);
+  };
+
+  const handleChangeCountry = (event) => {
+    setCountry(event.target.value);
+  };
+
+  const handleChangeContactName = (event) => {
+    setContactName(event.target.value);
+  };
+
+  const handleChangePosition = (event) => {
+    setPosition(event.target.value);
+  };
+
+  const handleChangePhoneNumber = (event) => {
+    setPhoneNumber(event.target.value);
+  };
+
+  const handleChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
+
+  const validatePhoneNumber = () =>
+    phoneNumber.length >= 7 && phoneNumber.length <= 15;
+
+  const emailValidator = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+    email
+  );
+  const validateEmail = () => emailValidator;
 
   const isFormValid = () => {
-    let isValid = true;
-    let newErrorValues = { ...errorValues };
-
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
-        newErrorValues.empty = true;
-        isValid = false;
-      }
-    });
-
-    if (!validatePhoneNumber(formData.phoneNumber)) {
-      newErrorValues.phone = true;
-      isValid = false;
+    if (
+      warehouse === "" ||
+      streetAddress === "" ||
+      city === "" ||
+      country === "" ||
+      contactName === "" ||
+      position === "" ||
+      phoneNumber === "" ||
+      email === ""
+    ) {
+      return setEmpty(true);
     }
-    if (!validateEmail(formData.email)) {
-      newErrorValues.email = true;
-      isValid = false;
+    setEmpty(false);
+  
+    if (!validatePhoneNumber()) {
+      return setPhoneError(true);
     }
-
-    setErrorValues(newErrorValues);
-
-    return isValid;
+    setPhoneError(false);
+  
+    if (!validateEmail()) {
+      return setEmailError(true);
+    }
+    setEmailError(false);
+  
+    return true;
   };
 
-  const handleSubmit = async (event) => {
-    setSubmitting(true);
+  const handleSubmit = (event) => {
+    setSubmit(true);
+    event.preventDefault();
 
     if (isFormValid()) {
-      try {
-        const response = await axios.post("http://localhost:8080/warehouses/", {
+      axios.post("http://localhost:8080/warehouses/", {
           id: uuid(),
-          warehouse_name: formData.warehouse,
-          address: formData.streetAddress,
-          city: formData.city,
-          country: formData.country,
-          contact_name: formData.contactName,
-          contact_position: formData.position,
-          contact_phone: formData.phoneNumber,
-          contact_email: formData.email,
+          warehouse_name: warehouse,
+          address: streetAddress,
+          city: city,
+          country: country,
+          contact_name: contactName,
+          contact_position: position,
+          contact_phone: phoneNumber,
+          contact_email: email,
+        })
+        .catch((error) => {
+          console.log(error);
         });
-
-        console.log(response.data);
-        alert("Warehouse successfully added, redirecting to homepage.");
-        setTimeout(() => {
-          navigate("/");
-        }, 2000)
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      setSubmitting(false);
-      alert("Please fill in all required fields correctly.");
+      alert("Warehouse successfully added, redirecting to homepage.");
+      setAdd(true);
+      return setTimeout(() => {
+        navigate("/warehouses");
+      }, 2000);
     }
-    event.preventDefault();
   };
-
   const handleCancel = () => {
     return navigate("/warehouses");
   };
@@ -112,14 +133,26 @@ function AddNewWarehouseForm() {
       <form onSubmit={handleSubmit} className="add-form">
         <div className="add-form__wrapper">
           <WarehouseDetailsForm
-            formData={formData}
-            handleChange={handleChange}
-            errorValues={errorValues}
+            handleChangeWarehouse={handleChangeWarehouse}
+            handleChangeStreetAddress={handleChangeStreetAddress}
+            handleChangeCity={handleChangeCity}
+            handleChangeCountry={handleChangeCountry}
+            warehouse={warehouse}
+            streetAddress={streetAddress}
+            city={city}
+            country={country}
+            submit={submit}
           />
           <ContactDetailsForm
-            formData={formData}
-            handleChange={handleChange}
-            errorValues={errorValues}
+            handleChangeContactName={handleChangeContactName}
+            handleChangePosition={handleChangePosition}
+            handleChangePhoneNumber={handleChangePhoneNumber}
+            handleChangeEmail={handleChangeEmail}
+            contactName={contactName}
+            position={position}
+            phoneNumber={phoneNumber}
+            email={email}
+            submit={submit}
           />
         </div>
         <div className="add-form__button-wrapper">
@@ -130,7 +163,10 @@ function AddNewWarehouseForm() {
             >
               Cancel
             </button>
-            <button type="submit" className="add-form__button add-form__button--2">
+            <button
+              type="submit"
+              className="add-form__button add-form__button--2"
+            >
               +Add Warehouse
             </button>
           </div>
@@ -138,6 +174,6 @@ function AddNewWarehouseForm() {
       </form>
     </section>
   );
-}
+};
 
 export default AddNewWarehouseForm;
