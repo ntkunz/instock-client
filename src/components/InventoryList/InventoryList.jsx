@@ -117,7 +117,7 @@ function InventoryList() {
                       </h4>
                       <Link
                         className="inventory-table__link-item"
-                        to={`/inventories/${item.id}`}
+                        to={`/inventory/${item.id}`}
                       >
                         {item.item_name}
                         <img
@@ -173,7 +173,7 @@ function InventoryList() {
                     src={deleteIcon}
                     alt="delete icon"
                   />
-                  <Link to={`/inventories/edit/${item.id}`}>
+                  <Link to={`/inventory/edit/${item.id}`}>
                     <img
                       className="inventory-table__icon"
                       src={editIcon}

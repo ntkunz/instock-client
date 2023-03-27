@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.table {
+.warehouse-table {
   font-size: 0.8125rem;
   &__headings {
     display: none;
@@ -88,7 +88,7 @@
 
     @include tablet {
       margin-bottom: 0;
-      width: 50%;
+      flex: 1;
     }
   }
 

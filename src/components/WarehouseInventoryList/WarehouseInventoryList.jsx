@@ -29,113 +29,119 @@ function WarehouseInventoryList() {
   }
 
   return (
-    <div className="table">
-      <div className="table__headings">
-        <div className="table__heading-wrapper">
-          <h4 className="table__heading">Inventory Item</h4>
-          <button className="table__heading-button">
+    <div className="warehouse-table">
+      <div className="warehouse-table__headings">
+        <div className="warehouse-table__heading-wrapper">
+          <h4 className="warehouse-table__heading">Inventory Item</h4>
+          <button className="warehouse-table__heading-button">
             <img
-              className="table__heading-icon"
+              className="warehouse-table__heading-icon"
               src={sortIcon}
               alt="sort icon"
             />
           </button>
         </div>
-        <div className="table__heading-wrapper">
-          <h4 className="table__heading">Category</h4>
-          <button className="table__heading-button">
+        <div className="warehouse-table__heading-wrapper">
+          <h4 className="warehouse-table__heading">Category</h4>
+          <button className="warehouse-table__heading-button">
             <img
-              className="table__heading-icon"
+              className="warehouse-table__heading-icon"
               src={sortIcon}
               alt="sort icon"
             />
           </button>
         </div>
-        <div className="table__heading-wrapper">
-          <h4 className="table__heading">Status</h4>
-          <button className="table__heading-button">
+        <div className="warehouse-table__heading-wrapper">
+          <h4 className="warehouse-table__heading">Status</h4>
+          <button className="warehouse-table__heading-button">
             <img
-              className="table__heading-icon"
+              className="warehouse-table__heading-icon"
               src={sortIcon}
               alt="sort icon"
             />
           </button>
         </div>
-        <div className="table__heading-wrapper">
-          <h4 className="table__heading">Quantity</h4>
-          <button className="table__heading-button">
+        <div className="warehouse-table__heading-wrapper">
+          <h4 className="warehouse-table__heading">Quantity</h4>
+          <button className="warehouse-table__heading-button">
             <img
-              className="table__heading-icon"
+              className="warehouse-table__heading-icon"
               src={sortIcon}
               alt="sort icon"
             />
           </button>
         </div>
-        <div className="table__heading-wrapper table__heading-wrapper--actions">
-          <h4 className="table__heading">Actions</h4>
+        <div className="warehouse-table__heading-wrapper warehouse-table__heading-wrapper--actions">
+          <h4 className="warehouse-table__heading">Actions</h4>
         </div>
       </div>
 
-      <ul className="table__list">
+      <ul className="warehouse-table__list">
         {inventory.map((item) => {
           return (
-            <li key={item.id} className="table__list-item">
-              <div className="table__list-divider">
-                <div className="table__list-container">
-                  <div className="table__list-wrapper">
-                    <h4 className="table__heading table__heading--mobile">
+            <li key={item.id} className="warehouse-table__list-item">
+              <div className="warehouse-table__list-divider">
+                <div className="warehouse-table__list-container">
+                  <div className="warehouse-table__list-wrapper">
+                    <h4 className="warehouse-table__heading warehouse-table__heading--mobile">
                       Inventory Item
                     </h4>
                     <Link
-                      className="table__link-item"
-                      to={`/inventories/${item.id}`}
+                      className="warehouse-table__link-item"
+                      to={`/inventory/${item.id}`}
                     >
                       {item.item_name}
                       <img
-                        className="table__link-arrow"
+                        className="warehouse-table__link-arrow"
                         src={arrowRight}
                         alt=""
                       />
                     </Link>
                   </div>
-                  <div className="table__list-wrapper">
-                    <h4 className="table__heading table__heading--mobile">
+                  <div className="warehouse-table__list-wrapper">
+                    <h4 className="warehouse-table__heading warehouse-table__heading--mobile">
                       Category
                     </h4>
-                    <p className="table__text">{item.category}</p>
+                    <p className="warehouse-table__text">{item.category}</p>
                   </div>
                 </div>
 
-                <div className="table__list-container">
-                  <div className="table__list-wrapper">
-                    <h4 className="table__heading table__heading--mobile">
+                <div className="warehouse-table__list-container">
+                  <div className="warehouse-table__list-wrapper">
+                    <h4 className="warehouse-table__heading warehouse-table__heading--mobile">
                       Status
                     </h4>
                     <p
                       className={
-                        "table__tag" +
-                        (item.quantity === 0 ? " table__tag--out" : "")
+                        "warehouse-table__tag" +
+                        (item.quantity === 0
+                          ? " warehouse-table__tag--out"
+                          : "")
                       }
                     >
                       {item.status}
                     </p>
                   </div>
-                  <div className="table__list-wrapper">
-                    <h4 className="table__heading table__heading--mobile">
+                  <div className="warehouse-table__list-wrapper">
+                    <h4 className="warehouse-table__heading warehouse-table__heading--mobile">
                       QTY
                     </h4>
-                    <p className="table__text">{item.quantity}</p>
+                    <p className="warehouse-table__text">{item.quantity}</p>
                   </div>
                 </div>
               </div>
-              <div className="table__icons">
+              <div className="warehouse-table__icons">
                 <img
-                  className="table__icon"
+                  className="warehouse-table__icon"
                   src={deleteIcon}
                   alt="delete icon"
                 />
-                <Link to={`/inventories/edit/${item.id}`}>
-                  <img className="table__icon" src={editIcon} alt="edit icon" />
+                <Link to={`/inventory/edit/${item.id}`}>
+                  <img
+                    className="warehouse-table__icon"
+                    src={editIcon}
+                    alt="edit icon"
+                  />
                 </Link>
               </div>
             </li>
