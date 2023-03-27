@@ -42,7 +42,7 @@ function InventoryList() {
               name="searchBar"
             />
 
-            <Link className="InventoryList__btn" to={"/inventories/add"}>
+            <Link className="InventoryList__btn" to={"/inventory/add"}>
               + Add New Inventory
             </Link>
           </form>
