@@ -50,6 +50,7 @@ export default function InventoryDetails() {
 
         <div className="inventoryDetails__description">
           <div className="inventoryDetails__container">
+            <div className="inventoryDetails__category1">
             <div className="inventoryDetails__info">
               <p className="inventoryDetails__subtitle">Item Description:</p>
               <p className="inventoryDetails__text">{description}</p>
@@ -60,18 +61,19 @@ export default function InventoryDetails() {
               <p className="inventoryDetails__subtitle">Category:</p>
               <p className="inventoryDetails__text">{category}</p>
             </div>
+            </div>
             {/* </div>
           </div> */}
 
             {/* <div className="inventoryDetails__container1">
           <div className="inventoryDetails__container2"> */}
-        
+        <div className="inventoryDetails__square">
             <div className="inventoryDetails__wrapper">
                 <div className="inventoryDetails__box2">
               <p className="inventoryDetails__subtitle">Status:</p>
               <p className="inventoryDetails__text inventoryDetails__status">{status}</p>
          </div>
-           <div className="inventoryDetails__info">
+           <div className="inventoryDetails__info3">
             <p className="inventoryDetails__subtitle">Quantity:</p>
             <p className="inventoryDetails__text">{quantity}</p>
             </div>
@@ -81,6 +83,7 @@ export default function InventoryDetails() {
               <p className="inventoryDetails__text">
                 {warehouse_name}
               </p>
+              </div>
             </div>
           </div>
         
