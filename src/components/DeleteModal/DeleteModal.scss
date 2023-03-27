@@ -1,0 +1,74 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.delete-modal {
+  padding: 1rem;
+  //   top: 40px;
+  //   left: 40px;
+  //   right: 40px;
+  //   bottom: 40px;
+  position: absolute;
+  background-color: $primary-color-light;
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $primary-color-light;
+
+    @include tablet {
+      //   background-color: rgba(19, 24, 44, 0.07);
+    }
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+
+    @include tablet {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__text {
+    margin-bottom: 13rem;
+    font-size: 0.9375rem;
+
+    @include tablet {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__btn {
+    all: unset;
+    width: 100%;
+    min-height: 2.25rem;
+    border-radius: 1.25rem;
+    color: $secondary-color-dark;
+    font-weight: 600;
+    border: 0.0625rem solid #bdc5d5;
+    text-align: center;
+
+    @include tablet {
+      height: 2.375rem;
+      width: 8.625rem;
+    }
+
+    &--delete {
+      background-color: $supporting-color-out;
+      color: $primary-color-light;
+    }
+  }
+  &__close-btn {
+    display: flex;
+    justify-content: right;
+    border: none;
+    min-width: 0;
+  }
+}
