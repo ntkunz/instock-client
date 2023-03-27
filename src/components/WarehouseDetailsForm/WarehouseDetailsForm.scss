@@ -42,6 +42,14 @@
     width: 100%;
     height: 2.25rem;
     padding-left: 1rem;
+    &--error {
+      border: 1px solid $secondary-color-light;
+      border-radius: 1.25rem;
+      width: 100%;
+      height: 2.25rem;
+      padding-left: 1rem;
+      border: 1px solid red;
+    }
     @include tablet {
       height: 2.375rem;
     }
