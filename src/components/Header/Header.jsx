@@ -3,9 +3,21 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import headerImg from "../../assets/logo/InStock-Logo.svg";
 
+
+import { useLocation } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 function Header({ inventoryPage }) {
 
+    let location = useLocation();
     const [pageUrl, setPageUrl] = useState('warehouse')
+
+    // useEffect(() => {
+    //     console.log(location)
+    //   }, [location]);
+
     //set active class for header warehouses or inventory link
     //add active class after page has loaded
     // setTimeout(()=>{
@@ -18,6 +30,7 @@ function Header({ inventoryPage }) {
     //         document.querySelector('.header__inventory-button').classList.remove('active')
     //     }
     // }, 1000)
+
 
     // attempt 2
     // let pageUrl = window.location.href;
