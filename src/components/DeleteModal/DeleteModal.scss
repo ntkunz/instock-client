@@ -3,12 +3,15 @@
 
 .delete-modal {
   padding: 1rem;
-  //   top: 40px;
-  //   left: 40px;
-  //   right: 40px;
-  //   bottom: 40px;
   position: absolute;
   background-color: $primary-color-light;
+
+  @include tablet {
+    top: 155px;
+    left: 150px;
+    right: 154px;
+    bottom: 177px;
+  }
 
   &__overlay {
     position: fixed;
@@ -19,7 +22,7 @@
     background-color: $primary-color-light;
 
     @include tablet {
-      //   background-color: rgba(19, 24, 44, 0.07);
+      background-color: rgba(19, 24, 44, 0.07);
     }
   }
 
@@ -28,6 +31,7 @@
 
     @include tablet {
       margin-bottom: 2rem;
+      font-size: 2rem;
     }
   }
 
@@ -43,6 +47,7 @@
   &__btns {
     display: flex;
     gap: 1rem;
+    cursor: pointer;
   }
 
   &__btn {
@@ -66,9 +71,12 @@
     }
   }
   &__close-btn {
-    display: flex;
-    justify-content: right;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     border: none;
-    min-width: 0;
+    width: auto;
+    height: auto;
+    cursor: pointer;
   }
 }
