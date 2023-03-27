@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import headerImg from "../../assets/logo/InStock-Logo.svg";
 
-function Header() {
+function Header({ inventoryPage }) {
 
     //set active class for header warehouses or inventory link
     //add active class after page has loaded

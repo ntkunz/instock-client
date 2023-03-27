@@ -16,19 +16,30 @@ import EditWarehouseForm from "./components/EditWarehouseForm/EditWarehouseForm"
 
 export default function App() { 
 
-  const [ inventoryPage, setInventoryPage ] = useState([false]);
+//   const [ inventoryPage, setInventoryPage ] = useState([false]);
 
-function checkUrl() {
-  if (window.location.href.includes('inventory')) {
-    setInventoryPage(true)
-    console.log(inventoryPage)
-  } else {setInventoryPage(false)}
-}
+// function checkUrl() {
+//   if (window.location.href.includes('inventory')) {
+//     setInventoryPage(true)
+//     console.log(inventoryPage)
+//   } else {setInventoryPage(false)}
+//   setActiveHeader(inventoryPage)
+// }
+
+// function setActiveHeader(whichPage) {
+//   if (whichPage) {
+//     document.querySelector('.header__warehouse-button').classList.add('active')
+//     document.querySelector('.header__inventory-button').classList.remove('active')
+// } else {
+//     document.querySelector('.header__inventory-button').classList.add('active')
+//     document.querySelector('.header__warehouse-button').classList.remove('active')
+// }
+// }
 
   return (
-    <div className="App" onChange={checkUrl}>
+    <div className="App">
       <BrowserRouter>
-        <Header inventoryPage={inventoryPage} />
+        <Header />
         <Routes >
           <Route path="/" element={<WarehouseList />} />
           <Route path="/warehouses" element={<WarehouseList />} />
