@@ -8,7 +8,7 @@ import editIcon from "../../assets/icons/edit-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
 
 function InventoryList() {
-  const api = process.env.REACT_APP_BASEURL;
+  const api = process.env.REACT_APP_API_URL;
   const [inventory, setInventory] = useState([]);
 
   useEffect(() => {
@@ -162,7 +162,7 @@ function InventoryList() {
                         Warehouse
                       </h4>
                       <p className="inventory-table__text">
-                        {item.warehouse_id}
+                        {item.warehouse_name}
                       </p>
                     </div>
                   </div>

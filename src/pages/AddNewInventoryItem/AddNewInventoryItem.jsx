@@ -7,11 +7,12 @@ import ItemDetailsForm from "../../components/ItemDetailsForm/ItemDetailsForm";
 import ItemAvailabilityForm from "../../components/ItemAvailabilityForm/ItemAvailabilityForm";
 
 function AddNewInventoryItem() {
-//bring in Api address for axios calls
-const api = process.env.REACT_APP_BASEURL;
-const { v4 } = require("uuid");
-const navigate = useNavigate();
+  //bring in Api address for axios calls
+  const api = process.env.REACT_APP_API_URL;
+  const { v4 } = require("uuid");
+  const navigate = useNavigate();
 
+<<<<<<< HEAD
 const [warehouses, setWarehouses] = useState([]);
 const [inventories, setInventories] = useState([]);
 const [itemName, setItemName] = useState("");
@@ -27,39 +28,58 @@ const [categoryError, setCategoryError] = useState(false);
 const [statusError, setStatusError] = useState(false);
 const [quantityError, setQuantityError] = useState(false);
 const [submit, setSubmit] = useState(false);
+=======
+  const [warehouses, setWarehouses] = useState([]);
+  const [inventories, setInventories] = useState([]);
+  const [itemName, setItemName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [selectWarehouse, setSelectWarehouse] = useState("");
+  const [itemNameError, setItemNameError] = useState(false);
+  const [descError, setDescError] = useState(false);
+  const [selectWarehouseError, setSelectWarehouseError] = useState(false);
+  const [categoryError, setCategoryError] = useState(false);
+  const [statusError, setStatusError] = useState(false);
+  const [quantityError, setQuantityError] = useState(false);
+  const [submit, setSubmit] = useState(false);
+  const [empty, setEmpty] = useState(false);
+  const [add, setAdd] = useState(false);
+>>>>>>> develop
 
-
-const handleChangeSelectWarehouse = (event) => {
-    if (selectWarehouse !== '') setSelectWarehouseError(false);
-	document.querySelector('.avail__warehouse').classList.remove('error')
-	setSelectWarehouse(event.target.value);
+  const handleChangeSelectWarehouse = (event) => {
+    if (selectWarehouse !== "") setSelectWarehouseError(false);
+    document.querySelector(".avail__warehouse").classList.remove("error");
+    setSelectWarehouse(event.target.value);
   };
 
   const handleChangeItemName = (event) => {
-	if (itemName !== '') setItemNameError(false)
-	document.querySelector('.details__input').classList.remove('error')
+    if (itemName !== "") setItemNameError(false);
+    document.querySelector(".details__input").classList.remove("error");
     setItemName(event.target.value);
   };
 
   const handleChangeDesc = (event) => {
-	if (desc !== '') setDescError(false)
-	document.querySelector('.details__desc-input').classList.remove('error')
+    if (desc !== "") setDescError(false);
+    document.querySelector(".details__desc-input").classList.remove("error");
     setDesc(event.target.value);
   };
 
   const handleChangeCategory = (event) => {
-    if (category !== '') setCategoryError(false)
-	document.querySelector('.details__select').classList.remove('error')
-	setCategory(event.target.value);
+    if (category !== "") setCategoryError(false);
+    document.querySelector(".details__select").classList.remove("error");
+    setCategory(event.target.value);
   };
 
   const handleChangeQuantity = (event) => {
-	if (quantity !== '') setQuantityError(false)
-	document.querySelector('.avail__input').classList.remove('error')
+    if (quantity !== "") setQuantityError(false);
+    document.querySelector(".avail__input").classList.remove("error");
     setQuantity(event.target.value);
   };
 
   const handleChangeStatus = (event) => {
+<<<<<<< HEAD
 	//create variables for checkbox radios
 	const quantityWrapper = document.querySelector(".avail__quantity-wrap");
 	const stockRadio = document.querySelectorAll(".avail__radio");
@@ -79,59 +99,120 @@ const handleChangeSelectWarehouse = (event) => {
 		//disable dependency request to avoid creating infinite loop
 		// eslint-disable-next-line
 	}, []);
+=======
+    //create variables for checkbox radios
+    const quantityWrapper = document.querySelector(".avail__quantity-wrap");
+    const stockRadio = document.querySelectorAll(".avail__radio");
+    //create true value if item in stock, false if out of stock
+    let stockCheck = stockRadio[0].checked;
+    //if item in stock then set instock inputValue and show quantity field
+    if (stockCheck) {
+      quantityWrapper.classList.remove("avail__out-of-stock");
+    }
+    //if item out of stock then set instock inputVluae and hide quantity field
+    if (!stockCheck) {
+      // setStatusError(true)
+      quantityWrapper.classList.add("avail__out-of-stock");
+    }
+    setStatus(event.target.value);
+  };
 
-	//api get call function to get warehouses 
-	function getWarehouses() {
-		axios
-			.get(`${api}/warehouses`)
-			.then((data) => {
-				if (data) {
-					setWarehouses(data.data);
-				}
-			})
-			.catch((err) => {
-				console.log("err: ", err);
-				// navigate("/404");
-			});
-	}
+  const isFormValid = () => {
+    if (
+      selectWarehouse === "" ||
+      itemName === "" ||
+      desc === "" ||
+      category === "" ||
+      status === "" ||
+      quantity === ""
+    ) {
+      return setEmpty(true);
+    }
+    setEmpty(false);
+  };
 
-	//api get call function to get inventories ==move function up later
-	function getInventories() {
-		axios
-			.get(`${api}/inventories`)
-			.then((data) => {
-				if (data) {
-					setInventories(data.data);
-				}
-			})
-			.catch((err) => {
-				console.log("err: ", err);
-				// navigate("/404");e.target.videoDesc.value
-			});
-	}
+  //on load get warehouses and inventories
+  useEffect(() => {
+    getWarehouses();
+    getInventories();
+    //disable dependency request to avoid creating infinite loop
+    // eslint-disable-next-line
+  }, []);
 
-	//removeDup example modified from a respons at https://stackoverflow.com/questions/54757902/remove-duplicates-in-an-array-using-foreach
-	function removeDup(arr) {
-		let result = [];
-		arr.forEach((item) => {
-			if (!result.includes(item.category)) result.push(item.category);
-		});
-		return result;
-	}
-	//categoryArray has all categories from inventories without duplicates
-	const categoryArray = removeDup(inventories);
+  //api get call function to get warehouses
+  function getWarehouses() {
+    axios
+      .get(`${api}/warehouses`)
+      .then((data) => {
+        if (data) {
+          setWarehouses(data.data);
+        }
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+        // navigate("/404");
+      });
+  }
 
-	//function to handle form submit
-	function handleFormSubmit(e) {
-		e.preventDefault();
-		setSubmit(true)
+  //api get call function to get inventories ==move function up later
+  function getInventories() {
+    axios
+      .get(`${api}/inventories`)
+      .then((data) => {
+        if (data) {
+          setInventories(data.data);
+        }
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+        // navigate("/404");e.target.videoDesc.value
+      });
+  }
+>>>>>>> develop
 
-		if (itemName === "") {
-			setItemNameError(true)
-			document.querySelector('.details__input').classList.add('error')
-			return alert('Please enter an item name')
-		}
+  //removeDup example modified from a respons at https://stackoverflow.com/questions/54757902/remove-duplicates-in-an-array-using-foreach
+  function removeDup(arr) {
+    let result = [];
+    arr.forEach((item) => {
+      if (!result.includes(item.category)) result.push(item.category);
+    });
+    return result;
+  }
+  //categoryArray has all categories from inventories without duplicates
+  const categoryArray = removeDup(inventories);
 
+  //function to handle form submit
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    setSubmit(true);
+
+    if (itemName === "") {
+      setItemNameError(true);
+      document.querySelector(".details__input").classList.add("error");
+      return alert("Please enter an item name");
+    }
+
+    // if (inputValues.desc === '') {
+    if (desc === "") {
+      setDescError(true);
+      document.querySelector(".details__desc-input").classList.add("error");
+      return alert("Please enter an item description");
+    }
+    // if (inputValues.category === '') {
+    if (category === "") {
+      setCategoryError(true);
+      document.querySelector(".details__select").classList.add("error");
+      return alert("Please select a category");
+    }
+
+    // if (isNaN(inputValues.quantity) || inputValues.quantity === '') {
+    if (isNaN(quantity) || quantity === "") {
+      setQuantityError(true);
+      document.querySelector(".avail__input").classList.add("error");
+      return alert("Please enter a number for quantity");
+    }
+
+<<<<<<< HEAD
 		// if (inputValues.desc === '') {
 		if (desc === '') {
 			setDescError(true)
@@ -144,24 +225,62 @@ const handleChangeSelectWarehouse = (event) => {
 			document.querySelector('.details__select').classList.add('error')
 			return alert("Please select a category");
 		}
+=======
+    // if (inputValues.selectWarehouse === '') {
+    if (selectWarehouse === "") {
+      setSelectWarehouseError(true);
+      document.querySelector(".avail__warehouse").classList.add("error");
+      return alert("Please select a warehouse");
+    }
 
-		// if (isNaN(inputValues.quantity) || inputValues.quantity === '') {
-		if (isNaN(quantity) || quantity === '') {
-			setQuantityError(true)
-			document.querySelector('.avail__input').classList.add('error')
-			return alert("Please enter a number for quantity");
-		}
+    //set new id variable to be able to navigate to page after
+    let newId = v4();
+>>>>>>> develop
 
-		// if (inputValues.selectWarehouse === '') {
-		if (selectWarehouse === '') {
-			setSelectWarehouseError(true)
-			document.querySelector('.avail__warehouse').classList.add('error')
-			return alert("Please select a warehouse");
-		}
+    if (isFormValid()) {
+      axios
+        .post(`${api}/inventories`, {
+          id: newId,
+          warehouse_id: selectWarehouse,
+          item_name: itemName,
+          description: desc,
+          category: category,
+          status: status,
+          quantity: quantity,
+        })
+        .then((response) => {
+          alert(`Your new inventory item ${itemName} has been added`);
 
-		//set new id variable to be able to navigate to page after
-		let newId = v4();
+          //reset form on successful submit
+          e.target.reset();
+          setSelectWarehouse("");
+          setItemName("");
+          setDesc("");
+          setCategory("");
+          setStatus("");
+          setQuantity(0);
+          navigate(`/inventory/${newId}`);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }
 
+  //function to handle form cancel
+  function handleFormCancel(e) {
+    e.preventDefault();
+    document.querySelector("form").reset();
+    setSelectWarehouse("");
+    setItemName("");
+    setDesc("");
+    setCategory("");
+    setStatus("");
+    setQuantity(0);
+    navigate(-1);
+  }
+
+<<<<<<< HEAD
 		axios
 			.post(`${api}/inventories`, {
 				id: newId,
@@ -261,6 +380,69 @@ const handleChangeSelectWarehouse = (event) => {
 			</form>
 		</section>
 	);
+=======
+  return (
+    <section className="container">
+      <div className="heading">
+        <Link
+          className="heading__link"
+          to={".."}
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+          }}
+        >
+          <img src={ArrowBack} alt="ArrowBackButton" />
+        </Link>
+        <h1 className="heading__title">Add New Inventory Item</h1>
+      </div>
+      <form className="form" onSubmit={handleFormSubmit}>
+        <div className="form__component-container">
+          <ItemDetailsForm
+            categoryArray={categoryArray}
+            handleChangeItemName={handleChangeItemName}
+            itemName={itemName}
+            itemNameError={itemNameError}
+            handleChangeDesc={handleChangeDesc}
+            desc={desc}
+            descError={descError}
+            handleChangeCategory={handleChangeCategory}
+            category={category}
+            categoryError={categoryError}
+            submit={submit}
+          />
+        </div>
+        <div className="form__component-container">
+          <ItemAvailabilityForm
+            warehouses={warehouses}
+            handleChangeStatus={handleChangeStatus}
+            status={status}
+            handleChangeQuantity={handleChangeQuantity}
+            quantity={quantity}
+            handleChangeSelectWarehouse={handleChangeSelectWarehouse}
+            selectWarehouse={selectWarehouse}
+            statusError={statusError}
+            quantityError={quantityError}
+            selectWarehouseError={selectWarehouseError}
+            submit={submit}
+          />
+        </div>
+        <div className="form__button-wrapper">
+          <div className="form__button-container">
+            <button
+              className="form__button form__button--1"
+              to={".."}
+              onClick={handleFormCancel}
+            >
+              Cancel
+            </button>
+            <button className="form__button form__button--2">+ Add Item</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  );
+>>>>>>> develop
 }
 
 export default AddNewInventoryItem;
