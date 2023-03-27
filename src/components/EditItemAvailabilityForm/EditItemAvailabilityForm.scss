@@ -43,6 +43,10 @@
             height: 2.375rem;
             margin-bottom: 1.5rem;
         }
+
+        &:focus {
+			outline: $primary-color-medium solid 1px;
+		}
     }
 
     &__radio-container {
@@ -70,10 +74,6 @@
         font-size: .8125rem;
         padding-left: .5rem;
     }
-
-    // &__quantity-wrap {
-
-    // }
 
     &__out-of-stock {
         display: none;
@@ -106,5 +106,13 @@
         @include tablet {
             height: 2.375rem;
         }
+
+		&:focus {
+			outline: $primary-color-medium solid 1px;
+		}
     }
+}
+
+.error {
+    outline: $supporting-color-out solid 1px;
 }

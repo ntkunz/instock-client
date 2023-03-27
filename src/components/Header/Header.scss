@@ -68,10 +68,11 @@
         font-size: .625rem;
 
         &:hover {
-            background-color: $primary-color-dark;
             color: $primary-color-light;
+            text-decoration: underline;
             cursor: pointer;
         }
+
         @include tablet {
             height: 2.375rem;
             width: 6.75rem;
@@ -92,8 +93,8 @@
         flex-basis: 50%;
 
         &:hover {
-            background-color: $primary-color-dark;
             color: $primary-color-light;
+            text-decoration: underline;
             cursor: pointer;
         }
 
@@ -103,4 +104,9 @@
             padding: 0;
         }
     }
+}
+
+.active {
+    background-color: $primary-color-dark;
+    color: $primary-color-light;
 }

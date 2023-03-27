@@ -44,6 +44,10 @@
 			height: 2.375rem;
 			margin-bottom: 1.5rem;
 		}
+
+		&:focus {
+			outline: $primary-color-medium solid 1px;
+		}
 	}
 
 	&__desc-input {
@@ -58,19 +62,23 @@
 		@include tablet {
 			margin-bottom: 1.5rem;
 		}
+
+		&:focus {
+			outline: $primary-color-medium solid 1px;
+		}
 	}
 
 	&__select-wrap {
 		position: relative;
-	}
 
-	&__select-wrap::after {
-		content: url("../../assets/icons/arrow_drop_down-24px.svg");
-		fill: $secondary-color-dark;
-		font-size: 1rem;
-		top: 6px;
-		right: 1.25rem;
-		position: absolute;
+		&::after {
+			content: url("../../assets/icons/arrow_drop_down-24px.svg");
+			fill: $secondary-color-dark;
+			font-size: 1rem;
+			top: 6px;
+			right: 1.25rem;
+			position: absolute;
+		}
 	}
 
 	&__select {
@@ -87,5 +95,13 @@
 		@include tablet {
 			height: 2.375rem;
 		}
+		
+		&:focus {
+			outline: $primary-color-medium solid 1px;
+		}
 	}
+}
+
+.error {
+    outline: $supporting-color-out solid 1px;
 }

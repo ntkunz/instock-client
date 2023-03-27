@@ -29,7 +29,6 @@ function EditInventory() {
 
 	//onChange function for all inputs of form
 	const handleOnChange = (event) => {
-		
 		//create variables for checkbox radios
 		const quantityWrapper = document.querySelector(".avail__quantity-wrap");
 		const stockRadio = document.querySelectorAll(".avail__radio");
@@ -40,14 +39,22 @@ function EditInventory() {
 		//if item in stock then set instock inputValue and show quantity field
 		if (stockCheck) {
 			quantityWrapper.classList.remove("avail__out-of-stock");
-			// setInputValues({ ...inputValues, instock: "In Stock" });
 		}
 		//if item out of stock then set instock inputVluae and hide quantity field
 		if (!stockCheck) {
 			quantityWrapper.classList.add("avail__out-of-stock");
-			// setInputValues({ quantity: '0' })
-			// setInputValues({ ...inputValues, instock: "Out of Stock" });
 		}
+
+		// remove error states
+		if (inputValues.itemName !== "")
+			document.querySelector(".details__input").classList.remove("error");
+		if (inputValues.desc !== "")
+			document.querySelector(".details__desc-input").classList.remove("error");
+		if (inputValues.quantity !== "")
+			document.querySelector(".avail__input").classList.remove("error");
+		if (inputValues.category !== "")
+			document.querySelector(".details__select").classList.remove("error");
+
 		//udpate inputValues
 		const { name, value } = event.target;
 		setInputValues({ ...inputValues, [name]: value });
@@ -59,9 +66,11 @@ function EditInventory() {
 		getWarehouses();
 		getInventoryItem();
 		getInventories();
+		//eslint disable to remove error requesting infinite loop
+		//eslint-disable-next-line
 	}, []);
 
-	//api get call function to get warehouses ==PASS DOWN LATER... MOVE FUNCTION UP LATER
+	//api get call function to get warehouses
 	function getWarehouses() {
 		axios
 			.get(`${api}/warehouses`)
@@ -107,7 +116,7 @@ function EditInventory() {
 			.get(`${api}/inventories/${id.inventoryId}`)
 			.then((data) => {
 				if (data) {
-					const inventoryItem = data.data
+					const inventoryItem = data.data;
 
 					setInputValues({
 						...inputValues,
@@ -121,7 +130,6 @@ function EditInventory() {
 			})
 			.catch((err) => {
 				console.log("err: ", err);
-				// navigate("/404");e.target.videoDesc.value
 			});
 	}
 
@@ -135,31 +143,38 @@ function EditInventory() {
 		}
 		let warehouseId = warehouses.find(getWarehouseId);
 
-		//form validation
-		if (
-			inputValues.instock === "" ||
-			inputValues.selectWarehouse === "" ||
-			inputValues.itemName === "" ||
-			inputValues.desc === "" ||
-			inputValues.category === ""
-		) {
-			return alert("Please enter all form field information");
+		//validate inputs and add error classes if not complete
+		if (inputValues.itemName === "") {
+			document.querySelector(".details__input").classList.add("error");
+			return alert("Please enter an item name");
 		}
 
-		//make sure that quantity is a number
-		if (isNaN(inputValues.quantity)) {
+		if (inputValues.desc === "") {
+			document.querySelector(".details__desc-input").classList.add("error");
+			return alert("Please enter an item description");
+		}
+
+		if (isNaN(inputValues.quantity) || inputValues.quantity === "") {
+			document.querySelector(".avail__input").classList.add("error");
 			return alert("Please enter a number for quantity");
+		}
+		if (inputValues.category === "") {
+			document.querySelector(".details__select-wrap").classList.add("error");
+			return alert("Please select a category");
 		}
 
 		//confirm that a radio button is selected for quantity
 		const stockRadio = document.querySelectorAll(".avail__radio");
 		let stockCheck = stockRadio[0].checked;
 		let outOfStockCheck = stockRadio[1].checked;
-		if (!stockCheck && !outOfStockCheck)
+		if (!stockCheck && !outOfStockCheck) {
+			document.querySelector(".avail__radio-container").classList.add("error");
 			return alert("Please select if item is In Stock or Out of Stock");
+		}
 
-			//set quantity to 0 if out of stock checked
-		if (outOfStockCheck) setInputValues({ quantity: 0})
+		//set quantity to 0 if out of stock checked
+		// ===========THIS DOESN'T WORK!!!!!!!!!11==================
+		// if (outOfStockCheck) setInputValues({ quantity: 0})
 
 		// axios put request to update inventory item
 		axios
@@ -185,7 +200,7 @@ function EditInventory() {
 					quantity: 0,
 				});
 				//navigate to inventory page
-				navigate(`/inventory/${id.inventoryId}`)
+				navigate(`/inventory/${id.inventoryId}`);
 			})
 			.catch((err) => {
 				console.error(err);
@@ -204,15 +219,19 @@ function EditInventory() {
 			instock: "",
 			quantity: 0,
 		});
-		navigate(-1)
+		navigate(-1);
 	}
 
 	return (
 		<section className="container">
 			<div className="heading">
-				<Link className="heading__link" to={".."} onClick={(e) => {
-						e.preventDefault(); 
-						navigate(-1); }}
+				<Link
+					className="heading__link"
+					to={".."}
+					onClick={(e) => {
+						e.preventDefault();
+						navigate(-1);
+					}}
 				>
 					<img src={ArrowBack} alt="ArrowBackButton" />
 				</Link>
@@ -242,7 +261,9 @@ function EditInventory() {
 						>
 							Cancel
 						</button>
-						<button className="form__button form__button--2">+ Edit Item</button>
+						<button className="form__button form__button--2">
+							+ Edit Item
+						</button>
 					</div>
 				</div>
 			</form>

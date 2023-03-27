@@ -1,4 +1,5 @@
 import "./EditItemDetailsForm.scss";
+import ErrorLogo from "../../assets/icons/error-24px.svg";
 
 function EditItemDetailsForm({ categoryArray, handleOnChange, inputValues }) {
 	return (
