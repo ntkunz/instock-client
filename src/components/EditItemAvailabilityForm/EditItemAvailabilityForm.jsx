@@ -23,7 +23,9 @@ function EditItemAvailabilityForm({
 			<label htmlFor="name" className="avail__label">
 				Status
 			</label>
+
 			<div className="avail__radio-container">
+							{/* RADIO BUTON 1 */}
 				<div className="avail__radio-set">
 					<input
 						className="avail__radio"
@@ -38,6 +40,8 @@ function EditItemAvailabilityForm({
 						In stock
 					</label>
 				</div>
+
+				{/* RADIO BUTTON 2 */}
 				<div className="avail__radio-set">
 					<input
 						className="avail__radio"

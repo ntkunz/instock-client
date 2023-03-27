@@ -73,8 +73,11 @@ function EditInventory() {
 		if (!stockCheck) {
 			// setStatusError(true)
 			quantityWrapper.classList.add("avail__out-of-stock");
+			setQuantity('0')
+			console.log(quantity)
 		}
 		setStatus(event.target.value);
+
 	};
 
 	//on load get warehouses and inventories
