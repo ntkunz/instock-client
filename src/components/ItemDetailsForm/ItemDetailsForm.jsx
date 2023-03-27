@@ -3,9 +3,7 @@ import InventoryItemErrorMessage from "../InventoryItemErrorMessage/InventoryIte
 import ErrorLogo from "../../assets/icons/error-24px.svg";
 
 function ItemDetailsForm({  
-	handleOnChange, 
 	categoryArray, 
-	inputValues, 
 	itemName, 
 	desc, 
 	category, 
@@ -27,9 +25,7 @@ function ItemDetailsForm({
 				type="text"
 				className="details__input"
 				name="itemName"
-				// value={inputValues.itemName}
 				value={itemName}
-				// onChange={handleOnChange}
 				onChange={handleChangeItemName}
 				placeholder="Item Name"
 			/>
@@ -42,9 +38,7 @@ function ItemDetailsForm({
 				type="text"
 				className="details__desc-input"
 				name="desc"
-				// value={inputValues.desc}
 				value={desc}
-				// onChange={ handleOnChange }
 				onChange={ handleChangeDesc }
 				placeholder="Please enter a brief item description..."
 			/>
@@ -59,9 +53,7 @@ function ItemDetailsForm({
 					className="details__select"
 					name="category"
 					id="details_select"
-					// onChange={ handleOnChange }
 					onChange={ handleChangeCategory }
-					// value={inputValues.category}
 					value={category}
 				>
 					<option className="details__placeholder" value="" readOnly>

@@ -3,8 +3,6 @@ import InventoryItemErrorMessage from "../InventoryItemErrorMessage/InventoryIte
 
 function ItemAvailabilityForm({ 
 	warehouses, 
-	handleOnChange, 
-	inputValues, 
 	status, 
 	quantity, 
 	selectWarehouse, 
@@ -29,11 +27,8 @@ function ItemAvailabilityForm({
 						className="avail__radio"
 						type="radio"
 						id="instock"
-						// name="instock"
 						name="status"
 						value="In Stock"
-						// value="status"
-						// onChange={handleOnChange}
 						onChange={handleChangeStatus}
 					/>
 
@@ -46,10 +41,8 @@ function ItemAvailabilityForm({
 						className="avail__radio"
 						type="radio"
 						id="outofstock"
-						// name="instock"
 						name="status"
 						value="Out of Stock"
-						// onChange={handleOnChange}
 						onChange={handleChangeStatus}
 					/>
 					<label
@@ -68,9 +61,7 @@ function ItemAvailabilityForm({
 			<input
 				type="text"
 				className="avail__input"
-				// value={inputValues.quantity}
 				value={quantity}
-				// onChange={handleOnChange}
 				onChange={handleChangeQuantity}
 				placeholder=""
 				name="quantity"
@@ -87,8 +78,6 @@ function ItemAvailabilityForm({
 					name="selectWarehouse"
 					id="avail_warehouse"
 					onChange={handleChangeSelectWarehouse}
-					// onChange={handleOnChange}
-					// value={inputValues.selectWarehouse}
 					value={selectWarehouse}
 				>
 					<option value="" readOnly>
