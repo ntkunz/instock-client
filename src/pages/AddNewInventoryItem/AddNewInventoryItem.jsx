@@ -12,7 +12,6 @@ function AddNewInventoryItem() {
   const { v4 } = require("uuid");
   const navigate = useNavigate();
 
-<<<<<<< HEAD
 const [warehouses, setWarehouses] = useState([]);
 const [inventories, setInventories] = useState([]);
 const [itemName, setItemName] = useState("");
@@ -28,25 +27,6 @@ const [categoryError, setCategoryError] = useState(false);
 const [statusError, setStatusError] = useState(false);
 const [quantityError, setQuantityError] = useState(false);
 const [submit, setSubmit] = useState(false);
-=======
-  const [warehouses, setWarehouses] = useState([]);
-  const [inventories, setInventories] = useState([]);
-  const [itemName, setItemName] = useState("");
-  const [desc, setDesc] = useState("");
-  const [category, setCategory] = useState("");
-  const [status, setStatus] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [selectWarehouse, setSelectWarehouse] = useState("");
-  const [itemNameError, setItemNameError] = useState(false);
-  const [descError, setDescError] = useState(false);
-  const [selectWarehouseError, setSelectWarehouseError] = useState(false);
-  const [categoryError, setCategoryError] = useState(false);
-  const [statusError, setStatusError] = useState(false);
-  const [quantityError, setQuantityError] = useState(false);
-  const [submit, setSubmit] = useState(false);
-  const [empty, setEmpty] = useState(false);
-  const [add, setAdd] = useState(false);
->>>>>>> develop
 
   const handleChangeSelectWarehouse = (event) => {
     if (selectWarehouse !== "") setSelectWarehouseError(false);
@@ -79,7 +59,6 @@ const [submit, setSubmit] = useState(false);
   };
 
   const handleChangeStatus = (event) => {
-<<<<<<< HEAD
 	//create variables for checkbox radios
 	const quantityWrapper = document.querySelector(".avail__quantity-wrap");
 	const stockRadio = document.querySelectorAll(".avail__radio");
@@ -99,45 +78,6 @@ const [submit, setSubmit] = useState(false);
 		//disable dependency request to avoid creating infinite loop
 		// eslint-disable-next-line
 	}, []);
-=======
-    //create variables for checkbox radios
-    const quantityWrapper = document.querySelector(".avail__quantity-wrap");
-    const stockRadio = document.querySelectorAll(".avail__radio");
-    //create true value if item in stock, false if out of stock
-    let stockCheck = stockRadio[0].checked;
-    //if item in stock then set instock inputValue and show quantity field
-    if (stockCheck) {
-      quantityWrapper.classList.remove("avail__out-of-stock");
-    }
-    //if item out of stock then set instock inputVluae and hide quantity field
-    if (!stockCheck) {
-      // setStatusError(true)
-      quantityWrapper.classList.add("avail__out-of-stock");
-    }
-    setStatus(event.target.value);
-  };
-
-  const isFormValid = () => {
-    if (
-      selectWarehouse === "" ||
-      itemName === "" ||
-      desc === "" ||
-      category === "" ||
-      status === "" ||
-      quantity === ""
-    ) {
-      return setEmpty(true);
-    }
-    setEmpty(false);
-  };
-
-  //on load get warehouses and inventories
-  useEffect(() => {
-    getWarehouses();
-    getInventories();
-    //disable dependency request to avoid creating infinite loop
-    // eslint-disable-next-line
-  }, []);
 
   //api get call function to get warehouses
   function getWarehouses() {
@@ -150,11 +90,10 @@ const [submit, setSubmit] = useState(false);
       })
       .catch((err) => {
         console.log("err: ", err);
-        // navigate("/404");
       });
   }
 
-  //api get call function to get inventories ==move function up later
+    //api get call function to get inventories ==move function up later
   function getInventories() {
     axios
       .get(`${api}/inventories`)
@@ -168,7 +107,6 @@ const [submit, setSubmit] = useState(false);
         // navigate("/404");e.target.videoDesc.value
       });
   }
->>>>>>> develop
 
   //removeDup example modified from a respons at https://stackoverflow.com/questions/54757902/remove-duplicates-in-an-array-using-foreach
   function removeDup(arr) {
@@ -212,32 +150,14 @@ const [submit, setSubmit] = useState(false);
       return alert("Please enter a number for quantity");
     }
 
-<<<<<<< HEAD
-		// if (inputValues.desc === '') {
-		if (desc === '') {
-			setDescError(true)
-			document.querySelector('.details__desc-input').classList.add('error')
-			return alert('Please enter an item description')
+				//Get warehouse id based off of warehosue name of inventory item selected
+		function getWarehouseId(array) {
+			return array.warehouse_name === selectWarehouse;
 		}
-				// if (inputValues.category === '') {
-		if (category === '') {
-			setCategoryError(true)
-			document.querySelector('.details__select').classList.add('error')
-			return alert("Please select a category");
-		}
-=======
-    // if (inputValues.selectWarehouse === '') {
-    if (selectWarehouse === "") {
-      setSelectWarehouseError(true);
-      document.querySelector(".avail__warehouse").classList.add("error");
-      return alert("Please select a warehouse");
-    }
+		let warehouseId = warehouses.find(getWarehouseId);
+		//set new id variable to be able to navigate to page after
+		let newId = v4();
 
-    //set new id variable to be able to navigate to page after
-    let newId = v4();
->>>>>>> develop
-
-    if (isFormValid()) {
       axios
         .post(`${api}/inventories`, {
           id: newId,
@@ -265,7 +185,6 @@ const [submit, setSubmit] = useState(false);
           console.error(err);
         });
     }
-  }
 
   //function to handle form cancel
   function handleFormCancel(e) {
@@ -280,48 +199,7 @@ const [submit, setSubmit] = useState(false);
     navigate(-1);
   }
 
-<<<<<<< HEAD
-		axios
-			.post(`${api}/inventories`, {
-				id: newId,
-				warehouse_id: selectWarehouse,
-				item_name: itemName,
-				description: desc,
-				category: category,
-				status: status,
-				quantity: quantity,
-			})
-			.then((response) => {
-				alert(`Your new inventory item ${itemName} has been added`);
-
-				//reset form on successful submit
-				e.target.reset();
-				setSelectWarehouse("")
-				setItemName("")
-				setDesc("")
-				setCategory("")
-				setStatus("")
-				setQuantity(0)
-				navigate(`/inventory/${newId}`);
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-	}
-
-	//function to handle form cancel
-	function handleFormCancel(e) {
-		e.preventDefault();
-		document.querySelector("form").reset();
-		setSelectWarehouse("")
-		setItemName("")
-		setDesc("")
-		setCategory("")
-		setStatus("")
-		setQuantity(0)
-		navigate(-1)
-	}
-
+  
 	return (
 		<section className="container">
 			<div className="heading">
@@ -380,69 +258,6 @@ const [submit, setSubmit] = useState(false);
 			</form>
 		</section>
 	);
-=======
-  return (
-    <section className="container">
-      <div className="heading">
-        <Link
-          className="heading__link"
-          to={".."}
-          onClick={(e) => {
-            e.preventDefault();
-            navigate(-1);
-          }}
-        >
-          <img src={ArrowBack} alt="ArrowBackButton" />
-        </Link>
-        <h1 className="heading__title">Add New Inventory Item</h1>
-      </div>
-      <form className="form" onSubmit={handleFormSubmit}>
-        <div className="form__component-container">
-          <ItemDetailsForm
-            categoryArray={categoryArray}
-            handleChangeItemName={handleChangeItemName}
-            itemName={itemName}
-            itemNameError={itemNameError}
-            handleChangeDesc={handleChangeDesc}
-            desc={desc}
-            descError={descError}
-            handleChangeCategory={handleChangeCategory}
-            category={category}
-            categoryError={categoryError}
-            submit={submit}
-          />
-        </div>
-        <div className="form__component-container">
-          <ItemAvailabilityForm
-            warehouses={warehouses}
-            handleChangeStatus={handleChangeStatus}
-            status={status}
-            handleChangeQuantity={handleChangeQuantity}
-            quantity={quantity}
-            handleChangeSelectWarehouse={handleChangeSelectWarehouse}
-            selectWarehouse={selectWarehouse}
-            statusError={statusError}
-            quantityError={quantityError}
-            selectWarehouseError={selectWarehouseError}
-            submit={submit}
-          />
-        </div>
-        <div className="form__button-wrapper">
-          <div className="form__button-container">
-            <button
-              className="form__button form__button--1"
-              to={".."}
-              onClick={handleFormCancel}
-            >
-              Cancel
-            </button>
-            <button className="form__button form__button--2">+ Add Item</button>
-          </div>
-        </div>
-      </form>
-    </section>
-  );
->>>>>>> develop
 }
 
 export default AddNewInventoryItem;
