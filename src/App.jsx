@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import AddNewWarehouseForm from "./components/AddNewWarehouseForm/AddNewWarehouseForm";
 import EditWarehouseForm from "./components/EditWarehouseForm/EditWarehouseForm";
 import InventoryList from "./components/InventoryList/InventoryList";
+import InventoryDetails from "./pages/InventoryDetails/InventoryDetails";
 
 export default function App() { 
 
@@ -58,10 +59,10 @@ export default function App() {
           <Route path="/:warehouseId" element={<WarehouseInventoryList />} />
           <Route path="/inventory" element={<InventoryList />} />
           {/* <Route path="inventory/add" element={<AddInventory />} /> */}
-          {/* <Route
+          <Route
             path="/inventory/:inventoryId"
             element={<InventoryDetails />}
-          /> */}
+          /> 
           {/* <Route path="inventory/edit" element={<EditInventory />} /> */}
         </Routes>
         <Footer />
