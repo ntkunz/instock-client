@@ -75,10 +75,6 @@
         padding-left: .5rem;
     }
 
-    &__out-of-stock {
-        display: none;
-    }
-
     &__select-wrap {
         position: relative;
     }
@@ -114,4 +110,9 @@
 
 .error {
     outline: $supporting-color-out solid 1px;
+}
+
+
+.out-of-stock {
+    display: none;
 }

@@ -65,16 +65,9 @@ function EditInventory() {
 		const stockRadio = document.querySelectorAll(".avail__radio");
 		//create true value if item in stock, false if out of stock
 		let stockCheck = stockRadio[0].checked;
-		//if item in stock then set instock inputValue and show quantity field
-		if (stockCheck) {
-			quantityWrapper.classList.remove("avail__out-of-stock");
-		}
 		//if item out of stock then set instock inputVluae and hide quantity field
 		if (!stockCheck) {
-			// setStatusError(true)
-			quantityWrapper.classList.add("avail__out-of-stock");
 			setQuantity('0')
-			console.log(quantity)
 		}
 		setStatus(event.target.value);
 
@@ -144,6 +137,8 @@ function EditInventory() {
 					setStatus(inventoryItem.status);
 					setQuantity(inventoryItem.quantity);
 				}
+				
+
 			})
 			.catch((err) => {
 				console.log("err: ", err);

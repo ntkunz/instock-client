@@ -22,6 +22,7 @@ function ItemAvailabilityForm({
 				Status
 			</label>
 			<div className="avail__radio-container">
+
 				<div className="avail__radio-set">
 					<input
 						className="avail__radio"
@@ -46,15 +47,17 @@ function ItemAvailabilityForm({
 						onChange={handleChangeStatus}
 					/>
 					<label
-						className="avail__radio-label out-of-stock"
+						className="avail__radio-label"
 						htmlFor="outofstock"
 					>
 						Out of stock
 					</label>
 					{submit === true && statusError === true && <InventoryItemErrorMessage />}
 				</div>
+
+				
 			</div>
-		<div className="avail__quantity-wrap avail__out-of-stock">
+		<div className={status === "In Stock" ? "" : "out-of-stock"}>
 			<label htmlFor="quantity" className="avail__label">
 				Quantity
 			</label>

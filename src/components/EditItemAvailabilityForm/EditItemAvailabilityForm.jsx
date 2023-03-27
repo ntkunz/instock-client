@@ -25,7 +25,10 @@ function EditItemAvailabilityForm({
 			</label>
 
 			<div className="avail__radio-container">
-							{/* RADIO BUTON 1 */}
+
+				{/* RADIO BUTON 1 */}
+				{status === 'In Stock' && 
+				<>
 				<div className="avail__radio-set">
 					<input
 						className="avail__radio"
@@ -33,15 +36,15 @@ function EditItemAvailabilityForm({
 						id="instock"
 						name="status"
 						value="In Stock"
+						checked="checked"
 						onChange={handleChangeStatus}
 					/>
-
 					<label className="avail__radio-label" htmlFor="instock">
 						In stock
 					</label>
 				</div>
 
-				{/* RADIO BUTTON 2 */}
+
 				<div className="avail__radio-set">
 					<input
 						className="avail__radio"
@@ -52,15 +55,57 @@ function EditItemAvailabilityForm({
 						onChange={handleChangeStatus}
 					/>
 					<label
-						className="avail__radio-label out-of-stock"
+						className="avail__radio-label"
 						htmlFor="outofstock"
 					>
 						Out of stock
 					</label>
 					{submit === true && statusError === true && <InventoryItemErrorMessage />}
 				</div>
+				</>
+				}
+
+				{status === 'Out of Stock' && 
+				<>
+				<div className="avail__radio-set">
+					<input
+						className="avail__radio"
+						type="radio"
+						id="instock"
+						name="status"
+						value="In Stock"
+						onChange={handleChangeStatus}
+					/>
+					<label className="avail__radio-label" htmlFor="instock">
+						In stock
+					</label>
+				</div>
+
+
+				<div className="avail__radio-set">
+					<input
+						className="avail__radio"
+						type="radio"
+						id="outofstock"
+						name="status"
+						value="Out of Stock"
+						checked="checked"
+						onChange={handleChangeStatus}
+					/>
+					<label
+						className="avail__radio-label"
+						htmlFor="outofstock"
+					>
+						Out of stock
+					</label>
+					{submit === true && statusError === true && <InventoryItemErrorMessage />}
+				</div>
+				</>
+				}
 			</div>
-		<div className="avail__quantity-wrap avail__out-of-stock">
+
+
+		<div className={status === "In Stock" ? "" : "out-of-stock"}>
 			<label htmlFor="quantity" className="avail__label">
 				Quantity
 			</label>
@@ -92,7 +137,7 @@ function EditItemAvailabilityForm({
 					{warehouses.map((warehouse) => (
 						<option 
 							key={warehouse.id} 
-							value={warehouse.id}>
+							value={warehouse.warehouse_name}>
 							{warehouse.warehouse_name}
 						</option>
 					))}
