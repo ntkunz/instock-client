@@ -20,7 +20,6 @@ function EditNewWarehouseForm() {
   const [emailError, setEmailError] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [empty, setEmpty] = useState(false);
-  const [edit, setEdit] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const URL = `http://localhost:8080/warehouses/${id}`;
@@ -124,7 +123,6 @@ function EditNewWarehouseForm() {
         .catch((error) => {
           console.log(error.response);
         });
-      setEdit(true);
       alert("Edit succesful redirecting to warehouses.")
       return setTimeout(() => {
         navigate("/warehouses");
