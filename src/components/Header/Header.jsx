@@ -1,10 +1,11 @@
 import './Header.scss';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import headerImg from "../../assets/logo/InStock-Logo.svg";
 
 function Header({ inventoryPage }) {
 
+    const [pageUrl, setPageUrl] = useState('warehouse')
     //set active class for header warehouses or inventory link
     //add active class after page has loaded
     // setTimeout(()=>{
@@ -19,8 +20,9 @@ function Header({ inventoryPage }) {
     // }, 1000)
 
     // attempt 2
+    // let pageUrl = window.location.href;
     // useEffect(() => {
-	// 	        const pageUrl = window.location.href;
+	// 	        // let pageUrl = window.location.href;
     //     if (pageUrl.includes('inventory')) {
     //         document.querySelector('.header__inventory-button').classList.add('active')
     //         document.querySelector('.header__warehouse-button').classList.remove('active')
@@ -28,17 +30,24 @@ function Header({ inventoryPage }) {
     //         document.querySelector('.header__warehouse-button').classList.add('active')
     //         document.querySelector('.header__inventory-button').classList.remove('active')
     //     }
-	// }, []);
+	// }, [pageUrl]);
 
     return(
 
     <header className="header">
         <Link to="/"><img className="header__img" src={headerImg} alt="instock arrow logo" /></Link>
         <div className="header__buttons">
-            <Link to="/"><button className="header__warehouse-button"><h3>Warehouses</h3></button></Link>
-            <Link to="/inventory"><button className="header__inventory-button"><h3>Inventory</h3></button></Link>
+            <Link to="/"><button className={pageUrl === 'warehouse' ? "header__warehouse-button--active" : "header__warehouse-button"}><h3>Warehouses</h3></button></Link>
+            <Link to="/inventory"><button className={pageUrl !== "warehouse" ? "header__inventory-button--active" : "header__inventory-button"}><h3>Inventory</h3></button></Link>
         </div>
     </header>
+    // <header className="header">
+    //     <Link to="/"><img className="header__img" src={headerImg} alt="instock arrow logo" /></Link>
+    //     <div className="header__buttons">
+    //         <Link to="/"><button className="header__warehouse-button"><h3>Warehouses</h3></button></Link>
+    //         <Link to="/inventory"><button className="header__inventory-button"><h3>Inventory</h3></button></Link>
+    //     </div>
+    // </header>
 
     )
 }

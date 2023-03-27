@@ -81,6 +81,32 @@
         }
     }
 
+        &__warehouse-button--active {
+        height: 2.25rem;
+        // width: 100%;
+        padding: 0 2.75rem;
+        background-color: $background-color-dark;
+        color: $secondary-color-light;
+        border: none;
+        border-radius: 1.125rem;
+        font-size: .625rem;
+        background-color: $primary-color-dark;
+        color: $primary-color-light;
+
+        &:hover {
+            color: $primary-color-light;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        @include tablet {
+            height: 2.375rem;
+            width: 6.75rem;
+            padding: 0;
+            border-radius: 1.125rem;
+        }
+    }
+
     &__inventory-button {
         height: 2.25rem;
         padding: 0 3.3rem;
@@ -91,6 +117,32 @@
         border-radius: 1.125rem;
         font-size: .625rem;
         flex-basis: 50%;
+
+        &:hover {
+            color: $primary-color-light;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        @include tablet {
+            height: 2.375rem;
+            width: 5.625rem;
+            padding: 0;
+        }
+    }
+
+        &__inventory-button--active {
+        height: 2.25rem;
+        padding: 0 3.3rem;
+        
+        background-color: $background-color-dark;
+        color: $secondary-color-light;
+        border: none;
+        border-radius: 1.125rem;
+        font-size: .625rem;
+        flex-basis: 50%;
+        background-color: $primary-color-dark;
+        color: $primary-color-light;
 
         &:hover {
             color: $primary-color-light;
