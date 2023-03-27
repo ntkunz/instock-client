@@ -28,8 +28,6 @@ function EditInventory() {
 	const [statusError, setStatusError] = useState(false);
 	const [quantityError, setQuantityError] = useState(false);
 	const [submit, setSubmit] = useState(false);
-	const [empty, setEmpty] = useState(false);
-	const [add, setAdd] = useState(false);
 
 	const handleChangeSelectWarehouse = (event) => {
 		if (selectWarehouse !== "") setSelectWarehouseError(false);
@@ -77,20 +75,6 @@ function EditInventory() {
 			quantityWrapper.classList.add("avail__out-of-stock");
 		}
 		setStatus(event.target.value);
-	};
-
-	const isFormValid = () => {
-		if (
-			selectWarehouse === "" ||
-			itemName === "" ||
-			desc === "" ||
-			category === "" ||
-			status === "" ||
-			quantity === ""
-		) {
-			return setEmpty(true);
-		}
-		setEmpty(false);
 	};
 
 	//on load get warehouses and inventories
@@ -187,6 +171,7 @@ function EditInventory() {
 			return alert("Please select a category");
 		}
 
+	// }
 		// if (isNaN(inputValues.quantity) || inputValues.quantity === '') {
 		if (isNaN(quantity) || quantity === "") {
 			setQuantityError(true);
@@ -204,16 +189,14 @@ function EditInventory() {
 		//set new id variable to be able to navigate to page after
 		let newId = v4();
 
-		if (isFormValid()) {
 			axios
-				.post(`${api}/inventories`, {
-					id: newId,
-					warehouse_id: selectWarehouse,
-					item_name: itemName,
-					description: desc,
-					category: category,
-					status: status,
-					quantity: quantity,
+				.put(`${api}/inventories/${id.inventoryId}`, {
+					warehouse_id: warehouseId.id,
+					item_name: inputValues.itemName,
+					description: inputValues.desc,
+					category: inputValues.category,
+					status: inputValues.instock,
+					quantity: inputValues.quantity,
 				})
 				.then((response) => {
 					alert(`Your new inventory item ${itemName} has been added`);
@@ -232,7 +215,6 @@ function EditInventory() {
 					console.error(err);
 				});
 		}
-	}
 
 	//function to handle form cancel
 	function handleFormCancel(e) {

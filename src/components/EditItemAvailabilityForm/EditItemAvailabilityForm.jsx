@@ -82,8 +82,8 @@ function EditItemAvailabilityForm({
 					onChange={handleChangeSelectWarehouse}
 					value={selectWarehouse}
 				>
-					<option value="" readOnly>
-						Please select
+					<option value={selectWarehouse}>
+						{selectWarehouse}
 					</option>
 					{warehouses.map((warehouse) => (
 						<option 

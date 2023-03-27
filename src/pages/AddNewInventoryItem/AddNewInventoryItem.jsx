@@ -27,8 +27,6 @@ const [categoryError, setCategoryError] = useState(false);
 const [statusError, setStatusError] = useState(false);
 const [quantityError, setQuantityError] = useState(false);
 const [submit, setSubmit] = useState(false);
-const [empty, setEmpty] = useState(false);
-const [add, setAdd] = useState(false);
 
 
 const handleChangeSelectWarehouse = (event) => {
@@ -78,21 +76,6 @@ const handleChangeSelectWarehouse = (event) => {
 	}
     setStatus(event.target.value);
   };
-
-
-  const isFormValid = () => {
-    if (
-      selectWarehouse === "" ||
-      itemName === "" ||
-      desc === "" ||
-      category === "" ||
-      status === "" ||
-      quantity === "" 
-    ) {
-      return setEmpty(true);
-    }
-    setEmpty(false);
-  }
 
 	//on load get warehouses and inventories
 	useEffect(() => {
@@ -154,7 +137,6 @@ const handleChangeSelectWarehouse = (event) => {
 			return alert('Please enter an item name')
 		}
 
-
 		// if (inputValues.desc === '') {
 		if (desc === '') {
 			setDescError(true)
@@ -185,7 +167,6 @@ const handleChangeSelectWarehouse = (event) => {
 		//set new id variable to be able to navigate to page after
 		let newId = v4();
 
-		if(isFormValid()) {
 		axios
 			.post(`${api}/inventories`, {
 				id: newId,
@@ -213,7 +194,6 @@ const handleChangeSelectWarehouse = (event) => {
 				console.error(err);
 			});
 	}
-}
 
 	//function to handle form cancel
 	function handleFormCancel(e) {
