@@ -1,6 +1,6 @@
 import "./ItemAvailabilityForm.scss";
 
-function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
+function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues, status, quantity, selectWarehouse, handleChangeStatus, handleChangeQuantity, handleChangeSelectWarehouse }) {
 
 	return (
 		<div className="avail">
@@ -14,9 +14,12 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						className="avail__radio"
 						type="radio"
 						id="instock"
-						name="instock"
+						// name="instock"
+						name="status"
 						value="In Stock"
-						onChange={handleOnChange}
+						// value="status"
+						// onChange={handleOnChange}
+						onChange={handleChangeStatus}
 					/>
 					<label className="avail__radio-label" htmlFor="instock">
 						In stock
@@ -27,9 +30,11 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 						className="avail__radio"
 						type="radio"
 						id="outofstock"
-						name="instock"
+						// name="instock"
+						name="status"
 						value="Out of Stock"
-						onChange={handleOnChange}
+						// onChange={handleOnChange}
+						onChange={handleChangeStatus}
 					/>
 					<label
 						className="avail__radio-label out-of-stock"
@@ -46,8 +51,10 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 			<input
 				type="text"
 				className="avail__input"
-				value={inputValues.quantity}
-				onChange={handleOnChange}
+				// value={inputValues.quantity}
+				value={quantity}
+				// onChange={handleOnChange}
+				onChange={handleChangeQuantity}
 				placeholder=""
 				name="quantity"
 			/>
@@ -60,8 +67,10 @@ function ItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 					className="avail__warehouse"
 					name="selectWarehouse"
 					id="avail_warehouse"
-					onChange={handleOnChange}
-					value={inputValues.selectWarehouse}
+					onChange={handleChangeSelectWarehouse}
+					// onChange={handleOnChange}
+					// value={inputValues.selectWarehouse}
+					value={selectWarehouse}
 				>
 					<option value="" readOnly>
 						Please select

@@ -1,10 +1,25 @@
 import "./ItemDetailsForm.scss";
+import InventoryItemErrorMessage from "../InventoryItemErrorMessage/InventoryItemErrorMessage"
 import ErrorLogo from "../../assets/icons/error-24px.svg";
 
-function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
+function ItemDetailsForm({  
+	handleOnChange, 
+	categoryArray, 
+	inputValues, 
+	itemName, 
+	desc, 
+	category, 
+	handleChangeItemName, 
+	handleChangeDesc, 
+	handleChangeCategory, 
+	itemNameError,
+	descError,
+	categoryError, 
+	submit  }) {
 	return (
 		<div className="details">
 			<h2 className="details__title">Item Details</h2>
+
 			<label htmlFor="name" className="details__label">
 				Item Name
 			</label>
@@ -12,16 +27,13 @@ function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 				type="text"
 				className="details__input"
 				name="itemName"
-				value={inputValues.itemName}
-				onChange={handleOnChange}
+				// value={inputValues.itemName}
+				value={itemName}
+				// onChange={handleOnChange}
+				onChange={handleChangeItemName}
 				placeholder="Item Name"
 			/>
-			{/* MAYBE HAVE ERROR IMG AND P TAGS HERE, THEN USE ONSUBMIT TO SET ERRORS TO VISIBLE, AND ON CHANGE TO REMOVE ERRORS!!! */}
-
-            	<div className="details__required">
-            		<img className="required-img" src={ErrorLogo} alt="Error enter valid item name" />
-					<p className="required-message">Required field.</p>
-				</div>
+			{submit === true && itemNameError === true && <InventoryItemErrorMessage />}
 
 			<label htmlFor="desc" className="details__label">
 				Description
@@ -30,10 +42,15 @@ function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 				type="text"
 				className="details__desc-input"
 				name="desc"
-				value={inputValues.desc}
-				onChange={ handleOnChange }
+				// value={inputValues.desc}
+				value={desc}
+				// onChange={ handleOnChange }
+				onChange={ handleChangeDesc }
 				placeholder="Please enter a brief item description..."
 			/>
+			{submit === true && descError === true && <InventoryItemErrorMessage />}
+
+
 			<label htmlFor="" className="details__label">
 				Category
 			</label>
@@ -42,8 +59,10 @@ function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 					className="details__select"
 					name="category"
 					id="details_select"
-					onChange={ handleOnChange }
-					value={inputValues.category}
+					// onChange={ handleOnChange }
+					onChange={ handleChangeCategory }
+					// value={inputValues.category}
+					value={category}
 				>
 					<option className="details__placeholder" value="" readOnly>
 						Please select
@@ -58,6 +77,7 @@ function ItemDetailsForm({ handleOnChange, categoryArray, inputValues }) {
 					))}
 				</select>
 			</div>
+			{submit === true && categoryError === true && <InventoryItemErrorMessage />}
 		</div>
 	);
 }

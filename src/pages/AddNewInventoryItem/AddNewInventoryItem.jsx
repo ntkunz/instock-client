@@ -13,53 +13,165 @@ function AddNewInventoryItem() {
 	const navigate = useNavigate();
 
 	//useState for all warehouses and inventories
-	const [warehouses, setWarehouses] = useState([]);
-	const [inventories, setInventories] = useState([]);
-	// const [ outOfStock, setOutOfStock ] = useState("");
+	// const [warehouses, setWarehouses] = useState([]);
+	// const [inventories, setInventories] = useState([]);
+	// // const [ outOfStock, setOutOfStock ] = useState("");
 
-	//useState for all form inputs
-	const [inputValues, setInputValues] = useState({
-		instock: "Out of Stock",
-		quantity: "0",
-		selectWarehouse: "",
-		itemName: "",
-		desc: "",
-		category: "",
-	});
+	// //useState for all form inputs
+	// const [inputValues, setInputValues] = useState({
+	// 	instock: "Out of Stock",
+	// 	quantity: "0",
+	// 	selectWarehouse: "",
+	// 	itemName: "",
+	// 	desc: "",
+	// 	category: "",
+	// });
 
-	//onChange function for all inputs of form
-	const handleOnChange = (event) => {
-		//create variables for checkbox radios
-		const quantityWrapper = document.querySelector(".avail__quantity-wrap");
-		const stockRadio = document.querySelectorAll(".avail__radio");
+//========TOMMY======================
 
-		//create true value if item in stock, false if out of stock
-		let stockCheck = stockRadio[0].checked;
+const [warehouses, setWarehouses] = useState([]);
+const [inventories, setInventories] = useState([]);
+const [itemName, setItemName] = useState("");
+const [desc, setDesc] = useState("");
+const [category, setCategory] = useState("");
+const [status, setStatus] = useState("");
+const [quantity, setQuantity] = useState("");
+const [selectWarehouse, setSelectWarehouse] = useState("");
+// const [email, setEmail] = useState("");
+const [itemNameError, setItemNameError] = useState(false);
+const [descError, setDescError] = useState(false);
+const [selectWarehouseError, setSelectWarehouseError] = useState(false);
+const [categoryError, setCategoryError] = useState(false);
+const [statusError, setStatusError] = useState(false);
+const [quantityError, setQuantityError] = useState(false);
+const [submit, setSubmit] = useState(false);
+const [empty, setEmpty] = useState(false);
+const [add, setAdd] = useState(false);
 
-		//if item in stock then set instock inputValue and show quantity field
-		if (stockCheck) {
-			quantityWrapper.classList.remove("avail__out-of-stock");
-		}
-		//if item out of stock then set instock inputVluae and hide quantity field
-		if (!stockCheck) {
-			quantityWrapper.classList.add("avail__out-of-stock");
-		}
+	// 	// remove error states
+	// 	if (inputValues.itemName !== '') {
+	// 		document.querySelector('.details__input').classList.remove('error')
+	// 		document.querySelector('.details__required').classList.remove('show') 
+	// 	}
+	// 	if (inputValues.desc !== '') document.querySelector('.details__desc-input').classList.remove('error')
+	// 	if (inputValues.quantity !== '') document.querySelector('.avail__input').classList.remove('error')
+	// 	if (inputValues.category !== '') document.querySelector('.details__select').classList.remove('error')
+	// 	if (inputValues.selectWarehouse !== '') document.querySelector('.avail__warehouse').classList.remove('error')
 
-		// remove error states
-		if (inputValues.itemName !== '') {
-			document.querySelector('.details__input').classList.remove('error')
-			document.querySelector('.details__required').classList.remove('show') 
-		}
-		if (inputValues.desc !== '') document.querySelector('.details__desc-input').classList.remove('error')
-		if (inputValues.quantity !== '') document.querySelector('.avail__input').classList.remove('error')
-		if (inputValues.category !== '') document.querySelector('.details__select').classList.remove('error')
-		if (inputValues.selectWarehouse !== '') document.querySelector('.avail__warehouse').classList.remove('error')
 
-		//udpate inputValues
-		const { name, value } = event.target;
-		setInputValues({ ...inputValues, [name]: value });
-		console.log(event.target.value);
-	};
+
+const handleChangeSelectWarehouse = (event) => {
+    // if (selectWarehouse !== '') document.querySelector('.avail__warehouse').classList.remove('error')
+    // if (selectWarehouse !== '') document.querySelector('.avail__warehouse').classList.remove('error')
+    if (selectWarehouse !== '') setSelectWarehouseError(false);
+	
+	setSelectWarehouse(event.target.value);
+  };
+
+  const handleChangeItemName = (event) => {
+	// if (itemName !== '') {
+	// 	document.querySelector('.details__input').classList.remove('error')
+	// 	document.querySelector('.details__required').classList.remove('show') 
+	// }
+	if (itemName !== '') setItemNameError(false)
+	document.querySelector('.details__input').classList.remove('error')
+    setItemName(event.target.value);
+  };
+
+  const handleChangeDesc = (event) => {
+	if (desc !== '') setDescError(false)
+	document.querySelector('.details__desc-input').classList.remove('error')
+    setDesc(event.target.value);
+  };
+
+  const handleChangeCategory = (event) => {
+    if (category !== '') setCategoryError(false)
+	document.querySelector('.details__select').classList.remove('error')
+	setCategory(event.target.value);
+  };
+
+  const handleChangeStatus = (event) => {
+	//create variables for checkbox radios
+	const quantityWrapper = document.querySelector(".avail__quantity-wrap");
+	const stockRadio = document.querySelectorAll(".avail__radio");
+	//create true value if item in stock, false if out of stock
+	let stockCheck = stockRadio[0].checked;
+	//if item in stock then set instock inputValue and show quantity field
+	if (stockCheck) {
+		quantityWrapper.classList.remove("avail__out-of-stock");
+	}
+	//if item out of stock then set instock inputVluae and hide quantity field
+	if (!stockCheck) {
+		quantityWrapper.classList.add("avail__out-of-stock");
+	}
+    setStatus(event.target.value);
+  };
+
+  const handleChangeQuantity = (event) => {
+	if (quantity !== '') document.querySelector('.avail__input').classList.remove('error')
+    setQuantity(event.target.value);
+  };
+
+  const isFormValid = () => {
+    if (
+      selectWarehouse === "" ||
+      itemName === "" ||
+      desc === "" ||
+      category === "" ||
+      status === "" ||
+      quantity === "" 
+    ) {
+      return setEmpty(true);
+    }
+    setEmpty(false);
+  }
+
+
+
+
+
+
+
+
+	// //onChange function for all inputs of form
+	// const handleOnChange = (event) => {
+
+
+
+
+
+
+	// 	//create variables for checkbox radios
+	// 	const quantityWrapper = document.querySelector(".avail__quantity-wrap");
+	// 	const stockRadio = document.querySelectorAll(".avail__radio");
+
+	// 	//create true value if item in stock, false if out of stock
+	// 	let stockCheck = stockRadio[0].checked;
+
+	// 	//if item in stock then set instock inputValue and show quantity field
+	// 	if (stockCheck) {
+	// 		quantityWrapper.classList.remove("avail__out-of-stock");
+	// 	}
+	// 	//if item out of stock then set instock inputVluae and hide quantity field
+	// 	if (!stockCheck) {
+	// 		quantityWrapper.classList.add("avail__out-of-stock");
+	// 	}
+
+	// 	// remove error states
+	// 	if (inputValues.itemName !== '') {
+	// 		document.querySelector('.details__input').classList.remove('error')
+	// 		document.querySelector('.details__required').classList.remove('show') 
+	// 	}
+	// 	if (inputValues.desc !== '') document.querySelector('.details__desc-input').classList.remove('error')
+	// 	if (inputValues.quantity !== '') document.querySelector('.avail__input').classList.remove('error')
+	// 	if (inputValues.category !== '') document.querySelector('.details__select').classList.remove('error')
+	// 	if (inputValues.selectWarehouse !== '') document.querySelector('.avail__warehouse').classList.remove('error')
+
+	// 	//udpate inputValues
+	// 	const { name, value } = event.target;
+	// 	setInputValues({ ...inputValues, [name]: value });
+	// 	console.log(event.target.value);
+	// };
 
 	//on load get warehouses and inventories
 	useEffect(() => {
@@ -113,29 +225,45 @@ function AddNewInventoryItem() {
 	//function to handle form submit
 	function handleFormSubmit(e) {
 		e.preventDefault();
+		setSubmit(true)
 
 		//validate inputs and add error classes if not complete
-		if (inputValues.itemName === '') {
+		// if (inputValues.itemName === '') {
+
+		// if (itemName === '') {
+		// 	document.querySelector('.details__input').classList.add('error')
+		// 	document.querySelector('.details__required').classList.add('show')
+		// 	return alert('Please enter an item name')
+		// }
+
+		if (itemName === "") {
+			setItemNameError(true)
 			document.querySelector('.details__input').classList.add('error')
-			document.querySelector('.details__required').classList.add('show')
 			return alert('Please enter an item name')
 		}
 
-		if (inputValues.desc === '') {
+
+		// if (inputValues.desc === '') {
+		if (desc === '') {
+			setDescError(true)
 			document.querySelector('.details__desc-input').classList.add('error')
 			return alert('Please enter an item description')
 		}
-
-		if (isNaN(inputValues.quantity) || inputValues.quantity === '') {
-			document.querySelector('.avail__input').classList.add('error')
-			return alert("Please enter a number for quantity");
-		}
-		if (inputValues.category === '') {
+				// if (inputValues.category === '') {
+		if (category === '') {
+			setCategoryError(true)
 			document.querySelector('.details__select').classList.add('error')
 			return alert("Please select a category");
 		}
 
-		if (inputValues.selectWarehouse === '') {
+		// if (isNaN(inputValues.quantity) || inputValues.quantity === '') {
+		if (isNaN(quantity) || quantity === '') {
+			document.querySelector('.avail__input').classList.add('error')
+			return alert("Please enter a number for quantity");
+		}
+
+		// if (inputValues.selectWarehouse === '') {
+		if (selectWarehouse === '') {
 			document.querySelector('.avail__warehouse').classList.add('error')
 			return alert("Please select a warehouse");
 		}
@@ -143,48 +271,57 @@ function AddNewInventoryItem() {
 		//set new id variable to be able to navigate to page after
 		let newId = v4();
 
+		if(isFormValid()) {
 		axios
 			.post(`${api}/inventories`, {
 				id: newId,
-				warehouse_id: inputValues.selectWarehouse,
-				item_name: inputValues.itemName,
-				description: inputValues.desc,
-				category: inputValues.category,
-				status: inputValues.instock,
-				quantity: inputValues.quantity,
+				warehouse_id: selectWarehouse,
+				item_name: itemName,
+				description: desc,
+				category: category,
+				status: status,
+				quantity: quantity,
+				// warehouse_id: inputValues.selectWarehouse,
+				// item_name: inputValues.itemName,
+				// description: inputValues.desc,
+				// category: inputValues.category,
+				// status: inputValues.instock,
+				// quantity: inputValues.quantity,
 			})
 			.then((response) => {
-				alert(`Your new inventory item ${inputValues.itemName} has been added`);
+				// alert(`Your new inventory item ${inputValues.itemName} has been added`);
+				alert(`Your new inventory item ${itemName} has been added`);
 
 				//reset form on successful submit
 				e.target.reset();
-				setInputValues({
-					selectWarehouse: "",
-					itemName: "",
-					desc: "",
-					category: "",
-					instock: "Out of Stock",
-					quantity: 0,
-				});
+				// setInputValues({
+				// 	selectWarehouse: "",
+				// 	itemName: "",
+				// 	desc: "",
+				// 	category: "",
+				// 	status: "Out of Stock",
+				// 	quantity: 0,
+				// });
 				navigate(`/inventory/${newId}`);
 			})
 			.catch((err) => {
 				console.error(err);
 			});
 	}
+}
 
 	//function to handle form cancel
 	function handleFormCancel(e) {
 		e.preventDefault();
 		document.querySelector("form").reset();
-		setInputValues({
-			selectWarehouse: "",
-			itemName: "",
-			desc: "",
-			category: "",
-			instock: "",
-			quantity: 0,
-		});
+		// setInputValues({
+		// 	selectWarehouse: "",
+		// 	itemName: "",
+		// 	desc: "",
+		// 	category: "",
+		// 	instock: "",
+		// 	quantity: 0,
+		// });
 		navigate(-1)
 	}
 
@@ -204,15 +341,31 @@ function AddNewInventoryItem() {
 				<div className="form__component-container">
 					<ItemDetailsForm
 						categoryArray={categoryArray}
-						handleOnChange={handleOnChange}
-						inputValues={inputValues}
+						// handleOnChange={handleOnChange}
+						// inputValues={inputValues}
+						handleChangeItemName={handleChangeItemName}
+						itemName={itemName}
+						itemNameError={itemNameError}
+						handleChangeDesc={handleChangeDesc}
+						desc={desc}
+						descError={descError}
+						handleChangeCategory={handleChangeCategory}
+						category={category}
+						categoryError={categoryError}
+						submit={submit}
 					/>
 				</div>
 				<div className="form__component-container">
 					<ItemAvailabilityForm
 						warehouses={warehouses}
-						handleOnChange={handleOnChange}
-						inputValues={inputValues}
+						// handleOnChange={handleOnChange}
+						// inputValues={inputValues}
+						handleChangeStatus={handleChangeStatus}
+						status={status}
+						handleChangeQuantity={handleChangeQuantity}
+						quantity={quantity}
+						handleChangeSelectWarehouse={handleChangeSelectWarehouse}
+						selectWarehouse={selectWarehouse}
 					/>
 				</div>
 				<div className="form__button-wrapper">
