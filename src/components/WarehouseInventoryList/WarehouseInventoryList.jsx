@@ -14,7 +14,7 @@ function WarehouseInventoryList() {
   const [inventory, setInventory] = useState([]);
   const [deleteModalInfo, setDeleteModalInfo] = useState({});
 
-  const api = process.env.REACT_APP_BASEURL;
+  const api = process.env.REACT_APP_API_URL;
   useEffect(() => {
     getInventoryList(warehouseId);
   }, []);
@@ -171,6 +171,7 @@ function WarehouseInventoryList() {
                   </div>
                 </div>
               </div>
+              {/* // need to change this to a button tag */}
               <div className="warehouse-table__icons">
                 <img
                   className="warehouse-table__icon"
