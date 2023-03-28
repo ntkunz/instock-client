@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const { v4: uuid } = require("uuid");
+export const api = process.env.REACT_APP_API_URL;
 
 const AddNewWarehouseForm = () => {
   const [warehouse, setWarehouse] = useState("");
@@ -20,8 +21,8 @@ const AddNewWarehouseForm = () => {
   const [emailError, setEmailError] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [empty, setEmpty] = useState(false);
-  const [add, setAdd] = useState(false);
   const navigate = useNavigate();
+
 
   const handleChangeWarehouse = (event) => {
     setWarehouse(event.target.value);
@@ -56,13 +57,11 @@ const AddNewWarehouseForm = () => {
   };
 
 
-  const validatePhoneNumber = () =>
-    phoneNumber.length >= 7 && phoneNumber.length <= 15;
+  const validatePhoneNumber = (value) =>
+    /^[0-9]*$/.test(value) && value.length >= 10;
 
-  const emailValidator = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-    email
-  );
-  const validateEmail = () => emailValidator;
+    const validateEmail = (value) =>
+    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
 
   const isFormValid = () => {
     if (
@@ -79,16 +78,16 @@ const AddNewWarehouseForm = () => {
     }
     setEmpty(false);
   
-    if (!validatePhoneNumber()) {
+    if (!validatePhoneNumber(phoneNumber)) {
       return setPhoneError(true);
     }
     setPhoneError(false);
   
-    if (!validateEmail()) {
+    if (!validateEmail(email)) {
       return setEmailError(true);
     }
     setEmailError(false);
-  
+
     return true;
   };
 
@@ -97,7 +96,7 @@ const AddNewWarehouseForm = () => {
     event.preventDefault();
 
     if (isFormValid()) {
-      axios.post("http://localhost:8080/warehouses/", {
+      axios.post(`${api}/warehouses/`, {
           id: uuid(),
           warehouse_name: warehouse,
           address: streetAddress,
@@ -110,12 +109,14 @@ const AddNewWarehouseForm = () => {
         })
         .catch((error) => {
           console.log(error);
-        });
+        }) 
       alert("Warehouse successfully added, redirecting to homepage.");
-      setAdd(true);
       return setTimeout(() => {
         navigate("/warehouses");
-      }, 2000);
+      }, 1000);
+      
+    } else {
+      alert("Please check your form")
     }
   };
   const handleCancel = () => {
@@ -151,6 +152,8 @@ const AddNewWarehouseForm = () => {
             contactName={contactName}
             position={position}
             phoneNumber={phoneNumber}
+            phoneError={phoneError}
+            emailError={emailError}
             email={email}
             submit={submit}
           />

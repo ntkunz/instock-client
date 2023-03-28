@@ -75,7 +75,7 @@ export default function WarehouseList() {
               <div className="warehouseList__item">
                 <div className="warehouseList__subtitle">warehouse</div>
                 <div className="warehouseList__info">
-                  <Link className="warehouseList__link" to={`${warehouse.id}`}>
+                  <Link className="warehouseList__link" to={`/warehouses/${warehouse.id}`}>
                     {warehouse.warehouse_name}
                     <img
                       className="warehouseList__icon"
