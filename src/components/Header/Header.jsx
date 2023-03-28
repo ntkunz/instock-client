@@ -11,10 +11,10 @@ function Header() {
         <div className="header__buttons">
             <NavLink to="/warehouses" className={({ isActive }) => 
                 isActive ? "header__warehouse-button--active" : "header__warehouse-button"
-                }><h3>Warehouses</h3></NavLink>
+                }><h3 className="header__button">Warehouses</h3></NavLink>
             <NavLink to="/inventory" className={({ isActive }) => 
                 isActive ? "header__inventory-button--active" : "header__inventory-button"
-                }><h3>Inventory</h3></NavLink>
+                }><h3 className="header__button">Inventory</h3></NavLink>
         </div>
     </header>
     )
