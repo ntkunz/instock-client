@@ -5,8 +5,12 @@
   box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
   border-radius: 3px;
   background-color: $primary-color-light;
-  margin-top: -4.375rem;
+  margin-top: -4rem;
   font-size: 0.8125rem;
+
+    @include tablet {
+        margin-top: -5.55rem;
+    }
 
   &__header {
     padding: 1.5rem;
