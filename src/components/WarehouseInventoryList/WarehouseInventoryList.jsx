@@ -45,7 +45,7 @@ function WarehouseInventoryList() {
 
   function deleteButtonClick(item) {
     const info = {
-      itemId: item.id,
+      id: item.id,
       title: `Delete ${item.item_name} inventory item?`,
       text: `Please confirm that you’d like to delete ${item.item_name} from the inventory
       list. You won’t be able to undo this action.`,
@@ -54,11 +54,11 @@ function WarehouseInventoryList() {
     setDeleteModalInfo(info);
   }
 
-  function onDeleteDialogCancel() {
+  function onDeleteModalCancel() {
     setDeleteModalInfo({});
   }
 
-  function onDeleteDialogConfirm(id) {
+  function onDeleteModalConfirm(id) {
     deleteInventoryItem(id);
     setDeleteModalInfo({});
   }
@@ -67,8 +67,8 @@ function WarehouseInventoryList() {
     <div className="warehouse-table">
       <DeleteModal
         deleteModalInfo={deleteModalInfo}
-        onCancel={onDeleteDialogCancel}
-        onConfirm={onDeleteDialogConfirm}
+        onCancel={onDeleteModalCancel}
+        onConfirm={onDeleteModalConfirm}
       />
 
       <div className="warehouse-table__headings">
