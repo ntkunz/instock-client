@@ -20,7 +20,6 @@ function InventoryList() {
       .get(`${api}/inventories`)
       .then((response) => {
         setInventory(response.data);
-        console.log("response data: ", response.data);
       })
 
       .catch((error) => {
@@ -42,7 +41,7 @@ function InventoryList() {
               name="searchBar"
             />
 
-            <Link className="InventoryList__btn" to={"/inventories/add"}>
+            <Link className="InventoryList__btn" to={"/inventory/add"}>
               + Add New Inventory
             </Link>
           </form>

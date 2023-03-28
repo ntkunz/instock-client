@@ -1,6 +1,6 @@
 import "./ItemDetailsForm.scss";
-import InventoryItemErrorMessage from "../InventoryItemErrorMessage/InventoryItemErrorMessage"
-import ErrorLogo from "../../assets/icons/error-24px.svg";
+import InventoryItemErrorMessage from "../InventoryItemErrorMessage/InventoryItemErrorMessage";
+
 
 function ItemDetailsForm({  
 	categoryArray, 

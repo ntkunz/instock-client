@@ -98,6 +98,10 @@
     font-size: 0.8125rem;
     font-weight: 600;
     align-items: end;
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: $primary-color-medium;
+    }
   }
 
   &__link-arrow {

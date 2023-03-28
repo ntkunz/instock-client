@@ -83,11 +83,18 @@
         height: 2.375rem;
         width: 4.5rem;
       }
+      &:hover {
+        border-color: $primary-color-medium;
+        color: $primary-color-medium;
+      }
     }
     &--2 {
       color: $primary-color-light;
       background-color: $primary-color-medium;
       border: none;
+      &:hover {
+        background-color: $background-color-dark;
+      }
     }
   }
 }

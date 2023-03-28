@@ -15,7 +15,7 @@ export default function InventoryDetails() {
   useEffect(() => {
     axios.get(`${api}/inventories/${inventoryId}`).then(({ data }) => {
       setInventoryItem(data);
-      console.log(data);
+      // console.log(data);
     });
   }, [inventoryId]);
 
