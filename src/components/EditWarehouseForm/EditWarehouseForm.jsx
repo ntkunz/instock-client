@@ -20,13 +20,12 @@ function EditNewWarehouseForm() {
   const [emailError, setEmailError] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [empty, setEmpty] = useState(false);
-  const [edit, setEdit] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  const URL = `http://localhost:8080/warehouses/${id}`;
+  const api = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    axios.get(URL).then((response) => {
+    axios.get(`${api}/warehouses/${id}`).then((response) => {
       setWarehouse(response.data.warehouse_name);
       setStreetAddress(response.data.address);
       setCity(response.data.city);
@@ -111,7 +110,7 @@ function EditNewWarehouseForm() {
     event.preventDefault();
     if (isFormValid()) {
       axios
-        .put(URL, {
+        .put(`api/warehouses/${id}`, {
           warehouse_name: warehouse,
           address: streetAddress,
           city: city,
@@ -124,7 +123,6 @@ function EditNewWarehouseForm() {
         .catch((error) => {
           console.log(error.response);
         });
-      setEdit(true);
       alert("Edit succesful redirecting to warehouses.")
       return setTimeout(() => {
         navigate("/warehouses");
