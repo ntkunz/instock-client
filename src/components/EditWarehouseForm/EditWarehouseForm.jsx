@@ -62,11 +62,15 @@ function EditNewWarehouseForm() {
   };
 
   const handleChangePhoneNumber = (event) => {
-    setPhoneNumber(event.target.value);
+    const value = event.target.value;
+    setPhoneNumber(value);
+    setPhoneError(!validatePhoneNumber(value));
   };
 
   const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
+    const value = event.target.value;
+    setEmail(value);
+    setEmailError(!validateEmail(value));
   };
 
   const validatePhoneNumber = (value) =>
@@ -126,7 +130,7 @@ function EditNewWarehouseForm() {
       alert("Edit succesful redirecting to warehouses.")
       return setTimeout(() => {
         navigate("/warehouses");
-      }, 1500);
+      }, 1000);
     }
   };
 
