@@ -135,6 +135,10 @@ ul:last-child li .warehouseList__container {
     }
   }
 
+  &__delete {
+    cursor: pointer;
+  }
+
   &__list--tablet {
     display: none;
     @include tablet {
