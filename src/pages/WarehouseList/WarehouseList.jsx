@@ -7,11 +7,15 @@ import sorticon from "../../assets/icons/sort-24px.svg";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 
 export const api = process.env.REACT_APP_API_URL;
 
 export default function WarehouseList() {
+  const { warehouseId } = useParams();
   const [warehouses, setWarehouses] = useState([]);
+  const [deleteModalInfo, setDeleteModalInfo] = useState({});
 
   useEffect(() => {
     getWarehouses();
@@ -21,6 +25,7 @@ export default function WarehouseList() {
     axios
       .get(`${api}/warehouses`)
       .then((response) => {
+        console.log(response.data);
         setWarehouses(response.data);
       })
       .catch((error) => {
@@ -28,8 +33,43 @@ export default function WarehouseList() {
       });
   }
 
+  function deleteWarehouse(id) {
+    axios
+      .delete(`${api}/warehouses/${id}`)
+      .then((response) => {
+        getWarehouses(id);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  function deleteButtonClick(warehouse) {
+    const info = {
+      id: warehouse.id,
+      title: `Delete ${warehouse.warehouse_name} warehouse?`,
+      text: `Please confirm that you’d like to delete ${warehouse.warehouse_name} from the list of warehouses. You won’t be able to undo this action.`,
+    };
+
+    setDeleteModalInfo(info);
+  }
+
+  function onDeleteModalCancel() {
+    setDeleteModalInfo({});
+  }
+
+  function onDeleteModalConfirm(id) {
+    deleteWarehouse(id);
+    setDeleteModalInfo({});
+  }
+
   return (
     <section className="warehouseList">
+      <DeleteModal
+        deleteModalInfo={deleteModalInfo}
+        onCancel={onDeleteModalCancel}
+        onConfirm={onDeleteModalConfirm}
+      />
       <div className="warehouseList__box">
         <div className="warehouseList__search">
           <h1 className="warehouseList__title">Warehouses</h1>
@@ -112,7 +152,11 @@ export default function WarehouseList() {
               </div>
               <div className="warehouseList__item warehouseList__item--last">
                 <div className="warehouseList__delete">
-                  <img src={deleteicon} alt="delete icon" />
+                  <img
+                    src={deleteicon}
+                    alt="delete icon"
+                    onClick={() => deleteButtonClick(warehouse)}
+                  />
                 </div>
                 <Link to={`/warehouses/edit/${warehouse.id}`}>
                   <div className="warehouseList__edit">
