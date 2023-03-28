@@ -18,8 +18,8 @@ function EditInventory() {
 	const [itemName, setItemName] = useState("");
 	const [desc, setDesc] = useState("");
 	const [category, setCategory] = useState("");
-	const [status, setStatus] = useState("");
-	const [quantity, setQuantity] = useState("");
+	const [status, setStatus] = useState("Out of Stock");
+	const [quantity, setQuantity] = useState("0");
 	const [selectWarehouse, setSelectWarehouse] = useState("");
 	const [itemNameError, setItemNameError] = useState(false);
 	const [descError, setDescError] = useState(false);
@@ -184,6 +184,8 @@ function EditInventory() {
 			return alert("Please select a warehouse");
 		}
 
+		if (status === "Out of Stock") setQuantity('0')
+
 				//Get warehouse id based off of warehosue name of inventory item selected
 		function getWarehouseId(array) {
 			return array.warehouse_name === selectWarehouse;
@@ -212,10 +214,11 @@ function EditInventory() {
 					setCategory("");
 					setStatus("");
 					setQuantity(0);
-					navigate(`/inventory/${newId}`);
+					navigate(`/inventory/${id.inventoryId}`);
 				})
 				.catch((err) => {
 					console.error(err);
+					alert ('Please edit the item or press cancel to return to the previous page, thanks!')
 				});
 		}
 
