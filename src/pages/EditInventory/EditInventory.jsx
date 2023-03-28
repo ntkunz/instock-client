@@ -192,6 +192,8 @@ function EditInventory() {
 		//set new id variable to be able to navigate to page after
 		let newId = v4();
 
+		if (status === "Out of Stock") setQuantity('0')
+
 			axios
 				.put(`${api}/inventories/${id.inventoryId}`, {
 					warehouse_id: warehouseId.id,
