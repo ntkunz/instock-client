@@ -64,7 +64,7 @@ function ContactDetailsForm({
             name="phoneNumber"
             onChange={handleChangePhoneNumber}
           />
-          {submit === true && !phoneError === true && (
+          {submit === true && !phoneNumber === true && (
             <div className="error-container">
               <img src={ErrorLogo} alt="Red error exclamation mark" />
               <p className="error-container__message">Please enter a valid phone number.</p>
@@ -86,7 +86,7 @@ function ContactDetailsForm({
             name="email"
             onChange={handleChangeEmail}
           />
-          {submit === true && !emailError === true && (
+          {submit === true && !email === true && (
             <div className="error-container">
               <img src={ErrorLogo} alt="Red error exclamation mark" />
               <p className="error-container__message">Please enter a valid email. example@this1.that</p>
