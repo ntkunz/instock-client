@@ -78,12 +78,12 @@ const AddNewWarehouseForm = () => {
     }
     setEmpty(false);
   
-    if (!validatePhoneNumber(phoneNumber)) {
+    if (!validatePhoneNumber()) {
       return setPhoneError(true);
     }
     setPhoneError(false);
   
-    if (!validateEmail(email)) {
+    if (!validateEmail()) {
       return setEmailError(true);
     }
     setEmailError(false);
