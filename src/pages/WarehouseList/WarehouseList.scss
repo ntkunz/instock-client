@@ -188,6 +188,10 @@ ul:last-child li .warehouseList__container {
   &__link {
     color: $primary-color-medium;
     font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: $primary-color-medium;
+    }
   }
 
   &__right {
