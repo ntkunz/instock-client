@@ -198,6 +198,7 @@ ul:last-child li .warehouseList__container {
     flex-wrap: wrap;
     @include tablet {
       gap: 0;
+      align-items: center;
       justify-content: space-between;
       padding: 1rem 2rem;
       border-bottom: solid $secondary-color-light;
