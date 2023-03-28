@@ -22,10 +22,10 @@ function EditNewWarehouseForm() {
   const [empty, setEmpty] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  const URL = `http://localhost:8080/warehouses/${id}`;
+  const api = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    axios.get(URL).then((response) => {
+    axios.get(`${api}/warehouses/${id}`).then((response) => {
       setWarehouse(response.data.warehouse_name);
       setStreetAddress(response.data.address);
       setCity(response.data.city);
@@ -110,7 +110,7 @@ function EditNewWarehouseForm() {
     event.preventDefault();
     if (isFormValid()) {
       axios
-        .put(URL, {
+        .put(`api/warehouses/${id}`, {
           warehouse_name: warehouse,
           address: streetAddress,
           city: city,

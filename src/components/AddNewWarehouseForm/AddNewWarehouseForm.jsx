@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const { v4: uuid } = require("uuid");
+export const api = process.env.REACT_APP_API_URL;
 
 const AddNewWarehouseForm = () => {
   const [warehouse, setWarehouse] = useState("");
@@ -91,12 +92,11 @@ const AddNewWarehouseForm = () => {
   };
 
   const handleSubmit = (event) => {
-    console.log("handleSubmit: ", handleSubmit)
     setSubmit(true);
     event.preventDefault();
 
     if (isFormValid()) {
-      axios.post("http://localhost:8080/warehouses/", {
+      axios.post(`${api}/warehouses/`, {
           id: uuid(),
           warehouse_name: warehouse,
           address: streetAddress,
@@ -109,12 +109,14 @@ const AddNewWarehouseForm = () => {
         })
         .catch((error) => {
           console.log(error);
-        })
+        }) 
       alert("Warehouse successfully added, redirecting to homepage.");
       return setTimeout(() => {
         navigate("/warehouses");
       }, 1000);
       
+    } else {
+      alert("Please check your form")
     }
   };
   const handleCancel = () => {
