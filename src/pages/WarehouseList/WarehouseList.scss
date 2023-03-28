@@ -57,6 +57,7 @@ ul:last-child li .warehouseList__container {
       margin: 0;
       width: 35%;
       height: 38px;
+      font-size: 0.9rem;
     }
 
     @include desktop {
@@ -167,6 +168,9 @@ ul:last-child li .warehouseList__container {
     font-size: 0.8rem;
     font-weight: 400;
     line-height: 1.2rem;
+    @include desktop {
+      display: flex;
+    }
   }
 
   &__icon {
@@ -198,8 +202,8 @@ ul:last-child li .warehouseList__container {
     flex-wrap: wrap;
     @include tablet {
       gap: 0;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 1rem 2rem;
       border-bottom: solid $secondary-color-light;
     }
