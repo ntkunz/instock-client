@@ -1,10 +1,23 @@
 import "./EditItemDetailsForm.scss";
-import ErrorLogo from "../../assets/icons/error-24px.svg";
+import InventoryItemErrorMessage from "../InventoryItemErrorMessage/InventoryItemErrorMessage";
 
-function EditItemDetailsForm({ categoryArray, handleOnChange, inputValues }) {
+
+function EditItemDetailsForm({ 
+	categoryArray, 
+	itemName, 
+	desc, 
+	category, 
+	handleChangeItemName, 
+	handleChangeDesc, 
+	handleChangeCategory, 
+	itemNameError,
+	descError,
+	categoryError, 
+	submit  }) {
 	return (
 		<div className="details">
 			<h2 className="details__title">Item Details</h2>
+
 			<label htmlFor="name" className="details__label">
 				Item Name
 			</label>
@@ -12,10 +25,12 @@ function EditItemDetailsForm({ categoryArray, handleOnChange, inputValues }) {
 				type="text"
 				className="details__input"
 				name="itemName"
-				value={inputValues.itemName}
-				onChange={handleOnChange}
+				value={itemName}
+				onChange={handleChangeItemName}
 				placeholder="Item Name"
 			/>
+			{submit === true && itemNameError === true && <InventoryItemErrorMessage />}
+
 			<label htmlFor="desc" className="details__label">
 				Description
 			</label>
@@ -23,10 +38,13 @@ function EditItemDetailsForm({ categoryArray, handleOnChange, inputValues }) {
 				type="text"
 				className="details__desc-input"
 				name="desc"
-				value={inputValues.desc}
-				onChange={ handleOnChange }
+				value={desc}
+				onChange={ handleChangeDesc }
 				placeholder="Please enter a brief item description..."
 			/>
+			{submit === true && descError === true && <InventoryItemErrorMessage />}
+
+
 			<label htmlFor="" className="details__label">
 				Category
 			</label>
@@ -35,11 +53,11 @@ function EditItemDetailsForm({ categoryArray, handleOnChange, inputValues }) {
 					className="details__select"
 					name="category"
 					id="details_select"
-					onChange={ handleOnChange }
-					value={inputValues.category}
+					onChange={ handleChangeCategory }
+					value={category}
 				>
-					<option className="details__placeholder" value={inputValues.category} >
-						{inputValues.category}
+					<option className="details__placeholder" value="" readOnly>
+						Please select
 					</option>
 					{categoryArray.map((inventory) => (
 						<option
@@ -51,6 +69,7 @@ function EditItemDetailsForm({ categoryArray, handleOnChange, inputValues }) {
 					))}
 				</select>
 			</div>
+			{submit === true && categoryError === true && <InventoryItemErrorMessage />}
 		</div>
 	);
 }

@@ -20,7 +20,6 @@ function InventoryList() {
       .get(`${api}/inventories`)
       .then((response) => {
         setInventory(response.data);
-        console.log("response data: ", response.data);
       })
 
       .catch((error) => {

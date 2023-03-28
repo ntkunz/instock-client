@@ -1,53 +1,125 @@
 import "./EditItemAvailabilityForm.scss";
+import InventoryItemErrorMessage from "../InventoryItemErrorMessage/InventoryItemErrorMessage";
 
-function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
+
+function EditItemAvailabilityForm({ 
+	
+	warehouses, 
+	status, 
+	quantity, 
+	selectWarehouse, 
+	handleChangeStatus, 
+	handleChangeQuantity, 
+	handleChangeSelectWarehouse,
+	statusError,
+	quantityError,
+	selectWarehouseError,
+	submit }) {
+
 	return (
 		<div className="avail">
-		<h2 className="avail__title">Item Availability</h2>
+			<h2 className="avail__title">Item Availability</h2>
+
 			<label htmlFor="name" className="avail__label">
 				Status
 			</label>
+
 			<div className="avail__radio-container">
+
+				{/* RADIO BUTON 1 */}
+				{status === 'In Stock' && 
+				<>
 				<div className="avail__radio-set">
 					<input
 						className="avail__radio"
 						type="radio"
 						id="instock"
-						name="instock"
+						name="status"
 						value="In Stock"
-						onChange={handleOnChange}
+						checked="checked"
+						onChange={handleChangeStatus}
 					/>
 					<label className="avail__radio-label" htmlFor="instock">
 						In stock
 					</label>
 				</div>
+
+
 				<div className="avail__radio-set">
 					<input
 						className="avail__radio"
 						type="radio"
 						id="outofstock"
-						name="instock"
+						name="status"
 						value="Out of Stock"
-						onChange={handleOnChange}
+						onChange={handleChangeStatus}
 					/>
-					<label className="avail__radio-label" htmlFor="outofstock">
+					<label
+						className="avail__radio-label"
+						htmlFor="outofstock"
+					>
 						Out of stock
 					</label>
+					{submit === true && statusError === true && <InventoryItemErrorMessage />}
 				</div>
+				</>
+				}
+
+				{status === 'Out of Stock' && 
+				<>
+				<div className="avail__radio-set">
+					<input
+						className="avail__radio"
+						type="radio"
+						id="instock"
+						name="status"
+						value="In Stock"
+						onChange={handleChangeStatus}
+					/>
+					<label className="avail__radio-label" htmlFor="instock">
+						In stock
+					</label>
+				</div>
+
+
+				<div className="avail__radio-set">
+					<input
+						className="avail__radio"
+						type="radio"
+						id="outofstock"
+						name="status"
+						value="Out of Stock"
+						checked="checked"
+						onChange={handleChangeStatus}
+					/>
+					<label
+						className="avail__radio-label"
+						htmlFor="outofstock"
+					>
+						Out of stock
+					</label>
+					{submit === true && statusError === true && <InventoryItemErrorMessage />}
+				</div>
+				</>
+				}
 			</div>
-			<div className="avail__quantity-wrap avail__out-of-stock">
-				<label htmlFor="quantity" className="avail__label">
-					Quantity
-				</label>
-				<input
-					type="text"
-					className="avail__input"
-					value={inputValues.quantity}
-					onChange={handleOnChange}
-					placeholder=""
-					name="quantity"
-				/>
-			</div>
+
+
+		<div className={status === "In Stock" ? "" : "out-of-stock"}>
+			<label htmlFor="quantity" className="avail__label">
+				Quantity
+			</label>
+			<input
+				type="text"
+				className="avail__input"
+				value={quantity}
+				onChange={handleChangeQuantity}
+				placeholder=""
+				name="quantity"
+			/>
+		</div>
+		{submit === true && quantityError === true && <InventoryItemErrorMessage />}
+
 			<label htmlFor="" className="avail__label">
 				Warehouse
 			</label>
@@ -56,19 +128,22 @@ function EditItemAvailabilityForm({ warehouses, handleOnChange, inputValues }) {
 					className="avail__warehouse"
 					name="selectWarehouse"
 					id="avail_warehouse"
-					onChange={handleOnChange}
-					value={inputValues.selectWarehouse}
+					onChange={handleChangeSelectWarehouse}
+					value={selectWarehouse}
 				>
-					<option value={inputValues.selectWarehouse}>
-						{inputValues.selectWarehouse}
+					<option value={selectWarehouse}>
+						{selectWarehouse}
 					</option>
 					{warehouses.map((warehouse) => (
-						<option key={warehouse.id} value={warehouse.warehouse_name}>
+						<option 
+							key={warehouse.id} 
+							value={warehouse.warehouse_name}>
 							{warehouse.warehouse_name}
 						</option>
 					))}
 				</select>
 			</div>
+			{submit === true && selectWarehouseError === true && <InventoryItemErrorMessage />}
 		</div>
 	);
 }
