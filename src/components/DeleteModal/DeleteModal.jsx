@@ -30,7 +30,7 @@ function DeleteModal({ deleteModalInfo, onCancel, onConfirm }) {
         </button>
         <button
           className="delete-modal__btn delete-modal__btn--delete"
-          onClick={() => onConfirm(deleteModalInfo.itemId)}
+          onClick={() => onConfirm(deleteModalInfo.id)}
         >
           Delete
         </button>

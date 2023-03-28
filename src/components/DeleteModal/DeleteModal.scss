@@ -7,10 +7,18 @@
   background-color: $primary-color-light;
 
   @include tablet {
-    top: 155px;
-    left: 150px;
-    right: 154px;
-    bottom: 177px;
+    padding: 2rem 4rem;
+    top: 202px;
+    left: 48px;
+    right: 48px;
+    height: 19rem;
+  }
+
+  @include desktop {
+    padding: 2rem 4rem;
+    top: 220px;
+    left: 265px;
+    right: 265px;
   }
 
   &__overlay {
@@ -22,12 +30,13 @@
     background-color: $primary-color-light;
 
     @include tablet {
-      background-color: rgba(19, 24, 44, 0.07);
+      background-color: rgba(19, 24, 44, 0.7);
     }
   }
 
   &__title {
-    margin-bottom: 1rem;
+    margin: 3.75rem 0 1rem;
+    font-size: 1.75rem;
 
     @include tablet {
       margin-bottom: 2rem;
@@ -36,7 +45,7 @@
   }
 
   &__text {
-    margin-bottom: 13rem;
+    margin-bottom: 22rem;
     font-size: 0.9375rem;
 
     @include tablet {
@@ -46,6 +55,7 @@
 
   &__btns {
     display: flex;
+    justify-content: right;
     gap: 1rem;
     cursor: pointer;
   }
@@ -68,11 +78,12 @@
     &--delete {
       background-color: $supporting-color-out;
       color: $primary-color-light;
+      border: none;
     }
   }
   &__close-btn {
     position: absolute;
-    top: 1rem;
+    top: 1.3125rem;
     right: 1rem;
     border: none;
     width: auto;
