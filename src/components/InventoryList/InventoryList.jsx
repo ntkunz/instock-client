@@ -6,10 +6,12 @@ import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import arrowRight from "../../assets/icons/chevron_right-24px.svg";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import sortIcon from "../../assets/icons/sort-24px.svg";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 function InventoryList() {
   const api = process.env.REACT_APP_API_URL;
   const [inventory, setInventory] = useState([]);
+  const [deleteModalInfo, setDeleteModalInfo] = useState({});
 
   useEffect(() => {
     getInventoryList();
@@ -26,9 +28,44 @@ function InventoryList() {
         console.log(error);
       });
   }
+  function deleteInventoryItem(id) {
+    axios
+      .delete(`${api}/inventories/${id}`)
+      .then((response) => {
+        getInventoryList(id);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function deleteButtonClick(inventory) {
+    const info = {
+      id: inventory.id,
+      title: `Delete ${inventory.item_name} warehouse?`,
+      text: `Please confirm that you’d like to delete ${inventory.item_name} from the list of warehouses. You won’t be able to undo this action.`,
+    };
+
+    setDeleteModalInfo(info);
+  }
+
+  function onDeleteModalCancel() {
+    setDeleteModalInfo({});
+  }
+
+  function onDeleteModalConfirm(id) {
+    deleteInventoryItem(id);
+    setDeleteModalInfo({});
+  }
 
   return (
     <section className="InventoryList">
+      <DeleteModal
+        deleteModalInfo={deleteModalInfo}
+        onCancel={onDeleteModalCancel}
+        onConfirm={onDeleteModalConfirm}
+      />
       <div className="InventoryList__box">
         <div className="InventoryList__search">
           <h1 className="InventoryList__title">Inventory</h1>
@@ -171,6 +208,7 @@ function InventoryList() {
                     className="inventory-table__icon"
                     src={deleteIcon}
                     alt="delete icon"
+                    onClick={() => deleteButtonClick(item)}
                   />
                   <Link to={`/inventory/edit/${item.id}`}>
                     <img
