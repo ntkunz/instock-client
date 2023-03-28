@@ -56,6 +56,9 @@ ul:last-child li .warehouseList__container {
     display: flex;
     justify-content: center;
     align-items: center;
+    &:hover {
+      background-color: $background-color-dark;
+    }
 
     @include tablet {
       margin: 0;

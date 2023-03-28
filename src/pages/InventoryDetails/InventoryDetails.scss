@@ -81,6 +81,9 @@
     text-decoration: none;
     color: $primary-color-light;
     cursor: pointer;
+    &:hover {
+      background-color: $background-color-dark;
+    }
 
     @include tablet {
       background-color: $primary-color-medium;
