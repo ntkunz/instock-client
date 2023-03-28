@@ -204,7 +204,7 @@ ul:last-child li .warehouseList__container {
       gap: 0;
       justify-content: space-between;
       padding: 1rem 2rem;
-      border-bottom: solid $secondary-color-light;
+      border-bottom: 1px solid $secondary-color-light;
     }
 
     @include desktop {
